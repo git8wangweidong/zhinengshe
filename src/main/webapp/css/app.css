@@ -1,0 +1,25 @@
+@charset "utf-8";
+/*div.login{width:50%;height:50%;text-align:center;}
+div.login .top{background:url(../image/header.jpg) no-repeat left top;width:320px;height:480px;}
+div.login .in{background:#0d84bc;margin-top:-289px;width:320px;height:289px;}
+div.login .in h2{color:white;}
+div.login .in p{color:white;font-family:"黑体";font-size:15px;margin-top:12px;}
+div.login .in .user input{width:210px;height:22px;}
+div.login .in .pwd input{width:210px;height:22px;margin-top:15px;}
+div.login .in .sb input{width:105px;height:18px;border-radius:10%;margin-top:25px;}
+div.login .in form{margin-top:31px;}
+div.login .footer{color:#8cb9ce;font-size:1px;margin-top:-55px;}*/
+
+/*---------------------------------------------app登陆页-------------------------------*/
+html{font-size: 20px;	}
+div.login{width:16rem;height:24rem;text-align:center;}
+div.login .top-one{background:url(../image/header.jpg) no-repeat left top;width:100%;height:9rem;background-size: cover;}
+div.login .in{background:#0d84bc;margin-top:-0;width:16rem;height:14.4rem;}/*height:289px;*/
+div.login .in h2{color:white;}
+div.login .in p{color:white;font-family:"黑体";font-size:15px;margin-top:12px;}
+div.login .in .user input{width:9.325rem;height:1.075rem;}
+div.login .in .pwd input{width:9.25rem;height:1.15rem;margin-top:0.525rem}
+div.login .in .sb input{width:5.25rem;height:1.025rem;border-radius:10%;margin-top:25px;}
+div.login .in form{margin-top:31px;}
+div.login .footer{color:#8cb9ce;font-size:1px;}
+/*---------------------------------------------app测评页-------------------------*/
