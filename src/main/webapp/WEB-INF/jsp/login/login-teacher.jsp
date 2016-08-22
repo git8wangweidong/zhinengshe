@@ -5,19 +5,19 @@
 <head>
 <meta charset="utf-8">
 <title>后台登陆管理</title>
-<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" type="text/css"  href="<%=request.getContextPath()%>/css/base.css" />
 </head>
 <body>
 	<div class="box">
-	<h2>学员在线评分-学生登陆</h2>
+	<h2>学员在线评分-教师登陆</h2>
 	<div class="con">
 		<form name="frm" method="post" action="/login/teacherLogin">
         	<ul>
             	<li class="clearfix">
-                    <input type="text" class="fl txt" name="userName"placeholder="请输入账号" name = "username"/>
+                    <input type="text" class="fl txt" placeholder="请输入账号" name = "username"/>
                 </li>
             	<li class="clearfix">
-                    <input type="password" class="fl txt" name="password"placeholder="请输入密码" name = "password"/>
+                    <input type="password" class="fl txt"  placeholder="请输入密码" name="password"/>
                 </li>
                 <li>
                 	<input type="submit" value="登录" class="btn" />

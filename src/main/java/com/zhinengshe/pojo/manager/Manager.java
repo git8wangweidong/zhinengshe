@@ -2,53 +2,53 @@ package com.zhinengshe.pojo.manager;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
-public class Manager implements Serializable{
-    private Integer id;
+public class Manager implements Serializable {
 
-    @Length(min = 2, max = 10, message="姓名长度在2-10之间")
-    private String name;
+	private Integer id;
 
-    @NotNull(message="用户名不能为空")
-    private String username;
+	@Length(min = 2, max = 10, message = "姓名长度在2-10之间")
+	private String name;
 
-    @Pattern(regexp = "[0-9a-zA-Z_](6,20)", message="密码必须是6-20个字符之间的")
-    private String password;
+	@NotBlank(message = "用户名不能为空")
+	private String username;
 
-    public Integer getId() {
-        return id;
-    }
+	@Pattern(regexp = "[0-9a-zA-Z_](6,20)", message = "密码必须是6-20个字符之间的")
+	private String password;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public void setName(String name) {
+		this.name = name == null ? null : name.trim();
+	}
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setUsername(String username) {
+		this.username = username == null ? null : username.trim();
+	}
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password == null ? null : password.trim();
+	}
 }

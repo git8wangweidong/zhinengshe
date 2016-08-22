@@ -2,17 +2,28 @@ package com.zhinengshe.pojo.teacher;
 
 import java.io.Serializable;
 
-public class Teacher implements Serializable{
-    private Integer id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+public class Teacher implements Serializable{
+	
+    private Integer id;
+    
+    @NotBlank(message="姓名不能为空")
     private String name;
 
+    @Pattern(regexp = "^1[3|4|5|7|8]\\d{9}$", message = "电话号码格式不正确")
     private String tel;
 
+    @NotNull(message="类别不能为空")
     private Byte category;
 
+    @NotBlank(message="用户名不能为空")
     private String username;
 
+    @NotBlank(message="密码不能为空")
     private String password;
 
     public Integer getId() {

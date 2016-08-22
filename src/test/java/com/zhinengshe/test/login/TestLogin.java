@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSON;
+import com.zhinengshe.pojo.manager.Manager;
 import com.zhinengshe.pojo.student.Student;
 import com.zhinengshe.service.login.IManagerLoginService;
 import com.zhinengshe.service.login.IStudentLoginService;
@@ -58,7 +59,7 @@ public class TestLogin extends BaseTest {
 	@Test
 	public void testManagerLogin(){
 		
-		List<Student> list = managerLoginService.login("123", "123");
+		List<Manager> list = managerLoginService.login("123", "123");
 		System.out.println(JSON.toJSONString(list.get(0)));
 		
 	}

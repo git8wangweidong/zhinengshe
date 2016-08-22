@@ -47,9 +47,8 @@ public class ManagerLoginImpl implements IManagerLoginService {
 				if (list == null || list.size() <= 0) {
 					return null;
 				}
+				
 				return list;
-			}else {
-				throw new ParameterException("");
 			}
 		}
 		return null;
