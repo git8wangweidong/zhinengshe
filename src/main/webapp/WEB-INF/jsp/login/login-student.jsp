@@ -22,7 +22,7 @@
 		<div class="in">
 			<h2>智能社学员在线网</h2>
 			<p>欢迎您登陆智能社答题测评系统!</p>
-			<form action="${pageContext.request.contextPath }/login/studentLogin" method="post">
+			<form action="/login/studentLogin" method="post">
 			
 				<ul>
 					<li class="user">

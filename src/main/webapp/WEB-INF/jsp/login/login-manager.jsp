@@ -11,7 +11,7 @@
 	<div class="box">
 	<h2>学员在线评分-管理员登陆</h2>
 	<div class="con">
-		<form name="frm" method="post" action="${pageContext.request.contextPath }/login/managerLogin">
+		<form name="frm" method="post" action="/login/managerLogin">
         	<ul>
             	<li class="clearfix">
                     <input type="text" class="fl txt"  placeholder="请输入账号" name = "username"/>
