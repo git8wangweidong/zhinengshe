@@ -31,7 +31,42 @@ public class StudentServiceImpl extends AbstractService<Student, StudentExample>
 		super.setBaseMapper(mapper);
 	}
 
+
 	@Override
+	public List<Student> get(Student t) {
+		// TODO 参数校验
+
+		StudentExample example = new StudentExample();
+		if (t != null) {
+			Criteria criteria = example.createCriteria();
+
+			if (t.getName() != null) {
+				String name = t.getName();
+				criteria.andNameLike("%" + name + "%");
+			}
+			if (t.getClasses() != null) {
+				criteria.andClassesEqualTo(t.getClasses());
+
+			}
+			if (t.getUsername() != null) {
+				String username = t.getUsername();
+				criteria.andUsernameLike("%" + username + "%");
+			}
+			if (t.getQsstate() != null) {
+				criteria.andQsstateEqualTo(t.getQsstate());
+			}
+			if (t.getStustate() != null) {
+				criteria.andStustateEqualTo(t.getStustate());
+			}
+			List<Student> list = this.mapper.selectByExample(example);
+			return list;
+		}
+
+		return null;
+	}
+
+	
+	/*@Override
 	public Boolean add(Student t) {
 		// TODO 参数校验-数据格式校验未编写
 		if (t != null) {
@@ -78,49 +113,8 @@ public class StudentServiceImpl extends AbstractService<Student, StudentExample>
 		}
 		return false;
 	}
-
-	@Override
-	public List<Student> get(Student t) {
-		// TODO 参数校验
-
-		StudentExample example = new StudentExample();
-		if (t != null) {
-			Criteria criteria = example.createCriteria();
-
-			if (t.getName() != null) {
-				String name = t.getName();
-				criteria.andNameLike("%" + name + "%");
-			}
-			if (t.getClasses() != null) {
-				criteria.andClassesEqualTo(t.getClasses());
-
-			}
-			if (t.getUsername() != null) {
-				String username = t.getUsername();
-				criteria.andUsernameLike("%" + username + "%");
-			}
-			if (t.getQsstate() != null) {
-				criteria.andQsstateEqualTo(t.getQsstate());
-			}
-			if (t.getStustate() != null) {
-				criteria.andStustateEqualTo(t.getStustate());
-			}
-			List<Student> list = this.mapper.selectByExample(example);
-			return list;
-		}
-
-		return null;
-	}
-
-	@Override
-	public List<Student> list() {
-		// TODO Auto-generated method stub
-		StudentExample example = new StudentExample();
-		List<Student> list = this.mapper.selectByExample(example);
-		if (list != null && list.size() > 0) {
-			return list;
-		}
-		return null;
-	}
+	*/
+	
+	
 
 }

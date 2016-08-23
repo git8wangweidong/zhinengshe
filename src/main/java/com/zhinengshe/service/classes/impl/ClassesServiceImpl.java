@@ -3,7 +3,6 @@ package com.zhinengshe.service.classes.impl;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.ejb.CreateException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,56 +28,9 @@ public class ClassesServiceImpl extends AbstractService<Classes, ClassesExample>
 		super.setBaseMapper(classesMapper);
 	}
 
-	@Override
-	public Boolean add(Classes t) {
-		
-		if (t!=null) {
-			if (t.getCourse()!=null && t.getCourse().trim().length()>0) {
-				if (t.getName()!=null && t.getName().trim().length()>0) {
-					if (t.getState()!=null && t.getState().toString().trim().length()>0) {
-						if (t.getStarttime()!=null) {
-							if (t.getEndtime()!=null) {
-								if (t.getTotalcount()!=null && t.getTotalcount()>=0) {
-									int i = classesMapper.insert(t);
-									return i>0;
-								}
-							}
-						}
-					}
-				}
-			}
-			
-		}
-		
-		return false;
-	}
 
 	/**
-	 * 删除
-	 */
-	@Override
-	public Boolean del(Integer id) {
-		if (id instanceof Integer) {
-			int i = classesMapper.deleteByPrimaryKey(id);
-			return  i>0;
-		}
-		return false;
-	}
-
-	/**
-	 * 更新
-	 */
-	@Override
-	public Boolean update(Classes t) {
-		if (t!=null) {
-			int i = classesMapper.updateByPrimaryKey(t);
-			return i>0;
-		}
-		return false;
-	}
-
-	/**
-	 * 查询
+	 * 多条件查询
 	 */
 	@Override
 	public List<Classes> get(Classes t) {
@@ -105,12 +57,10 @@ public class ClassesServiceImpl extends AbstractService<Classes, ClassesExample>
 	}
 
 	/**
-	 * 列表
+	 * 课程列表
 	 */
 	@Override
-	public List<Classes> list() {
-		
-		ClassesExample example = new ClassesExample();
+	public List<Classes> list(ClassesExample example) {
 		
 		List<Classes> list = classesMapper.selectByExample(example);
 		if (list.size()>0) {
@@ -120,5 +70,52 @@ public class ClassesServiceImpl extends AbstractService<Classes, ClassesExample>
 
 	}
 	
+	/*@Override
+	public Boolean add(Classes t) {
+		
+		if (t!=null) {
+			if (t.getCourse()!=null && t.getCourse().trim().length()>0) {
+				if (t.getName()!=null && t.getName().trim().length()>0) {
+					if (t.getState()!=null && t.getState().toString().trim().length()>0) {
+						if (t.getStarttime()!=null) {
+							if (t.getEndtime()!=null) {
+								if (t.getTotalcount()!=null && t.getTotalcount()>=0) {
+									int i = classesMapper.insert(t);
+									return i>0;
+								}
+							}
+						}
+					}
+				}
+			}
+			
+		}
+		
+		return false;
+	}
 
+	*//**
+	 * 删除
+	 *//*
+	@Override
+	public Boolean del(Integer id) {
+		if (id instanceof Integer) {
+			int i = classesMapper.deleteByPrimaryKey(id);
+			return  i>0;
+		}
+		return false;
+	}
+
+	*//**
+	 * 更新
+	 *//*
+	@Override
+	public Boolean update(Classes t) {
+		if (t!=null) {
+			int i = classesMapper.updateByPrimaryKey(t);
+			return i>0;
+		}
+		return false;
+	}
+*/
 }

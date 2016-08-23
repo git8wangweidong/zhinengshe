@@ -33,7 +33,7 @@ public class TeacherServiceImpl extends AbstractService<Teacher, TeacherExample>
 
 	/**
 	 * 添加教师
-	 */
+	 *//*
 	@Override
 	public Boolean add(Teacher t) {
 		// TODO 参数校验-数据合法性
@@ -55,9 +55,9 @@ public class TeacherServiceImpl extends AbstractService<Teacher, TeacherExample>
 		return false;
 	}
 
-	/**
+	*//**
 	 * 删除教师
-	 */
+	 *//*
 	@Override
 	public Boolean del(Integer id) {
 		// TODO 参数校验
@@ -70,9 +70,9 @@ public class TeacherServiceImpl extends AbstractService<Teacher, TeacherExample>
 		return false;
 	}
 
-	/**
+	*//**
 	 * 更新教师
-	 */
+	 *//*
 	@Override
 	public Boolean update(Teacher t) {
 		// TODO 参数校验 数据是否合法
@@ -83,7 +83,7 @@ public class TeacherServiceImpl extends AbstractService<Teacher, TeacherExample>
 		}
 
 		return false;
-	}
+	}*/
 
 	/**
 	 * 查询教师
@@ -121,18 +121,6 @@ public class TeacherServiceImpl extends AbstractService<Teacher, TeacherExample>
 		}
 
 		return null;
-	}
-
-	/**
-	 * 教师列表
-	 */
-	@Override
-	public List<Teacher> list() {
-		TeacherExample example = new TeacherExample();
-
-		List<Teacher> list = this.mapper.selectByExample(example);
-
-		return list;
 	}
 
 }

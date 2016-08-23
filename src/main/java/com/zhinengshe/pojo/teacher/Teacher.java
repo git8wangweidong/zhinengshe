@@ -1,13 +1,11 @@
 package com.zhinengshe.pojo.teacher;
 
-import java.io.Serializable;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-public class Teacher implements Serializable{
+public class Teacher {
 	
     private Integer id;
     

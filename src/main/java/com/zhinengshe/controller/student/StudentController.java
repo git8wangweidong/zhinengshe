@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zhinengshe.pojo.student.Student;
+import com.zhinengshe.pojo.student.StudentExample;
 import com.zhinengshe.service.student.IStudentService;
 
 @Controller
@@ -117,8 +118,9 @@ public class StudentController {
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
-
-		List<Student> students = studentService.list();
+		StudentExample example = new StudentExample();
+		
+		List<Student> students = studentService.list(example);
 		model.addAttribute("students", students);
 		return "student-list";
 

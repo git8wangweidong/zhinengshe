@@ -1,9 +1,8 @@
 package com.zhinengshe.pojo.classes;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Classes implements Serializable{
+public class Classes {
     private Integer id;
 
     private String name;

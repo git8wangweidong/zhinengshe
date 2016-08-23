@@ -1,10 +1,16 @@
 package com.zhinengshe.pojo.naireresult;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NaireresultExample {
-    protected String orderByClause;
+public class NaireresultExample implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2937746540247494128L;
+
+	protected String orderByClause;
 
     protected boolean distinct;
 

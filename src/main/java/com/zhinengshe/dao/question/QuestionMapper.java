@@ -1,10 +1,12 @@
 package com.zhinengshe.dao.question;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.zhinengshe.dao.basedao.IBaseMapper;
 import com.zhinengshe.pojo.question.Question;
 import com.zhinengshe.pojo.question.QuestionExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface QuestionMapper extends IBaseMapper<Question, QuestionExample> {
 	int countByExample(QuestionExample example);

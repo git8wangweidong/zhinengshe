@@ -5,7 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManagerExample implements Serializable{
-    protected String orderByClause;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3586767530876837394L;
+
+	protected String orderByClause;
 
     protected boolean distinct;
 

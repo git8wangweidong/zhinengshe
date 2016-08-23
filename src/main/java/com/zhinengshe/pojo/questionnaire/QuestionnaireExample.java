@@ -5,7 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionnaireExample implements Serializable{
-    protected String orderByClause;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -720542721146302255L;
+
+	protected String orderByClause;
 
     protected boolean distinct;
 

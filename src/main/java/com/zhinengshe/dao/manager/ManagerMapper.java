@@ -1,13 +1,13 @@
 package com.zhinengshe.dao.manager;
 
-import com.zhinengshe.dao.basedao.IBaseMapper;
-import com.zhinengshe.pojo.classes.Classes;
-import com.zhinengshe.pojo.classes.ClassesExample;
-import com.zhinengshe.pojo.manager.Manager;
-import com.zhinengshe.pojo.manager.ManagerExample;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import com.zhinengshe.dao.basedao.IBaseMapper;
+import com.zhinengshe.pojo.manager.Manager;
+import com.zhinengshe.pojo.manager.ManagerExample;
 
 @Repository
 public interface ManagerMapper extends IBaseMapper<Manager, ManagerExample>{

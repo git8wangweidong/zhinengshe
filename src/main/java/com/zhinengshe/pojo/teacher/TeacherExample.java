@@ -5,7 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TeacherExample implements Serializable{
-    protected String orderByClause;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 428798980664829919L;
+
+	protected String orderByClause;
 
     protected boolean distinct;
 

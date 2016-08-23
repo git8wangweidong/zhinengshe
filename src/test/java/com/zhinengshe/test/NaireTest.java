@@ -45,7 +45,7 @@ public class NaireTest extends BaseTest {
 		
 		questions.setQuestions(list);
 		
-		Boolean b = questionnaireService.add(naire, questions);
+		Boolean b = questionnaireService.addNaire(naire, questions);
 		
 		System.out.println(b);
 	}

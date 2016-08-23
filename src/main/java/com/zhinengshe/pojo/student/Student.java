@@ -1,6 +1,5 @@
 package com.zhinengshe.pojo.student;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
@@ -8,7 +7,7 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-public class Student implements Serializable{
+public class Student {
 	
     private Integer id;
 

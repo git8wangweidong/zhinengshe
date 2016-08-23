@@ -3,13 +3,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="UTF-8">
-	<title>app测评页</title>
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-			<meta name="apple-mobile-web-app-status-bar-style" content="black">
-				<link rel="stylesheet" href="">
+<title>app测评页</title>
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="">
 </head>
 <body>
 	<div class="wamp">
@@ -26,9 +24,9 @@
 		<div class="cateclass">
 			<h5 class="h5">在这个学习阶段,你认为</h5>
 			<form name="frm" method="post" action="/questionnaire/receive">
-			
-			<input type="hidden" name="id" value="1" />
-				
+
+				<input type="hidden" name="id" value="1" />
+
 				<div class="classbox">
 					<!-- 遍历获取题目类型 -->
 					<c:forEach items="${naire.questiontypes }" var="types">
@@ -38,10 +36,10 @@
 							<!-- 判断题目是否为当前类型 是：显示 否：不显示 -->
 							<c:if test="${types.id == que.questiontype}">
 								<c:if test="${types.id!=4 }">
-									<div class="classkcs">
+									<div class="classkcs getval" id="input_${(vs.count)-1 }">
 										<label for="">${que.question }</label>
-										<%-- <input type="hidden" name ="question" value="${que.question }"/> --%>
-										<input type="hidden" name="questions[${(vs.count)-1 }].id" value="${que.id }" />
+										<input type="hidden"  name="questions[${(vs.count)-1 }].id" value="${que.id }"/>
+										<input type="hidden"  name ="questions[${(vs.count)-1 }].answer" value=""/>
 										<ul class="ulcont">
 											<li>1</li>
 											<li>2</li>
@@ -59,7 +57,8 @@
 								<c:if test="${types.id==4 }">
 									<div class="classbox">
 										<div class="titile">${que.question }</div>
-										<input type="hidden" name="questions[${(vs.count)-1 }].id" value="${que.id }" />
+										<input type="hidden" name="questions[${(vs.count)-1 }].id"
+											value="${que.id }" />
 										<div>便于我们帮你复习巩固</div>
 										<textarea style="overflow-y: hidden"></textarea>
 									</div>

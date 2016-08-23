@@ -21,8 +21,6 @@ public class NaireresultServiceImpl implements INaireresultServcie {
 	
 	
 	public Boolean finish(QuestionList questionList, Questionnaire questionnaire){
-		
-		
 		return null;
 		
 	}

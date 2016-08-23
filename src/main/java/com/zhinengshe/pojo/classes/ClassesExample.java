@@ -7,7 +7,12 @@ import java.util.List;
 
 public class ClassesExample implements Serializable{
 	
-    protected String orderByClause;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4920617885456244491L;
+
+	protected String orderByClause;
 
     protected boolean distinct;
 

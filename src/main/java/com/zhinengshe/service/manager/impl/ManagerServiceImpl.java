@@ -26,54 +26,6 @@ public class ManagerServiceImpl extends AbstractService<Manager, ManagerExample>
 	}
 
 	/**
-	 * 添加管理员
-	 */
-	@Override
-	public Boolean add(Manager t) {
-		// TODO 属性校验 -数据格式校验
-		if (t != null) {
-			if (t.getName() != null) {
-				if (t.getUsername() != null) {
-					if (t.getPassword() != null) {
-						int i = this.managerMapper.insertSelective(t);
-						return i > 0;
-					}
-				}
-			}
-		}
-		return false;
-	}
-	
-	/**
-	 * 删除管理员
-	 */
-	@Override
-	public Boolean del(Integer id) {
-		// TODO 参数校验
-		if (id != null) {
-
-			int i = this.managerMapper.deleteByPrimaryKey(id);
-			return i > 0;
-		}
-		return false;
-	}
-
-	/**
-	 * 更新管理员
-	 */
-	@Override
-	public Boolean update(Manager t) {
-		// TODO 参数校验
-		if (t != null) {
-
-			int i = this.managerMapper.updateByPrimaryKeySelective(t);
-
-			return i > 0;
-		}
-		return false;
-	}
-
-	/**
 	 * 查询管理员
 	 */
 	@Override
@@ -105,18 +57,60 @@ public class ManagerServiceImpl extends AbstractService<Manager, ManagerExample>
 	 * 查询所有管理员
 	 */
 	@Override
-	public List<Manager> list() {
-		// TODO Auto-generated method stub
-		ManagerExample example = new ManagerExample();
-
+	public List<Manager> list(ManagerExample example){
 		List<Manager> list = this.managerMapper.selectByExample(example);
-
 		if (list != null && list.size() > 0) {
 			return list;
 		}
 		return null;
 	}
 
+	/**
+	 * 添加管理员
+	 *//*
+	@Override
+	public Boolean add(Manager t) {
+		// TODO 属性校验 -数据格式校验
+		if (t != null) {
+			if (t.getName() != null) {
+				if (t.getUsername() != null) {
+					if (t.getPassword() != null) {
+						int i = this.managerMapper.insertSelective(t);
+						return i > 0;
+					}
+				}
+			}
+		}
+		return false;
+	}
 	
+	*//**
+	 * 删除管理员
+	 *//*
+	@Override
+	public Boolean del(Integer id) {
+		// TODO 参数校验
+		if (id != null) {
+
+			int i = this.managerMapper.deleteByPrimaryKey(id);
+			return i > 0;
+		}
+		return false;
+	}
+
+	*//**
+	 * 更新管理员
+	 *//*
+	@Override
+	public Boolean update(Manager t) {
+		// TODO 参数校验
+		if (t != null) {
+
+			int i = this.managerMapper.updateByPrimaryKeySelective(t);
+
+			return i > 0;
+		}
+		return false;
+	}*/
 
 }

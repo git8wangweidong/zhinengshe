@@ -41,7 +41,7 @@ public class TestTeacher extends BaseTest{
 		teacher.setName("小明爱吃菜");
 		teacher.setCategory(new Byte("1"));
 		teacher.setTel("123456789");
-		teacher.setUsername("小明不吃肉2");
+		teacher.setUsername("小明不吃肉4");
 		teacher.setPassword("xiaomingbuchirou");
 		Boolean flag = this.teacherService.add(teacher);
 		System.out.println(flag);

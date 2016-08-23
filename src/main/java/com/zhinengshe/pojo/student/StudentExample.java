@@ -6,7 +6,12 @@ import java.util.Date;
 import java.util.List;
 
 public class StudentExample implements Serializable{
-    protected String orderByClause;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7531465476673079576L;
+
+	protected String orderByClause;
 
     protected boolean distinct;
 

@@ -1,10 +1,16 @@
 package com.zhinengshe.pojo.questiontype;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestiontypeExample {
-    protected String orderByClause;
+public class QuestiontypeExample implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2175176429032848666L;
+
+	protected String orderByClause;
 
     protected boolean distinct;
 
