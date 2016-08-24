@@ -12,11 +12,20 @@ public class Questionnaire {
 
     private String questionid;
 
-    private Byte state;
+    private Integer nairetype;
     
     private List<Question> questions;
     
     private List<Questiontype> questiontypes;
+    
+    
+    public List<Questiontype> getQuestiontypes() {
+		return questiontypes;
+	}
+
+	public void setQuestiontypes(List<Questiontype> questiontypes) {
+		this.questiontypes = questiontypes;
+	}
 
 	public List<Question> getQuestions() {
 		return questions;
@@ -24,14 +33,6 @@ public class Questionnaire {
 
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
-	}
-
-	public List<Questiontype> getQuestiontypes() {
-		return questiontypes;
-	}
-
-	public void setQuestiontypes(List<Questiontype> questiontypes) {
-		this.questiontypes = questiontypes;
 	}
 
 	public Integer getId() {
@@ -58,11 +59,11 @@ public class Questionnaire {
         this.questionid = questionid == null ? null : questionid.trim();
     }
 
-    public Byte getState() {
-        return state;
+    public Integer getNairetype() {
+        return nairetype;
     }
 
-    public void setState(Byte state) {
-        this.state = state;
+    public void setNairetype(Integer nairetype) {
+        this.nairetype = nairetype;
     }
 }

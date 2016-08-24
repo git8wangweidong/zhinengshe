@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.zhinengshe.dao.question.QuestionMapper;
 import com.zhinengshe.dao.questionnaire.QuestionnaireMapper;
 import com.zhinengshe.dao.questiontype.QuestiontypeMapper;
+import com.zhinengshe.pojo.naireresult.Naireresult;
 import com.zhinengshe.pojo.question.Question;
 import com.zhinengshe.pojo.question.QuestionExample;
 import com.zhinengshe.pojo.questionnaire.QuestionList;
@@ -61,7 +62,7 @@ public class QuestionnaireServiceImpl extends AbstractService<Questionnaire, Que
 		}
 
 		t.setQuestionid(quetionId.toString());
-		t.setState(new Byte("1"));
+		t.setNairetype(1);
 
 		int i = questionnaireMapper.insert(t);
 
@@ -84,9 +85,6 @@ public class QuestionnaireServiceImpl extends AbstractService<Questionnaire, Que
 		if (t.getName() !=null && t.getName().trim().length()>0) {
 			criteria.andNameLike("%"+t.getId()+"%");
 		}
-		if (t.getState()!=null) {
-			criteria.andStateEqualTo(t.getState());
-		}
 		
 		List<Questionnaire> list = questionnaireMapper.selectByExample(example);
 		
@@ -100,6 +98,7 @@ public class QuestionnaireServiceImpl extends AbstractService<Questionnaire, Que
 	 */
 	@Override
 	public Questionnaire get(Integer id) {
+
 		// 查询问卷
 		Questionnaire naire = questionnaireMapper.selectByPrimaryKey(id);
 
@@ -131,6 +130,8 @@ public class QuestionnaireServiceImpl extends AbstractService<Questionnaire, Que
 
 		return naire;
 	}
+
+	
 
 	
 

@@ -1,16 +1,10 @@
 package com.zhinengshe.pojo.naireresult;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NaireresultExample implements Serializable{
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2937746540247494128L;
-
-	protected String orderByClause;
+public class NaireresultExample {
+    protected String orderByClause;
 
     protected boolean distinct;
 
@@ -227,6 +221,66 @@ public class NaireresultExample implements Serializable{
 
         public Criteria andQuestionidNotBetween(Integer value1, Integer value2) {
             addCriterion("questionid not between", value1, value2, "questionid");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuestiontypeIsNull() {
+            addCriterion("questiontype is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuestiontypeIsNotNull() {
+            addCriterion("questiontype is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuestiontypeEqualTo(Integer value) {
+            addCriterion("questiontype =", value, "questiontype");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuestiontypeNotEqualTo(Integer value) {
+            addCriterion("questiontype <>", value, "questiontype");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuestiontypeGreaterThan(Integer value) {
+            addCriterion("questiontype >", value, "questiontype");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuestiontypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("questiontype >=", value, "questiontype");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuestiontypeLessThan(Integer value) {
+            addCriterion("questiontype <", value, "questiontype");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuestiontypeLessThanOrEqualTo(Integer value) {
+            addCriterion("questiontype <=", value, "questiontype");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuestiontypeIn(List<Integer> values) {
+            addCriterion("questiontype in", values, "questiontype");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuestiontypeNotIn(List<Integer> values) {
+            addCriterion("questiontype not in", values, "questiontype");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuestiontypeBetween(Integer value1, Integer value2) {
+            addCriterion("questiontype between", value1, value2, "questiontype");
+            return (Criteria) this;
+        }
+
+        public Criteria andQuestiontypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("questiontype not between", value1, value2, "questiontype");
             return (Criteria) this;
         }
 

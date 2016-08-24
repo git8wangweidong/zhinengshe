@@ -5,6 +5,8 @@ public class Naireresult {
 
     private Integer questionid;
 
+    private Integer questiontype;
+
     private String answer;
 
     private Integer naireid;
@@ -23,6 +25,14 @@ public class Naireresult {
 
     public void setQuestionid(Integer questionid) {
         this.questionid = questionid;
+    }
+
+    public Integer getQuestiontype() {
+        return questiontype;
+    }
+
+    public void setQuestiontype(Integer questiontype) {
+        this.questiontype = questiontype;
     }
 
     public String getAnswer() {

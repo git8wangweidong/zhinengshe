@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionnaireExample implements Serializable{
-    /**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -720542721146302255L;
 
 	protected String orderByClause;
@@ -310,63 +308,63 @@ public class QuestionnaireExample implements Serializable{
             return (Criteria) this;
         }
 
-        public Criteria andStateIsNull() {
-            addCriterion("state is null");
+        public Criteria andNairetypeIsNull() {
+            addCriterion("nairetype is null");
             return (Criteria) this;
         }
 
-        public Criteria andStateIsNotNull() {
-            addCriterion("state is not null");
+        public Criteria andNairetypeIsNotNull() {
+            addCriterion("nairetype is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStateEqualTo(Byte value) {
-            addCriterion("state =", value, "state");
+        public Criteria andNairetypeEqualTo(Integer value) {
+            addCriterion("nairetype =", value, "nairetype");
             return (Criteria) this;
         }
 
-        public Criteria andStateNotEqualTo(Byte value) {
-            addCriterion("state <>", value, "state");
+        public Criteria andNairetypeNotEqualTo(Integer value) {
+            addCriterion("nairetype <>", value, "nairetype");
             return (Criteria) this;
         }
 
-        public Criteria andStateGreaterThan(Byte value) {
-            addCriterion("state >", value, "state");
+        public Criteria andNairetypeGreaterThan(Integer value) {
+            addCriterion("nairetype >", value, "nairetype");
             return (Criteria) this;
         }
 
-        public Criteria andStateGreaterThanOrEqualTo(Byte value) {
-            addCriterion("state >=", value, "state");
+        public Criteria andNairetypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("nairetype >=", value, "nairetype");
             return (Criteria) this;
         }
 
-        public Criteria andStateLessThan(Byte value) {
-            addCriterion("state <", value, "state");
+        public Criteria andNairetypeLessThan(Integer value) {
+            addCriterion("nairetype <", value, "nairetype");
             return (Criteria) this;
         }
 
-        public Criteria andStateLessThanOrEqualTo(Byte value) {
-            addCriterion("state <=", value, "state");
+        public Criteria andNairetypeLessThanOrEqualTo(Integer value) {
+            addCriterion("nairetype <=", value, "nairetype");
             return (Criteria) this;
         }
 
-        public Criteria andStateIn(List<Byte> values) {
-            addCriterion("state in", values, "state");
+        public Criteria andNairetypeIn(List<Integer> values) {
+            addCriterion("nairetype in", values, "nairetype");
             return (Criteria) this;
         }
 
-        public Criteria andStateNotIn(List<Byte> values) {
-            addCriterion("state not in", values, "state");
+        public Criteria andNairetypeNotIn(List<Integer> values) {
+            addCriterion("nairetype not in", values, "nairetype");
             return (Criteria) this;
         }
 
-        public Criteria andStateBetween(Byte value1, Byte value2) {
-            addCriterion("state between", value1, value2, "state");
+        public Criteria andNairetypeBetween(Integer value1, Integer value2) {
+            addCriterion("nairetype between", value1, value2, "nairetype");
             return (Criteria) this;
         }
 
-        public Criteria andStateNotBetween(Byte value1, Byte value2) {
-            addCriterion("state not between", value1, value2, "state");
+        public Criteria andNairetypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("nairetype not between", value1, value2, "nairetype");
             return (Criteria) this;
         }
     }

@@ -6,6 +6,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface NaireresultMapper {
+	
+	int isnertList(List<Naireresult> naireresults);
+	
     int countByExample(NaireresultExample example);
 
     int deleteByExample(NaireresultExample example);

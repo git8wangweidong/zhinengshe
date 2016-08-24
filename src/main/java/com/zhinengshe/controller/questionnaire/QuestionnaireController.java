@@ -1,7 +1,5 @@
 package com.zhinengshe.controller.questionnaire;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -9,9 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zhinengshe.pojo.question.Question;
 import com.zhinengshe.pojo.questionnaire.QuestionList;
 import com.zhinengshe.pojo.questionnaire.Questionnaire;
+import com.zhinengshe.service.naireresult.INaireresultServcie;
 import com.zhinengshe.service.questionnaire.IQuestionnaireService;
 
 @Controller
@@ -20,6 +18,9 @@ public class QuestionnaireController {
 	
 	@Resource
 	private IQuestionnaireService service;
+	
+	@Resource
+	private INaireresultServcie naireresultServcie;
 	
 	/**
 	 * 问卷展示
@@ -39,7 +40,7 @@ public class QuestionnaireController {
 	}
 	
 	/**
-	 * 
+	 * 提交问卷
 	 * @param questionList 问题集合
 	 * @param questionnaire 当前问卷
 	 * @param model
@@ -48,13 +49,10 @@ public class QuestionnaireController {
 	@RequestMapping(value="/receive",method = RequestMethod.POST)
 	public String receive(QuestionList questionList, Questionnaire questionnaire, Model model){
 		
-		Integer id = questionnaire.getId(); // 问卷id
-		List<Question> questions = questionList.getQuestions();  // 问题集合 只有问题id和问题答案
-		for (Question question : questions) {
-			System.out.println(question.getId());
-		}	
+		Boolean b = naireresultServcie.commitNaire(questionList, questionnaire);
+		System.out.println(b);
 		
-		return null;
+		return null; // 完成问卷页面
 		
 		
 		

@@ -40,6 +40,7 @@
 										<label for="">${que.question }</label>
 										<input type="hidden"  name="questions[${(vs.count)-1 }].id" value="${que.id }"/>
 										<input type="hidden"  name ="questions[${(vs.count)-1 }].answer" value=""/>
+										<input type="hidden"  name ="questions[${(vs.count)-1 }].questiontype" value="${que.questiontype }"/>
 										<ul class="ulcont">
 											<li>1</li>
 											<li>2</li>
@@ -57,10 +58,12 @@
 								<c:if test="${types.id==4 }">
 									<div class="classbox">
 										<div class="titile">${que.question }</div>
+										<input type="hidden" name="questions[${(vs.count)-1 }].questiontype"
+											value="${que.questiontype }" />
 										<input type="hidden" name="questions[${(vs.count)-1 }].id"
 											value="${que.id }" />
 										<div>便于我们帮你复习巩固</div>
-										<textarea style="overflow-y: hidden"></textarea>
+										<textarea class="text" style="overflow-y: hidden" name="questions[${(vs.count)-1 }].answer"></textarea>
 									</div>
 								</c:if>
 							</c:if>
