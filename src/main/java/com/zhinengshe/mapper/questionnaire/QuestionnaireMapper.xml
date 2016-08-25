@@ -6,6 +6,7 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="questionid" property="questionid" jdbcType="VARCHAR" />
     <result column="nairetype" property="nairetype" jdbcType="INTEGER" />
+    <result column="periods" property="periods" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, questionid, nairetype
+    id, name, questionid, nairetype, periods
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhinengshe.pojo.questionnaire.QuestionnaireExample" >
     select
@@ -100,9 +101,9 @@
   </delete>
   <insert id="insert" parameterType="com.zhinengshe.pojo.questionnaire.Questionnaire" >
     insert into questionnaire (id, name, questionid, 
-      nairetype)
+      nairetype, periods)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{questionid,jdbcType=VARCHAR}, 
-      #{nairetype,jdbcType=INTEGER})
+      #{nairetype,jdbcType=INTEGER}, #{periods,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zhinengshe.pojo.questionnaire.Questionnaire" >
     insert into questionnaire
@@ -119,6 +120,9 @@
       <if test="nairetype != null" >
         nairetype,
       </if>
+      <if test="periods != null" >
+        periods,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -132,6 +136,9 @@
       </if>
       <if test="nairetype != null" >
         #{nairetype,jdbcType=INTEGER},
+      </if>
+      <if test="periods != null" >
+        #{periods,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -156,6 +163,9 @@
       <if test="record.nairetype != null" >
         nairetype = #{record.nairetype,jdbcType=INTEGER},
       </if>
+      <if test="record.periods != null" >
+        periods = #{record.periods,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -166,7 +176,8 @@
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
       questionid = #{record.questionid,jdbcType=VARCHAR},
-      nairetype = #{record.nairetype,jdbcType=INTEGER}
+      nairetype = #{record.nairetype,jdbcType=INTEGER},
+      periods = #{record.periods,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -183,6 +194,9 @@
       <if test="nairetype != null" >
         nairetype = #{nairetype,jdbcType=INTEGER},
       </if>
+      <if test="periods != null" >
+        periods = #{periods,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -190,7 +204,8 @@
     update questionnaire
     set name = #{name,jdbcType=VARCHAR},
       questionid = #{questionid,jdbcType=VARCHAR},
-      nairetype = #{nairetype,jdbcType=INTEGER}
+      nairetype = #{nairetype,jdbcType=INTEGER},
+      periods = #{periods,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,5 +1,6 @@
 package com.zhinengshe.dao.naireresult;
 
+import com.zhinengshe.pojo.naireresult.IdListAndPeriods;
 import com.zhinengshe.pojo.naireresult.Naireresult;
 import com.zhinengshe.pojo.naireresult.NaireresultExample;
 import java.util.List;
@@ -7,7 +8,25 @@ import org.apache.ibatis.annotations.Param;
 
 public interface NaireresultMapper {
 	
-	int isnertList(List<Naireresult> naireresults);
+	/**
+	 * 求问卷简答题结果
+	 * @param idListAndPeriods
+	 * @return
+	 */
+	List<Naireresult> selectTextByIdListAndPeriods(IdListAndPeriods idListAndPeriods);
+	/**
+	 * 求问卷打分题结果的平均值
+	 * @param idListAndPeriods
+	 * @return
+	 */
+	List<Naireresult> selectAvgByIdListAndPeriods(IdListAndPeriods idListAndPeriods);
+	
+	/**
+	 * 批量添加数据
+	 * @param naireresults
+	 * @return
+	 */
+	int insertList(List<Naireresult> naireresults);
 	
     int countByExample(NaireresultExample example);
 

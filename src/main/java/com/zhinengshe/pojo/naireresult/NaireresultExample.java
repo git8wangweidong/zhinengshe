@@ -413,6 +413,136 @@ public class NaireresultExample {
             addCriterion("naireid not between", value1, value2, "naireid");
             return (Criteria) this;
         }
+
+        public Criteria andPeriodsIsNull() {
+            addCriterion("periods is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodsIsNotNull() {
+            addCriterion("periods is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodsEqualTo(String value) {
+            addCriterion("periods =", value, "periods");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodsNotEqualTo(String value) {
+            addCriterion("periods <>", value, "periods");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodsGreaterThan(String value) {
+            addCriterion("periods >", value, "periods");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodsGreaterThanOrEqualTo(String value) {
+            addCriterion("periods >=", value, "periods");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodsLessThan(String value) {
+            addCriterion("periods <", value, "periods");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodsLessThanOrEqualTo(String value) {
+            addCriterion("periods <=", value, "periods");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodsLike(String value) {
+            addCriterion("periods like", value, "periods");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodsNotLike(String value) {
+            addCriterion("periods not like", value, "periods");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodsIn(List<String> values) {
+            addCriterion("periods in", values, "periods");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodsNotIn(List<String> values) {
+            addCriterion("periods not in", values, "periods");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodsBetween(String value1, String value2) {
+            addCriterion("periods between", value1, value2, "periods");
+            return (Criteria) this;
+        }
+
+        public Criteria andPeriodsNotBetween(String value1, String value2) {
+            addCriterion("periods not between", value1, value2, "periods");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommiterIsNull() {
+            addCriterion("commiter is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommiterIsNotNull() {
+            addCriterion("commiter is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommiterEqualTo(Integer value) {
+            addCriterion("commiter =", value, "commiter");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommiterNotEqualTo(Integer value) {
+            addCriterion("commiter <>", value, "commiter");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommiterGreaterThan(Integer value) {
+            addCriterion("commiter >", value, "commiter");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommiterGreaterThanOrEqualTo(Integer value) {
+            addCriterion("commiter >=", value, "commiter");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommiterLessThan(Integer value) {
+            addCriterion("commiter <", value, "commiter");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommiterLessThanOrEqualTo(Integer value) {
+            addCriterion("commiter <=", value, "commiter");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommiterIn(List<Integer> values) {
+            addCriterion("commiter in", values, "commiter");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommiterNotIn(List<Integer> values) {
+            addCriterion("commiter not in", values, "commiter");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommiterBetween(Integer value1, Integer value2) {
+            addCriterion("commiter between", value1, value2, "commiter");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommiterNotBetween(Integer value1, Integer value2) {
+            addCriterion("commiter not between", value1, value2, "commiter");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

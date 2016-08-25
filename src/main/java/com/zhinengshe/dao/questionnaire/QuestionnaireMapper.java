@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface QuestionnaireMapper extends IBaseMapper<Questionnaire, QuestionnaireExample>{
+	
     int countByExample(QuestionnaireExample example);
 
     int deleteByExample(QuestionnaireExample example);

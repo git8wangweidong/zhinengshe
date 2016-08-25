@@ -23,5 +23,12 @@ public interface INaireresultServcie {
 	 * @return List<Naireresult>  处理后的问卷结果
 	 */
 	List<Naireresult> showNaire(Integer naireId);
+	
+	/**
+	 * sql 测试
+	 * @param naireId
+	 * @return
+	 */
+	List<Naireresult> testSql(Integer naireId,Integer periods);
 
 }

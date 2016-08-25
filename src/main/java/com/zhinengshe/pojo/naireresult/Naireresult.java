@@ -11,6 +11,10 @@ public class Naireresult {
 
     private Integer naireid;
 
+    private String periods;
+
+    private Integer commiter;
+
     public Integer getId() {
         return id;
     }
@@ -49,5 +53,21 @@ public class Naireresult {
 
     public void setNaireid(Integer naireid) {
         this.naireid = naireid;
+    }
+
+    public String getPeriods() {
+        return periods;
+    }
+
+    public void setPeriods(String periods) {
+        this.periods = periods == null ? null : periods.trim();
+    }
+
+    public Integer getCommiter() {
+        return commiter;
+    }
+
+    public void setCommiter(Integer commiter) {
+        this.commiter = commiter;
     }
 }
