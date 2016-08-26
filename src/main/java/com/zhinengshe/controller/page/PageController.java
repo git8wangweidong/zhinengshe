@@ -13,25 +13,26 @@ public class PageController {
 	 */
 	@RequestMapping(value = "/teacherLogin")
 	public String teacherLogin(){
-		return "/login/login-teacher";
+		return "back/login/login-teacher";
 	}
 	
 	/**
-	 * 跳转教师登陆
+	 * 跳转学生登陆
 	 * @return
 	 */
 	@RequestMapping(value = "/studentLogin")
 	public String sudentLogin(){
-		return "/login/login-student";
+		return "front/login/login-student";
 	}
 	
 	/**
-	 * 跳转教师登陆
+	 * 跳转管理员登陆
 	 * @return
 	 */
 	@RequestMapping(value = "/managerLogin")
 	public String managerLogin(){
-		return "/login/login-manager";
+		return "back/login/login-manager";
 	}
+	
 
 }

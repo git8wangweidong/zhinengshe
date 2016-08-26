@@ -19,6 +19,16 @@ public class StudentController {
 
 	@Resource
 	private IStudentService studentService;
+	
+	
+	/**
+	 * toAdd
+	 * @return
+	 */
+	@RequestMapping(value = "/toAdd")
+	public String toAdd(){
+		return "back/user/add-student";
+	}
 
 	/**
 	 * 添加

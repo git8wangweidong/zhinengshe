@@ -14,8 +14,18 @@ public class Naireresult {
     private String periods;
 
     private Integer commiter;
+    
+    private AnswerDistribution answerDistribution;
+    
+    public AnswerDistribution getAnswerDistribution() {
+		return answerDistribution;
+	}
 
-    public Integer getId() {
+	public void setAnswerDistribution(AnswerDistribution answerDistribution) {
+		this.answerDistribution = answerDistribution;
+	}
+
+	public Integer getId() {
         return id;
     }
 

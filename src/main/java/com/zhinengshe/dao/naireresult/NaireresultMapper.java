@@ -1,5 +1,6 @@
 package com.zhinengshe.dao.naireresult;
 
+import com.zhinengshe.pojo.naireresult.AnswerDistribution;
 import com.zhinengshe.pojo.naireresult.IdListAndPeriods;
 import com.zhinengshe.pojo.naireresult.Naireresult;
 import com.zhinengshe.pojo.naireresult.NaireresultExample;
@@ -7,6 +8,15 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface NaireresultMapper {
+	
+	
+	/**
+	 * 查询答案分布情况
+	 * @param idListAndPeriods
+	 * @return
+	 */
+	List<AnswerDistribution> selectAnswerDistribution(IdListAndPeriods idListAndPeriods);
+	
 	
 	/**
 	 * 求问卷简答题结果
@@ -27,6 +37,10 @@ public interface NaireresultMapper {
 	 * @return
 	 */
 	int insertList(List<Naireresult> naireresults);
+	
+	
+	
+	
 	
     int countByExample(NaireresultExample example);
 

@@ -13,6 +13,16 @@ public class ManagerController {
 
 	@Resource
 	private IManagerService managerService;
+	
+	
+	/**
+	 * toAdd
+	 * @return
+	 */
+	@RequestMapping(value = "/toAdd")
+	public String toAdd(){
+		return "back/user/add-manager";
+	}
 
 	/**
 	 * 添加

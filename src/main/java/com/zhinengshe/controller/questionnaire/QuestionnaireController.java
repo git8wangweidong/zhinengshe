@@ -22,6 +22,17 @@ public class QuestionnaireController {
 	@Resource
 	private INaireresultServcie naireresultServcie;
 	
+	
+	/**
+	 * toCreate
+	 * @return
+	 */
+	@RequestMapping(value="/toCreate",method = RequestMethod.GET)
+	public String toCreate(){
+		return "back/questionnaire/naire-create";
+		
+	}
+	
 	/**
 	 * 问卷展示
 	 * @param id
@@ -46,15 +57,13 @@ public class QuestionnaireController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/receive",method = RequestMethod.POST)
-	public String receive(QuestionList questionList, Questionnaire questionnaire, Model model){
+	@RequestMapping(value="/commit",method = RequestMethod.POST)
+	public String commit(QuestionList questionList, Questionnaire questionnaire, Model model){
 		
 		Boolean b = naireresultServcie.commitNaire(questionList, questionnaire);
-		System.out.println(b);
 		
-		return null; // 完成问卷页面
-		
-		
+		return "success/commit-success"; // 完成问卷页面
 		
 	}
+	
 }

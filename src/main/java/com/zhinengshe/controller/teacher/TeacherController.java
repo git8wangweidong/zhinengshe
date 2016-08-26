@@ -19,6 +19,16 @@ public class TeacherController {
 
 	@Resource
 	private ITeacherService teacherService;
+	
+	
+	/**
+	 * toAddTeacher
+	 * @return
+	 */
+	@RequestMapping(value = "/toAdd")
+	public String toAdd(){
+		return "back/user/add-teacher";
+	}
 
 	/**
 	 * 添加
@@ -29,66 +39,58 @@ public class TeacherController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(Teacher teacher, Model model) {
 
-		if (teacher != null) {
-			if (teacher.getName() != null && teacher.getName().trim().length() > 0) {
-				if (teacher.getUsername() != null && teacher.getUsername().trim().length() > 0) {
-					if (teacher.getPassword() != null && teacher.getPassword().trim().length() > 0) {
-						Boolean b = teacherService.add(teacher);
-						if (b) {
-							this.list(model);
-						}
-					}
-				}
-			}
+		Boolean b = teacherService.add(teacher);
+		if (b) {
+			this.list(model);
 		}
 		model.addAttribute("teacher", teacher);
 		return "teacher-add";
 	}
-	
+
 	/**
 	 * 删除
+	 * 
 	 * @param id
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value = "/del", method = RequestMethod.GET)
-	public String del(Integer id, Model model){
-		
+	public String del(Integer id, Model model) {
+
 		if (id instanceof Integer) {
-			 Boolean b = teacherService.del(id);
-			 if (b) {
-				 this.list(model);
+			Boolean b = teacherService.del(id);
+			if (b) {
+				this.list(model);
 			}
-			 model.addAttribute("del_msg", "删除失败，请稍后重试");
+			model.addAttribute("del_msg", "删除失败，请稍后重试");
 		}
 		return "teacher-list";
-		
+
 	}
-	
+
 	/**
 	 * 修改-编辑
+	 * 
 	 * @param id
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String edit(Integer id, Model model){
-		
-		if (id instanceof Integer) {
-			Teacher teacher = new Teacher();
-			teacher.setId(id);
-			List<Teacher> list = teacherService.get(teacher);
-			if (list !=null && list.size()>0) {
-				Teacher m = list.get(0);
-				model.addAttribute("teacher", m);
-				return "teacher-edit";
-			}
-			model.addAttribute("edit_msg", "获取详细失败，请稍后再试。");
+	public String edit(Integer id, Model model) {
+
+		Teacher teacher = new Teacher();
+		teacher.setId(id);
+		List<Teacher> list = teacherService.get(teacher);
+		if (list != null && list.size() > 0) {
+			Teacher m = list.get(0);
+			model.addAttribute("teacher", m);
+			return "teacher-edit";
 		}
+		model.addAttribute("edit_msg", "获取详细失败，请稍后再试。");
 		return "teacher-list";
-		
+
 	}
-	
+
 	/**
 	 * 修改-更新
 	 * @param teacher
@@ -96,21 +98,19 @@ public class TeacherController {
 	 * @return
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(Teacher teacher, Model model){
-		
-		if (teacher !=null) {
-			Boolean b = teacherService.update(teacher);
-			if (b) {
-				model.addAttribute("update_msg", "更新成功");
-				this.list(model);
-			}
-			model.addAttribute("update_msg", "更新失败");
+	public String update(Teacher teacher, Model model) {
+
+		Boolean b = teacherService.update(teacher);
+		if (b) {
+			model.addAttribute("update_msg", "更新成功");
+			this.list(model);
 		}
-		
+
+		model.addAttribute("update_msg", "更新失败");
 		return "teacher-edit";
-		
+
 	}
-	
+
 	/**
 	 * 查询所有
 	 * @param model
@@ -134,13 +134,12 @@ public class TeacherController {
 	@RequestMapping(value = "/find", method = RequestMethod.POST)
 	public String find(Teacher teacher, Model model) {
 
-		if (teacher != null) {
-			List<Teacher> teachers = teacherService.get(teacher);
-			if (teacher == null || teachers.size() > 0) {
-				model.addAttribute("teachers", teachers);
-			}
-			model.addAttribute("msg", "呃,没有符合条件的数据。。。");
+		List<Teacher> teachers = teacherService.get(teacher);
+		if (teacher == null || teachers.size() > 0) {
+			model.addAttribute("teachers", teachers);
 		}
+		
+		model.addAttribute("msg", "呃,没有符合条件的数据。。。");
 		return "teacher-list";
 	}
 }

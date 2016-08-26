@@ -3,6 +3,7 @@ package com.zhinengshe.controller.login;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import com.zhinengshe.service.login.ITeacherLoginService;
 
 /**
  * 登陆控制
+ * 
  * @author Administrator
  *
  */
@@ -44,38 +46,31 @@ public class LoginController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/managerLogin", method = RequestMethod.POST)
-	public String managerLogin(@Valid Manager manager, BindingResult result, Model model) {
+	public String managerLogin(@Valid Manager manager, BindingResult result, Model model, HttpServletRequest request) {
 
 		String username = manager.getUsername();
 		String password = manager.getPassword();
 
-		/*if (result.hasErrors()) {
-			
-			List<FieldError> errors = result.getFieldErrors();
-			for (FieldError fieldError : errors) {
-				model.addAttribute("ERR_"+fieldError.getField(), fieldError.getDefaultMessage());
-			}
-			return "login/login-manager";
-			
-		}*/
-		if (manager != null) {
-			if (username != null && username.trim().length() > 0) {
-				if (password != null && password.trim().length() > 0) {
+		/*
+		 * if (result.hasErrors()) {
+		 * 
+		 * List<FieldError> errors = result.getFieldErrors(); for (FieldError
+		 * fieldError : errors) {
+		 * model.addAttribute("ERR_"+fieldError.getField(),
+		 * fieldError.getDefaultMessage()); } return "login/login-manager";
+		 * 
+		 * }
+		 */
+		List<Manager> list = managerLoginService.login(username, password);
+		if (list.size() > 0) {
+			Manager m = list.get(0);
+			request.getSession().setAttribute("manager", m);
+			model.addAttribute("manager", m);
 
-					List<Manager> list = managerLoginService.login(username, password);
-
-					if (list.size() > 0) {
-						Manager m = list.get(0);
-						model.addAttribute("manager", m);
-
-						return "index/index-manager";
-					}
-					model.addAttribute("error_msg", "用户名或密码不正确。。。");
-				}
-			}
+			return "back/index/index-manager";
 		}
-		model.addAttribute("error_msg", "用户名或密码不能为空。。。");
-		return "login/login-manager";
+		model.addAttribute("error_msg", "用户名或密码不能正确");
+		return "back/login/login-manager";
 	}
 
 	/**
@@ -90,24 +85,15 @@ public class LoginController extends BaseController {
 		String username = teacher.getUsername();
 		String password = teacher.getPassword();
 
-		if (teacher != null) {
-			if (username != null && username.trim().length() > 0) {
-				if (password != null && password.trim().length() > 0) {
+		List<Teacher> list = teacherLoginService.login(username, password);
+		if (list.size() > 0) {
+			Teacher tea = list.get(0);
+			model.addAttribute("teacher", tea);
 
-					List<Teacher> list = teacherLoginService.login(username, password);
-
-					if (list.size() > 0) {
-						Teacher tea = list.get(0);
-						model.addAttribute("teacher", tea);
-
-						return "index/index-teacher";
-					}
-					model.addAttribute("error_msg", "用户名或密码不正确。。。");
-				}
-			}
+			return "back/index/index-teacher";
 		}
 		model.addAttribute("error_msg", "用户名或密码不能为空。。。");
-		return "login/login-teacher";
+		return "back/login/login-teacher";
 	}
 
 	/**
@@ -117,26 +103,18 @@ public class LoginController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/studentLogin", method = RequestMethod.POST)
-	public String studentLogin(Student student, Model model) {
+	public String studentLogin(Student student, Model model, HttpServletRequest request) {
 
 		String username = student.getUsername();
 		String password = student.getPassword();
 
-		if (student != null) {
-			if (username != null && username.trim().length() > 0) {
-				if (password != null && password.trim().length() > 0) {
+		List<Student> list = studentLoginService.login(username, password);
+		if (list.size() > 0) {
+			Student stu = list.get(0);
+			request.getSession().setAttribute("student", stu);
+			model.addAttribute("student", stu);
 
-					List<Student> list = studentLoginService.login(username, password);
-
-					if (list.size() > 0) {
-						Student stu = list.get(0);
-						model.addAttribute("manager", stu);
-
-						return "index/index-student";
-					}
-					model.addAttribute("error_msg", "用户名或密码不正确。。。");
-				}
-			}
+			return "front/question-naire/index-student";
 		}
 		model.addAttribute("error_msg", "用户名或密码不能为空。。。");
 		return "login/login-student";

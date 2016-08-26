@@ -2,6 +2,7 @@ package com.zhinengshe.service.naireresult;
 
 import java.util.List;
 
+import com.zhinengshe.pojo.naireresult.AnswerDistribution;
 import com.zhinengshe.pojo.naireresult.Naireresult;
 import com.zhinengshe.pojo.questionnaire.QuestionList;
 import com.zhinengshe.pojo.questionnaire.Questionnaire;
@@ -22,13 +23,13 @@ public interface INaireresultServcie {
 	 * @param naireId
 	 * @return List<Naireresult>  处理后的问卷结果
 	 */
-	List<Naireresult> showNaire(Integer naireId);
+	List<Naireresult> showNaire(Integer naireId,Integer periods);
 	
 	/**
 	 * sql 测试
 	 * @param naireId
 	 * @return
 	 */
-	List<Naireresult> testSql(Integer naireId,Integer periods);
+	List<AnswerDistribution> testSql(Integer naireId,Integer periods);
 
 }

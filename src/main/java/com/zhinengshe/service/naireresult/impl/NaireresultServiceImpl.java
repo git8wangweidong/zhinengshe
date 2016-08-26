@@ -7,10 +7,11 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.zhinengshe.constant.Constants;
+import com.zhinengshe.constants.Constants;
 import com.zhinengshe.dao.naireresult.NaireresultMapper;
 import com.zhinengshe.dao.question.QuestionMapper;
 import com.zhinengshe.dao.questionnaire.QuestionnaireMapper;
+import com.zhinengshe.pojo.naireresult.AnswerDistribution;
 import com.zhinengshe.pojo.naireresult.IdListAndPeriods;
 import com.zhinengshe.pojo.naireresult.Naireresult;
 import com.zhinengshe.pojo.naireresult.NaireresultExample;
@@ -47,6 +48,9 @@ public class NaireresultServiceImpl implements INaireresultServcie {
 			result.setQuestiontype(question.getQuestiontype());
 			result.setQuestionid(question.getId());
 			result.setAnswer(question.getAnswer());
+			result.setPeriods(questionnaire.getPeriods());
+			result.setCommiter(questionnaire.getStudentId());
+			
 			naireresults.add(result);
 		}
 		int i = naireresultMapper.insertList(naireresults);
@@ -57,40 +61,18 @@ public class NaireresultServiceImpl implements INaireresultServcie {
 	 * 问卷结果展示
 	 */
 	@Override
-	public List<Naireresult> showNaire(Integer naireId) {
+	public List<Naireresult> showNaire(Integer naireId,Integer periods) {
 		
+		// 查询当前问卷的所有问题id
 		Questionnaire naire = naireMapper.selectByPrimaryKey(naireId);
 		String sid = naire.getQuestionid();
 		
 		String[] sids = sid.split("\\|");
 		
-		List<Integer> ids = new ArrayList<>();
-		for (int i = 0; i < sids.length; i++) {
-			ids.add(Integer.parseInt(sids[i]));
-			
-		}
-		NaireresultExample example = new NaireresultExample();
-		example.createCriteria().andQuestionidIn(ids).andNaireidEqualTo(naireId);
-		List<Naireresult> resultList = naireresultMapper.selectByExample(example);
+		IdListAndPeriods periods4Single = new IdListAndPeriods();
+		IdListAndPeriods periods4Text = new IdListAndPeriods();
 		
-		return null;
-	}
-	
-	/**
-	 * sql 测试
-	 * @param naireId
-	 * @return
-	 */
-	public List<Naireresult> testSql(Integer naireId,Integer periods){
-		
-		Questionnaire naire = naireMapper.selectByPrimaryKey(naireId);
-		String sid = naire.getQuestionid();
-		
-		String[] sids = sid.split("\\|");
-		
-		IdListAndPeriods idListAndPeriods = new IdListAndPeriods();
-		IdListAndPeriods idListAndPeriods2 = new IdListAndPeriods();
-		
+		// 接收打分题目的姐
 		List<Integer> ids = new ArrayList<>();
 		// 声明接收 单行填空的集合
 		List<Integer> inputIds = new ArrayList<>();
@@ -108,11 +90,12 @@ public class NaireresultServiceImpl implements INaireresultServcie {
 			
 		}
 		
-		idListAndPeriods.setIdList(ids);
-		idListAndPeriods.setPeriods(periods);
+		periods4Single.setIdList(ids);
+		periods4Single.setPeriods(periods);
+		periods4Single.setQuestionids(ids);
+		periods4Single.setAnswerList(Constants.ANSWER_LIST);
 		
-		idListAndPeriods2.setIdList(inputIds);
-		idListAndPeriods2.setPeriods(periods);
+		List<AnswerDistribution> distributionList = naireresultMapper.selectAnswerDistribution(periods4Single);
 		
 		List<Naireresult> list = null;
 		
@@ -120,12 +103,25 @@ public class NaireresultServiceImpl implements INaireresultServcie {
 				
 		if (ids.size()>0) {
 			// 查询平均值
-			list = naireresultMapper.selectAvgByIdListAndPeriods(idListAndPeriods);
+			list = naireresultMapper.selectAvgByIdListAndPeriods(periods4Single);
+			// 对比问题ID 将答案分布结果添加到结果展示对象中去
+			for (Naireresult naireresult : list) {
+				Integer questionid = naireresult.getQuestionid();
+				for (AnswerDistribution distribution : distributionList) {
+					if (questionid == distribution.getQuestionId()) {
+						naireresult.setAnswerDistribution(distribution);
+					}
+				}
+			}
 			
 		}
+		
+		periods4Text.setIdList(inputIds);
+		periods4Text.setPeriods(periods);
+		
 		if (inputIds.size()>0) {
 			// 查询问答结果
-			InputList = naireresultMapper.selectTextByIdListAndPeriods(idListAndPeriods2);
+			InputList = naireresultMapper.selectTextByIdListAndPeriods(periods4Text);
 		}
 		if (list!=null && list.size()>0) {
 			if (InputList!=null && InputList.size()>0) {
@@ -136,5 +132,43 @@ public class NaireresultServiceImpl implements INaireresultServcie {
 		
 	}
 	
+	/**
+	 * 查询答案分布
+	 * @param naireId
+	 * @return
+	 */
+	public List<AnswerDistribution> testSql(Integer naireId,Integer periods){
+		
+		IdListAndPeriods idListAndPeriods = new IdListAndPeriods();
+		
+		idListAndPeriods.setPeriods(periods);
+		
+		
+		
+		List<Integer> questionids = new ArrayList<>();
+		questionids.add(1);
+		questionids.add(2);
+		questionids.add(3);
+		questionids.add(13);
+		questionids.add(14);
+		questionids.add(15);
+		questionids.add(16);
+		questionids.add(17);
+		
+		
+		List<Integer> answerList = new ArrayList<>();
+		answerList.add(1);
+		answerList.add(2);
+		answerList.add(3);
+		answerList.add(4);
+		
+		idListAndPeriods.setQuestionids(questionids);
+		idListAndPeriods.setAnswerList(Constants.ANSWER_LIST);
+		
+		List<AnswerDistribution> list = naireresultMapper.selectAnswerDistribution(idListAndPeriods);
+		
+		return list;
+		
+	}
 	
 }

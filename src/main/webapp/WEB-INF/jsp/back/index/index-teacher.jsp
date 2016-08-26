@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-我是管理员idex
+我是教师index<br><br>
 </body>
 </html>

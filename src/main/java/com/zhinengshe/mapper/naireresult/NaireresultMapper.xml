@@ -42,6 +42,32 @@
 		</where>
 	</sql>
 
+	<!-- 查询答案分布 -->
+	<select id="selectAnswerDistribution" resultType="com.zhinengshe.pojo.naireresult.AnswerDistribution"
+		parameterType="com.zhinengshe.pojo.naireresult.IdListAndPeriods">
+		select
+			questionid,answer, count(1) as distribution
+		from 
+			naireresult
+		where 
+			periods = #{periods}
+		and
+			questionid in
+		<foreach collection="questionids" item="id" open="(" close=")"
+			separator=",">
+			#{id}
+		</foreach>
+		and 
+			answer in
+		<foreach collection="answerList" item="id" open="(" close=")"
+			separator=",">
+			#{id}
+		</foreach>
+		group by questionid,answer
+	</select>
+
+
+
 	<!-- 批量查询简答题结果 -->
 	<select id="selectTextByIdListAndPeriods" resultMap="BaseResultMap"
 		parameterType="com.zhinengshe.pojo.naireresult.IdListAndPeriods">
@@ -72,7 +98,7 @@
 	</select>
 
 	<!-- 插入list数据 -->
-	<insert id="isnertList" useGeneratedKeys="true" parameterType="java.util.List">
+	<insert id="insertList" useGeneratedKeys="true" parameterType="java.util.List">
 		<selectKey resultType="long" keyProperty="id" order="AFTER">
 			SELECT
 			LAST_INSERT_ID()

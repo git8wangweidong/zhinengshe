@@ -16,10 +16,19 @@ public class Questionnaire {
 
 	private String periods;
 	
+	private Integer studentId;
+	
 	private List<Question> questions;
 
 	private List<Questiontype> questiontypes;
 
+	public Integer getStudentId() {
+		return studentId;
+	}
+	
+	public void setStudentId(Integer studentId) {
+		this.studentId = studentId;
+	}
 	public List<Question> getQuestions() {
 		return questions;
 	}
