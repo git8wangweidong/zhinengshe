@@ -32,60 +32,6 @@ public class TeacherServiceImpl extends AbstractService<Teacher, TeacherExample>
 	}
 
 	/**
-	 * 添加教师
-	 *//*
-	@Override
-	public Boolean add(Teacher t) {
-		// TODO 参数校验-数据合法性
-		if (t != null) {
-			if (t.getName() != null) {
-				if (t.getCategory() != null) {
-					if (t.getTel() != null) {
-						if (t.getUsername() != null) {
-							if (t.getPassword() != null) {
-								int i = this.mapper.insertSelective(t);
-								return i > 0;
-							}
-						}
-					}
-				}
-
-			}
-		}
-		return false;
-	}
-
-	*//**
-	 * 删除教师
-	 *//*
-	@Override
-	public Boolean del(Integer id) {
-		// TODO 参数校验
-		if (id != null && id instanceof Integer) {
-
-			int i = this.mapper.deleteByPrimaryKey(id);
-			return i > 0;
-		}
-
-		return false;
-	}
-
-	*//**
-	 * 更新教师
-	 *//*
-	@Override
-	public Boolean update(Teacher t) {
-		// TODO 参数校验 数据是否合法
-		if (t != null) {
-
-			int i = this.mapper.updateByPrimaryKey(t);
-			return i > 0;
-		}
-
-		return false;
-	}*/
-
-	/**
 	 * 查询教师
 	 */
 	@Override
@@ -95,11 +41,12 @@ public class TeacherServiceImpl extends AbstractService<Teacher, TeacherExample>
 		if (t != null) {
 
 			TeacherExample example = new TeacherExample();
+			example.setOrderByClause(" id  desc ");
 			Criteria criteria = example.createCriteria();
 			String name = t.getName();
 			Byte category = t.getCategory();
 			Integer id = t.getId();
-
+			
 			if (name != null && name.trim().length() > 0) {
 				criteria.andNameLike("%" + name + "%");
 			}
@@ -112,7 +59,7 @@ public class TeacherServiceImpl extends AbstractService<Teacher, TeacherExample>
 				criteria.andIdEqualTo(id);
 			}
 
-			List<Teacher> list = this.mapper.selectByExample(example);
+			List<Teacher> list = mapper.selectByExample(example);
 
 			if (list != null && list.size() > 0) {
 				return list;

@@ -37,7 +37,7 @@ public class ManagerServiceImpl extends AbstractService<Manager, ManagerExample>
 			if (t.getId() != null) {
 				criteria.andIdEqualTo(t.getId());
 			}
-			if (t.getName() != null && t.getUsername().trim().length() > 0) {
+			if (t.getName() != null && t.getName().trim().length() > 0) {
 				String name = t.getName();
 				criteria.andNameLike("%" + name + "%");
 			}

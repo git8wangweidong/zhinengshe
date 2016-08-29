@@ -40,22 +40,22 @@ public class StudentServiceImpl extends AbstractService<Student, StudentExample>
 		if (t != null) {
 			Criteria criteria = example.createCriteria();
 
-			if (t.getName() != null) {
+			if (t.getName() != null && t.getName().trim().length()>0) {
 				String name = t.getName();
 				criteria.andNameLike("%" + name + "%");
 			}
-			if (t.getClasses() != null) {
+			if (t.getClasses() != null && t.getClasses().trim().length()>0) {
 				criteria.andClassesEqualTo(t.getClasses());
 
 			}
-			if (t.getUsername() != null) {
+			if (t.getUsername() != null && t.getUsername().trim().length()>0) {
 				String username = t.getUsername();
 				criteria.andUsernameLike("%" + username + "%");
 			}
-			if (t.getQsstate() != null) {
+			if (t.getQsstate() != null && t.getQsstate().toString().trim().length()>0) {
 				criteria.andQsstateEqualTo(t.getQsstate());
 			}
-			if (t.getStustate() != null) {
+			if (t.getStustate() != null && t.getStustate().toString().trim().length()>0) {
 				criteria.andStustateEqualTo(t.getStustate());
 			}
 			List<Student> list = this.mapper.selectByExample(example);
@@ -64,57 +64,5 @@ public class StudentServiceImpl extends AbstractService<Student, StudentExample>
 
 		return null;
 	}
-
-	
-	/*@Override
-	public Boolean add(Student t) {
-		// TODO 参数校验-数据格式校验未编写
-		if (t != null) {
-			if (t.getName() != null && t.getName().trim().length() > 0) {
-				if (t.getClasses() != null && t.getClasses().trim().length() > 0) {
-					// 时间格式未校验
-					if (t.getRegisttime() != null) {
-						if (t.getStustate() != null) {
-							if (t.getTel() != null) {
-								if (t.getQsstate() != null) {
-									if (t.getUsername() != null) {
-										if (t.getPassword() != null) {
-											int i = this.mapper.insertSelective(t);
-											return i > 0;
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-
-		return false;
-	}
-
-	@Override
-	public Boolean del(Integer id) {
-		// TODO Auto-generated method stub
-		if (id != null) {
-			int i = this.mapper.deleteByPrimaryKey(id);
-			return i > 0;
-		}
-		return false;
-	}
-
-	@Override
-	public Boolean update(Student t) {
-		// TODO 参数校验
-		if (t != null) {
-			int i = this.mapper.updateByPrimaryKey(t);
-			return i > 0;
-		}
-		return false;
-	}
-	*/
-	
-	
 
 }

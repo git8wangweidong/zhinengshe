@@ -8,5 +8,12 @@
 </head>
 <body>
 我是教师index<br><br>
+
+<a href="/questionnaire/add">添加问卷</a><br><br>
+
+<a href="/questionnaire/toPublish">选择问卷及范围</a><br><br>
+
+<a href="/questionnaire/state">查看问卷状态</a><br><br>
+
 </body>
 </html>

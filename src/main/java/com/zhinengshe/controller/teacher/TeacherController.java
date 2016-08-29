@@ -41,10 +41,10 @@ public class TeacherController {
 
 		Boolean b = teacherService.add(teacher);
 		if (b) {
-			this.list(model);
+			return this.list(model);
 		}
 		model.addAttribute("teacher", teacher);
-		return "teacher-add";
+		return "back/success/add-falied";
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class TeacherController {
 		if (id instanceof Integer) {
 			Boolean b = teacherService.del(id);
 			if (b) {
-				this.list(model);
+				return this.list(model);
 			}
 			model.addAttribute("del_msg", "删除失败，请稍后重试");
 		}
@@ -84,7 +84,7 @@ public class TeacherController {
 		if (list != null && list.size() > 0) {
 			Teacher m = list.get(0);
 			model.addAttribute("teacher", m);
-			return "teacher-edit";
+			return "back/user/edit-teacher";
 		}
 		model.addAttribute("edit_msg", "获取详细失败，请稍后再试。");
 		return "teacher-list";
@@ -103,11 +103,11 @@ public class TeacherController {
 		Boolean b = teacherService.update(teacher);
 		if (b) {
 			model.addAttribute("update_msg", "更新成功");
-			this.list(model);
+			return this.list(model);
 		}
 
 		model.addAttribute("update_msg", "更新失败");
-		return "teacher-edit";
+		return "back/user/edit-teacher";
 
 	}
 
@@ -116,12 +116,12 @@ public class TeacherController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	public String list(Model model) {
 		TeacherExample example = new TeacherExample();
 		List<Teacher> teachers = teacherService.list(example);
 		model.addAttribute("teachers", teachers);
-		return "teacher-list";
+		return "back/user/add-teacher";
 
 	}
 
@@ -140,6 +140,6 @@ public class TeacherController {
 		}
 		
 		model.addAttribute("msg", "呃,没有符合条件的数据。。。");
-		return "teacher-list";
+		return "back/user/add-teacher";
 	}
 }

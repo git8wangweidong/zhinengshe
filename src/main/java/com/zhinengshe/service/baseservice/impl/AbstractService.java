@@ -71,7 +71,6 @@ public abstract class AbstractService<T, K extends Serializable> implements IBas
 	 */
 	@Override
 	public List<T> list(K example) {
-		
 		List<T> list = baseMapper.selectByExample(example);
 		
 		return list;

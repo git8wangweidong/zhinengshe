@@ -24,12 +24,38 @@ public class QuestionnaireController {
 	
 	
 	/**
-	 * toCreate
+	 * add 添加问卷
 	 * @return
 	 */
-	@RequestMapping(value="/toCreate",method = RequestMethod.GET)
-	public String toCreate(){
-		return "back/questionnaire/naire-create";
+	@RequestMapping(value="/add",method = RequestMethod.GET)
+	public String add(){
+		return "back/questionnaire/add-naire";
+		
+	}
+	
+	/**
+	 * toPublish 添加问卷
+	 * @return
+	 */
+	@RequestMapping(value="/toPublish",method = RequestMethod.GET)
+	public String toPublish(){
+		
+		// TODO 展示所有的问卷 及班级
+		
+		return "back/questionnaire/publish-naire";
+		
+	}
+	
+	/**
+	 * state 添加问卷
+	 * @return
+	 */
+	@RequestMapping(value="/state",method = RequestMethod.GET)
+	public String state(){
+		
+		// TODO 展示所有的问卷完成率 及已做答人数
+		
+		return "back/questionnaire/state-naire";
 		
 	}
 	
