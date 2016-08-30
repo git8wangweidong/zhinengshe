@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.zhinengshe.exception.BusinessException;
 import com.zhinengshe.pojo.teacher.Teacher;
 import com.zhinengshe.service.teacher.ITeacherService;
 

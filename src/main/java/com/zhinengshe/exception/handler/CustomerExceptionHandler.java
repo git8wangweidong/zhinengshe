@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
-import com.zhinengshe.exception.SystemException;
-
 /**
  * 自定义异常处理
  * @author Administrator

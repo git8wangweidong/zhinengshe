@@ -87,8 +87,11 @@ public class QuestionnaireController {
 	public String commit(QuestionList questionList, Questionnaire questionnaire, Model model){
 		
 		Boolean b = naireresultServcie.commitNaire(questionList, questionnaire);
+		if (b) {
+			return "success/commit-success"; // 完成问卷页面
+		}
 		
-		return "success/commit-success"; // 完成问卷页面
+		return "success/commit-failed"; // 完成问卷失败
 		
 	}
 	
