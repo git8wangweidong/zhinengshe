@@ -16,9 +16,12 @@
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
 	<context:component-scan base-package="com.zhinengshe.controller" />
 
+	<!-- springMvc资源拦截 -->
 	<mvc:resources location="/" mapping="/**/*.js"/>
 	<mvc:resources location="/" mapping="/**/*.css"/>
 	<mvc:resources location="/" mapping="/**/*.png"/>
+	<mvc:resources location="/" mapping="/**/*.jpg"/>
+	
 
 	<!--避免IE执行AJAX时，返回JSON出现下载文件 -->
 	<bean id="mappingJacksonHttpMessageConverter"
@@ -65,16 +68,9 @@
 	<bean id="exceptionResolver" class="com.zhinengshe.exception.handler.CustomerExceptionHandler">
 		<property name="exceptionMappings">
 			<props>
-				<!-- 系统异常 -->
-				<prop key="com.zhinengshe.exception.SystemException">error/system-error</prop>
-				<!-- 业务异常 -->
-				<prop key="com.zhinengshe.exception.BusinessException">error/business-error</prop>
-				<!-- 参数异常 -->
-				<prop key="com.zhinengshe.exception.ParameterException">error/param-error</prop>
-				<!--  -->
-				<prop key="com.zhinengshe.exception.StringException">error/500</prop>
 				<!-- 异常 -->
-				<prop key="java.lang.exception">error/500</prop>
+				<prop key="com.zhinengshe.exception.BusinessException">error/500</prop>
+				<prop key="java.lang.Exception">error/500</prop>
 			</props>
 		</property>
 	</bean>

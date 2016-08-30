@@ -23,6 +23,8 @@ import com.zhinengshe.service.teacher.ITeacherService;
 @Service("teacherService")
 public class TeacherServiceImpl extends AbstractService<Teacher, TeacherExample> implements ITeacherService {
 
+	
+
 	@Resource
 	private TeacherMapper mapper;
 
@@ -70,4 +72,14 @@ public class TeacherServiceImpl extends AbstractService<Teacher, TeacherExample>
 		return null;
 	}
 
+	@Override
+	public List<Teacher> list(TeacherExample example) {
+		
+		
+		// TODO Auto-generated method stub
+		return super.list(example);
+	}
+	
+	
+	
 }

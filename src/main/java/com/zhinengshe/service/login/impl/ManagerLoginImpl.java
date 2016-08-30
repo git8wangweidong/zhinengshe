@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.zhinengshe.dao.manager.ManagerMapper;
@@ -24,6 +25,8 @@ public class ManagerLoginImpl implements IManagerLoginService {
 
 	@Resource
 	private ManagerMapper managerMapper;
+	
+	private static Logger log = Logger.getLogger(ManagerLoginImpl.class);
 
 	/**
 	 * 登陆方法
@@ -31,7 +34,7 @@ public class ManagerLoginImpl implements IManagerLoginService {
 	 * @param password
 	 * @return List<Manager>
 	 */
-	public List<Manager> login(String username, String password) {
+	public List<Manager> login(String username, String password) throws ParameterException, Exception{
 
 		ManagerExample example = new ManagerExample();
 		Criteria criteria = example.createCriteria();
@@ -43,15 +46,19 @@ public class ManagerLoginImpl implements IManagerLoginService {
 			if (password != null && password.trim().length() > 0) {
 				criteria.andPasswordEqualTo(password);
 				// 查询数据库
-				List<Manager> list = managerMapper.selectByExample(example);
-				if (list == null || list.size() <= 0) {
-					return null;
+				List<Manager> list = null;
+				try {
+					list = managerMapper.selectByExample(example);
+				} catch (Exception e) {
+					log.info("管理员登陆查询数据库异常", e);
 				}
-				
-				return list;
+				if (list != null && list.size() > 0) {
+					return list;
+				}
 			}
+			throw new ParameterException("密码格式不正确");
 		}
-		return null;
+		throw new ParameterException("账号格式不正确");
 	}
 
 }

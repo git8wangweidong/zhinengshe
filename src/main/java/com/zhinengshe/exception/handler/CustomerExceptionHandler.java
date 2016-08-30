@@ -11,6 +11,11 @@ import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
 import com.zhinengshe.exception.SystemException;
 
+/**
+ * 自定义异常处理
+ * @author Administrator
+ *
+ */
 public class CustomerExceptionHandler extends SimpleMappingExceptionResolver {
 
 	@Override
@@ -43,7 +48,7 @@ public class CustomerExceptionHandler extends SimpleMappingExceptionResolver {
 				return null;
 			}
 		} else {
-			throw new SystemException( "返回异常字符串！！！！！" , "utf-8" );
+			return null;
 		}
 
 	}

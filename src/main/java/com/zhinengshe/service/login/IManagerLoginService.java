@@ -18,6 +18,6 @@ public interface IManagerLoginService {
 	 * @param password
 	 * @return
 	 */
-	public List<Manager> login(String username, String password) throws ParameterException;
+	public List<Manager> login(String username, String password)throws ParameterException,Exception;
 
 }

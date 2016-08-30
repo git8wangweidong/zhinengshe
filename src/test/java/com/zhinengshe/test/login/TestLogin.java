@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.fastjson.JSON;
 import com.zhinengshe.pojo.manager.Manager;
 import com.zhinengshe.pojo.student.Student;
+import com.zhinengshe.pojo.teacher.Teacher;
 import com.zhinengshe.service.login.IManagerLoginService;
 import com.zhinengshe.service.login.IStudentLoginService;
 import com.zhinengshe.service.login.ITeacherLoginService;
@@ -28,24 +29,24 @@ public class TestLogin extends BaseTest {
 	@Autowired
 	private IStudentLoginService studentLoginService;
 	
-	@Test
-	public void testLogin(){
+	/*@Test
+	public void testLogin() {
 		
 		List<Student> list = studentLoginService.login("1234", "123");
 		System.out.println(JSON.toJSONString(list.get(0)));
 		
-	}
+	}*/
 	
 	/**
 	 * 测试教师登陆
 	 */
 	@Resource
-	private ITeacherLoginService teachetLoginService;
+	private ITeacherLoginService teacherLoginService;
 	
 	@Test
-	public void testTeacherLogin(){
+	public void testTeacherLogin() throws Exception{
 		
-		List<Student> list = teachetLoginService.login("123", "123");
+		List<Teacher> list = teacherLoginService.login("libaibai", "baibaili");
 		System.out.println(JSON.toJSONString(list.get(0)));
 		
 	}
@@ -57,7 +58,7 @@ public class TestLogin extends BaseTest {
 	private IManagerLoginService managerLoginService;
 	
 	@Test
-	public void testManagerLogin(){
+	public void testManagerLogin() throws Exception{
 		
 		List<Manager> list = managerLoginService.login("123", "123");
 		System.out.println(JSON.toJSONString(list.get(0)));

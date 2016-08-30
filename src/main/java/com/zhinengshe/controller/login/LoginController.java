@@ -6,13 +6,16 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zhinengshe.controller.BaseController;
+import com.zhinengshe.exception.ParameterException;
 import com.zhinengshe.pojo.manager.Manager;
 import com.zhinengshe.pojo.student.Student;
 import com.zhinengshe.pojo.teacher.Teacher;
@@ -22,7 +25,6 @@ import com.zhinengshe.service.login.ITeacherLoginService;
 
 /**
  * 登陆控制
- * 
  * @author Administrator
  *
  */
@@ -39,37 +41,56 @@ public class LoginController extends BaseController {
 	@Resource
 	private IStudentLoginService studentLoginService;
 
+	private static Logger log = Logger.getLogger(LoginController.class);
+	
+	
+	/**
+	 * 提取检查参数方法
+	 * @param model
+	 * @param result
+	 * @return
+	 */
+	private boolean checkParam(Model model,BindingResult result){
+		
+		if (result.hasErrors()) {
+			List<FieldError> errors = result.getFieldErrors();
+			for (FieldError fieldError : errors) {
+				model.addAttribute("ERR_" + fieldError.getField(), fieldError.getDefaultMessage());
+			}
+			return true;
+		}
+		return false;
+	}
+
 	/**
 	 * 管理员登陆
 	 * @param manager
 	 * @param model
 	 * @return
+	 * @throws Exception
 	 */
 	@RequestMapping(value = "/managerLogin", method = RequestMethod.POST)
 	public String managerLogin(@Valid Manager manager, BindingResult result, Model model, HttpServletRequest request) {
 
-		String username = manager.getUsername();
-		String password = manager.getPassword();
-
-		/*
-		 * if (result.hasErrors()) {
-		 * 
-		 * List<FieldError> errors = result.getFieldErrors(); for (FieldError
-		 * fieldError : errors) {
-		 * model.addAttribute("ERR_"+fieldError.getField(),
-		 * fieldError.getDefaultMessage()); } return "login/login-manager";
-		 * 
-		 * }
-		 */
-		List<Manager> list = managerLoginService.login(username, password);
-		if (list.size() > 0) {
-			Manager m = list.get(0);
-			request.getSession().setAttribute("manager", m);
-			model.addAttribute("manager", m);
-
+		
+		if (this.checkParam(model, result)) {
+			return "back/login/login-manager";
+		}
+		
+		List<Manager> list = null;
+		try {
+			list = managerLoginService.login(manager.getUsername(), manager.getPassword());
+		} catch (ParameterException e) {
+			log.error(e.getMessage(), e);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+		if (list != null && list.size() > 0) {
+			Manager man = list.get(0);
+			request.getSession().setAttribute("manager", man);
+			model.addAttribute("manager", man);
 			return "back/index/index-manager";
 		}
-		model.addAttribute("error_msg", "用户名或密码不能正确");
 		return "back/login/login-manager";
 	}
 
@@ -78,14 +99,24 @@ public class LoginController extends BaseController {
 	 * @param manager
 	 * @param model
 	 * @return
+	 * @throws Exception
 	 */
 	@RequestMapping(value = "/teacherLogin", method = RequestMethod.POST)
-	public String teacherLogin(Teacher teacher, Model model) {
+	public String teacherLogin(@Valid Teacher teacher, BindingResult result, Model model, HttpServletRequest request) {
 
-		String username = teacher.getUsername();
-		String password = teacher.getPassword();
+		if (this.checkParam(model, result)) {
+			return "back/login/login-teacher";
+		}
 
-		List<Teacher> list = teacherLoginService.login(username, password);
+		List<Teacher> list = null;
+		try {
+			list = teacherLoginService.login(teacher.getUsername(),teacher.getPassword());
+		} catch (ParameterException e) {
+			log.error(e.getMessage(), e);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+
 		if (list.size() > 0) {
 			Teacher tea = list.get(0);
 			model.addAttribute("teacher", tea);
@@ -101,22 +132,29 @@ public class LoginController extends BaseController {
 	 * @param manager
 	 * @param model
 	 * @return
+	 * @throws Exception
 	 */
 	@RequestMapping(value = "/studentLogin", method = RequestMethod.POST)
-	public String studentLogin(Student student, Model model, HttpServletRequest request) {
+	public String studentLogin(@Valid Student student, BindingResult result, Model model, HttpServletRequest request) {
 
-		String username = student.getUsername();
-		String password = student.getPassword();
+		if (this.checkParam(model, result)) {
+			return "front/login/login-student";
+		}
 
-		List<Student> list = studentLoginService.login(username, password);
+		List<Student> list = null;
+		try {
+			list = studentLoginService.login(student.getUsername(), student.getPassword());
+		} catch (ParameterException e) {
+			log.error(e.getMessage(), e);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
 		if (list.size() > 0) {
 			Student stu = list.get(0);
 			request.getSession().setAttribute("student", stu);
 			model.addAttribute("student", stu);
-
 			return "front/question-naire/index-student";
 		}
-		model.addAttribute("error_msg", "用户名或密码不能为空。。。");
-		return "login/login-student";
+		return "front/login/login-student";
 	}
 }

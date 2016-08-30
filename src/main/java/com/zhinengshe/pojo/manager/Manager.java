@@ -15,7 +15,7 @@ public class Manager {
 	@NotBlank(message = "用户名不能为空")
 	private String username;
 
-	@Pattern(regexp = "[0-9a-zA-Z_](6,20)", message = "密码必须是6-20个字符之间的")
+	@Pattern(regexp = "^[0-9_a-zA-Z]{6,20}$", message = "密码必须是6-20个字符之间的")
 	private String password;
 
 	public Integer getId() {

@@ -14,6 +14,6 @@
 <%= e.getMessage()%>
 <P>错误信息：</P>
 <% e.printStackTrace(new java.io.PrintWriter(out)); %> --%>
-
+你遭遇了什么？？
 </body>
 </html>

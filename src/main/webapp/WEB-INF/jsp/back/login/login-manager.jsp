@@ -14,10 +14,10 @@
 		<form name="frm" method="post" action="/login/managerLogin">
         	<ul>
             	<li class="clearfix">
-                    <input type="text" class="fl txt"  placeholder="请输入账号" name = "username"/>
+                    <input type="text" class="fl txt"  placeholder="请输入账号" name = "username"/>${ERR_username }
                 </li>
             	<li class="clearfix">
-                    <input type="password" class="fl txt"  placeholder="请输入密码"  name = "password"/>
+                    <input type="password" class="fl txt"  placeholder="请输入密码"  name = "password"/>${ERR_password }
                 </li>
                 <li>
                 	<input type="submit" value="登录" class="btn" />
