@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.zhinengshe.dao.teacher.TeacherMapper;
 import com.zhinengshe.pojo.teacher.Teacher;
 import com.zhinengshe.pojo.teacher.TeacherExample;
-import com.zhinengshe.pojo.teacher.TeacherExample.Criteria;
 import com.zhinengshe.service.baseservice.impl.AbstractService;
 import com.zhinengshe.service.teacher.ITeacherService;
 import com.zhinengshe.utlis.pagenation.Pagination;
@@ -34,9 +33,7 @@ public class TeacherServiceImpl extends AbstractService<Teacher, TeacherExample>
 		super.setBaseMapper(mapper);
 	}
 
-	/**
-	 * 查询所有教师
-	 */
+	// TODO 教师分页具体实现
 	@Override
 	public Pagination list(String name, Byte category, String username ,String tel, Integer pageNo) {
 		
@@ -79,7 +76,6 @@ public class TeacherServiceImpl extends AbstractService<Teacher, TeacherExample>
 		pagination.pageView(url, params.toString());
 		return pagination;
 	}
-	
-	
+
 	
 }
