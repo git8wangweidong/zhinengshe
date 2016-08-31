@@ -1,0 +1,62 @@
+[INFO] [2016-08-30 12:45:10][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring-mybatis.xml]
+[INFO] [2016-08-30 12:45:11][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@1501026: startup date [Tue Aug 30 12:45:11 CST 2016]; root of context hierarchy
+[INFO] [2016-08-30 12:45:12][org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]Loading properties file from class path resource [jdbc.properties]
+[INFO] [2016-08-30 12:45:12][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[WARN] [2016-08-30 12:45:14][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]Autowired annotation should be used on methods with actual parameters: public void com.zhinengshe.service.manager.impl.ManagerServiceImpl.setMapper()
+[WARN] [2016-08-30 12:45:14][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]Autowired annotation should be used on methods with actual parameters: public void com.zhinengshe.service.questionnaire.impl.QuestionnaireServiceImpl.setQuestionnaireMapper()
+[WARN] [2016-08-30 12:45:15][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]Autowired annotation should be used on methods with actual parameters: public void com.zhinengshe.service.teacher.impl.TeacherServiceImpl.setMapper()
+[WARN] [2016-08-30 12:45:15][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]Autowired annotation should be used on methods with actual parameters: public void com.zhinengshe.service.classes.impl.ClassesServiceImpl.setBaseMapper()
+[WARN] [2016-08-30 12:45:15][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]Autowired annotation should be used on methods with actual parameters: public void com.zhinengshe.service.question.impl.QuestionServiceImpl.setMapper()
+[INFO] [2016-08-30 12:45:17][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@1501026: startup date [Tue Aug 30 12:45:11 CST 2016]; root of context hierarchy
+[INFO] [2016-08-30 12:47:09][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring-mybatis.xml]
+[INFO] [2016-08-30 12:47:09][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@196f8: startup date [Tue Aug 30 12:47:09 CST 2016]; root of context hierarchy
+[INFO] [2016-08-30 12:47:10][org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]Loading properties file from class path resource [jdbc.properties]
+[INFO] [2016-08-30 12:47:10][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[WARN] [2016-08-30 12:47:12][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]Autowired annotation should be used on methods with actual parameters: public void com.zhinengshe.service.manager.impl.ManagerServiceImpl.setMapper()
+[WARN] [2016-08-30 12:47:12][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]Autowired annotation should be used on methods with actual parameters: public void com.zhinengshe.service.questionnaire.impl.QuestionnaireServiceImpl.setQuestionnaireMapper()
+[WARN] [2016-08-30 12:47:12][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]Autowired annotation should be used on methods with actual parameters: public void com.zhinengshe.service.teacher.impl.TeacherServiceImpl.setMapper()
+[WARN] [2016-08-30 12:47:12][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]Autowired annotation should be used on methods with actual parameters: public void com.zhinengshe.service.classes.impl.ClassesServiceImpl.setBaseMapper()
+[WARN] [2016-08-30 12:47:12][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]Autowired annotation should be used on methods with actual parameters: public void com.zhinengshe.service.question.impl.QuestionServiceImpl.setMapper()
+[INFO] [2016-08-30 12:47:13][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@196f8: startup date [Tue Aug 30 12:47:09 CST 2016]; root of context hierarchy
+[INFO] [2016-08-30 12:48:06][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring-mybatis.xml]
+[INFO] [2016-08-30 12:48:07][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@196f8: startup date [Tue Aug 30 12:48:07 CST 2016]; root of context hierarchy
+[INFO] [2016-08-30 12:48:07][org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]Loading properties file from class path resource [jdbc.properties]
+[INFO] [2016-08-30 12:48:07][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[WARN] [2016-08-30 12:48:09][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]Autowired annotation should be used on methods with actual parameters: public void com.zhinengshe.service.manager.impl.ManagerServiceImpl.setMapper()
+[WARN] [2016-08-30 12:48:09][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]Autowired annotation should be used on methods with actual parameters: public void com.zhinengshe.service.questionnaire.impl.QuestionnaireServiceImpl.setQuestionnaireMapper()
+[WARN] [2016-08-30 12:48:09][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]Autowired annotation should be used on methods with actual parameters: public void com.zhinengshe.service.teacher.impl.TeacherServiceImpl.setMapper()
+[WARN] [2016-08-30 12:48:09][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]Autowired annotation should be used on methods with actual parameters: public void com.zhinengshe.service.classes.impl.ClassesServiceImpl.setBaseMapper()
+[WARN] [2016-08-30 12:48:09][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]Autowired annotation should be used on methods with actual parameters: public void com.zhinengshe.service.question.impl.QuestionServiceImpl.setMapper()
+[INFO] [2016-08-30 12:48:10][com.zhinengshe.service.login.impl.TeacherLoginImpl]登陆错误
+java.lang.ArithmeticException: / by zero
+	at com.zhinengshe.service.login.impl.TeacherLoginImpl.login(TeacherLoginImpl.java:51)
+	at com.zhinengshe.test.login.TestLogin.testTeacherLogin(TestLogin.java:49)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:83)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:72)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:232)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:175)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+[INFO] [2016-08-30 12:48:10][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@196f8: startup date [Tue Aug 30 12:48:07 CST 2016]; root of context hierarchy
