@@ -22,6 +22,7 @@ import com.zhinengshe.pojo.teacher.Teacher;
 import com.zhinengshe.service.questionnaire.IQuestionnaireService;
 import com.zhinengshe.service.teacher.ITeacherService;
 import com.zhinengshe.test.basetest.BaseTest;
+import com.zhinengshe.utlis.pagenation.Pagination;
 
 
 public class TestTeacher extends BaseTest{
@@ -54,5 +55,34 @@ public class TestTeacher extends BaseTest{
 		System.out.println(JSON.toJSONString(questionnaire));
 		
 	}
+	
+	@Test
+	public void testListByPage1(){
+		
+		Pagination pagination = teacherService.list("王",null,null,null,1);
+		List<Teacher> list = (List<Teacher>) pagination.getList();
+		for (Teacher t : list) {
+			System.out.println(JSONObject.toJSONString(t));
+		}
+	}
 
+	@Test
+	public void testListByPage2(){
+		
+		Pagination pagination = teacherService.list(null,null,null,null,null);
+		List<Teacher> list = (List<Teacher>) pagination.getList();
+		for (Teacher t : list) {
+			System.out.println(JSONObject.toJSONString(t));
+		}
+	}
+	
+	@Test
+	public void testListByPage3(){
+		
+		Pagination pagination = teacherService.list("王",null,null,null,3);
+		List<Teacher> list = (List<Teacher>) pagination.getList();
+		for (Teacher t : list) {
+			System.out.println(JSONObject.toJSONString(t));
+		}
+	}
 }

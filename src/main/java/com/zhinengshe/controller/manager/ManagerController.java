@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.zhinengshe.pojo.manager.Manager;
 import com.zhinengshe.pojo.manager.ManagerExample;
 import com.zhinengshe.service.manager.IManagerService;
+import com.zhinengshe.utlis.pagenation.Pagination;
 
 @Controller
 @RequestMapping("/manager")
@@ -116,9 +117,32 @@ public class ManagerController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
 
-		ManagerExample example = new ManagerExample();
-		List<Manager> managers = managerService.list(example);
-		model.addAttribute("managers", managers);
+		Manager manager = new Manager();
+		Pagination pagination =  managerService.list(manager);
+		model.addAttribute("pagination", pagination);
+		return "back/user/add-manager";
+
+	}
+	
+	/**
+	 * 查询所有
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/listByPage", method = RequestMethod.GET)
+	public String listByPage(String name, String username, Integer pageNo,Model model) {
+
+		Manager manager = new Manager();
+		manager.setName(name);
+		manager.setUsername(username);
+		Pagination pagination = managerService.list(manager);
+		
+		model.addAttribute("username",username);
+		model.addAttribute("name", name);
+		
+		model.addAttribute("pagination", pagination);
+		
+		
 		return "back/user/add-manager";
 
 	}

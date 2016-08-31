@@ -12,13 +12,12 @@
 
 	/* 查询  */
 	function search() {
-		alert(0)
-		document.teacher.action="/teacher/find";
+		document.teacher.method="get";
+		document.teacher.action="/teacher/list";
 		document.teacher.submit();
 	}
 	/* 删除确认  */
 	function del(id){
-		alert(id)
 		if(confirm("确定删除本条记录？")){
 			window.location.href="/teacher/del?id="+id;
 		}
@@ -46,11 +45,11 @@
 			<div class="top">
 				<div class="edit">用户编辑</div>
 				<ul class="info clearfix">
-					<li class="one"><span>姓名：</span><input type="text" name="name"></li>
-					<li class="two"><span>手机号：</span><input type="text" name="tel"></li>
-					<li class="three"><span>类别：</span><input type="text" name="category"></li>
-					<li class="four"><span>用户名：</span><input type="text" name="username"></li>
-					<li class="five"><span>密码：</span><input type="text" name="password"></li>
+					<li class="one"><span>姓名：</span><input type="text" name="name" value="${name }" ></li>
+					<li class="two"><span>手机号：</span><input type="text" name="tel" value="${tel }"></li>
+					<li class="three"><span>类别：</span><input type="text" name="category" value="${category }"></li>
+					<li class="four"><span>用户名：</span><input type="text" name="username" value="${username }"></li>
+					<li class="five"><span>密码：</span><input type="text" name="password" value="${password }"></li>
 					 <li class="operate">
 					 	<input type="submit" value="创建" class="cj"/><input type="button" onclick="search();" class="ss" value="搜索"/>
 					 </li>
@@ -65,7 +64,7 @@
 		        <td>课程</td>
 		        <td>编辑</td>
 	      </tr>
-	      <c:forEach items="${teachers }" var="teacher">
+	      <c:forEach items="${pagination.list }" var="teacher">
 	      	<input  type="hidden" name="id" value="${teacher.id }"/>
 		      <tr>
 		        <td>${teacher.name }</td>
@@ -79,6 +78,9 @@
 		      </tr>
 	      </c:forEach>
 	     </table>
+	     <c:forEach items="${pagination.pageView }" var="page">
+	     	${page }
+	     </c:forEach>
 	<div class="footer"></div>
 </body>
 </html>

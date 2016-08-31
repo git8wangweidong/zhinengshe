@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zhinengshe.pojo.student.Student;
 import com.zhinengshe.pojo.student.StudentExample;
+import com.zhinengshe.pojo.teacher.Teacher;
 import com.zhinengshe.service.student.IStudentService;
+import com.zhinengshe.utlis.pagenation.Pagination;
 
 @Controller
 @RequestMapping("/student")
@@ -115,10 +117,11 @@ public class StudentController {
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
-		StudentExample example = new StudentExample();
+		
+		Student student = new Student();
 
-		List<Student> students = studentService.list(example);
-		model.addAttribute("students", students);
+		Pagination pagination = studentService.list(student);
+		model.addAttribute("pagination", pagination);
 		return "back/user/add-student";
 
 	}

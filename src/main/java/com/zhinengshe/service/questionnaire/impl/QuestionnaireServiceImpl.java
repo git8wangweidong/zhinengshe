@@ -22,6 +22,7 @@ import com.zhinengshe.pojo.questiontype.Questiontype;
 import com.zhinengshe.pojo.questiontype.QuestiontypeExample;
 import com.zhinengshe.service.baseservice.impl.AbstractService;
 import com.zhinengshe.service.questionnaire.IQuestionnaireService;
+import com.zhinengshe.utlis.pagenation.Pagination;
 
 @Service("questionnaireService")
 public class QuestionnaireServiceImpl extends AbstractService<Questionnaire, QuestionnaireExample> implements IQuestionnaireService {
@@ -129,6 +130,12 @@ public class QuestionnaireServiceImpl extends AbstractService<Questionnaire, Que
 		naire.setQuestiontypes(questiontypes);
 
 		return naire;
+	}
+
+	@Override
+	public Pagination list(String name, Byte category, String username, String tel, Integer pageNo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

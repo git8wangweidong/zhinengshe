@@ -1,8 +1,10 @@
 package com.zhinengshe.controller.teacher;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zhinengshe.pojo.teacher.Teacher;
-import com.zhinengshe.pojo.teacher.TeacherExample;
 import com.zhinengshe.service.teacher.ITeacherService;
+import com.zhinengshe.utlis.pagenation.Pagination;
 
 @Controller
 @RequestMapping("/teacher")
@@ -118,13 +120,31 @@ public class TeacherController {
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	public String list(Model model) {
-		TeacherExample example = new TeacherExample();
-		List<Teacher> teachers = teacherService.list(example);
-		model.addAttribute("teachers", teachers);
+		Teacher teacher = new Teacher();
+		Pagination pagination = teacherService.list(null,null, null, null, null);
+		model.addAttribute("pagination", pagination);
 		return "back/user/add-teacher";
 
 	}
 
+	/**
+	 * 查询所有
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String list(String name, Byte category, String username ,String tel, Integer pageNo, HttpServletRequest request, Model model) {
+		
+		Pagination pagination = teacherService.list(name,category, username, tel, pageNo);
+		model.addAttribute("name", name);
+		model.addAttribute("category", category);
+		model.addAttribute("username", username);
+		model.addAttribute("tel", tel);
+		model.addAttribute("pagination", pagination);
+		
+		return "back/user/add-teacher";
+
+	}
 	/**
 	 * 查询
 	 * @param teacher

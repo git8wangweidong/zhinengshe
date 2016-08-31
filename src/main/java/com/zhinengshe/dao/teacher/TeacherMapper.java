@@ -10,6 +10,20 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TeacherMapper extends IBaseMapper<Teacher, TeacherExample>{
 	
+	/**
+	 * 分页查询
+	 * @param teacher
+	 * @return
+	 */
+	List<Teacher> selectByPage(Teacher teacher);
+	
+	/**
+	 * 查询总记录条数
+	 * @param teacher
+	 * @return
+	 */
+	int selectTotalCount(Teacher teacher);
+	
     int countByExample(TeacherExample example);
 
     int deleteByExample(TeacherExample example);

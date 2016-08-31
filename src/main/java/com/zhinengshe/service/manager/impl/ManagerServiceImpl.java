@@ -11,8 +11,10 @@ import com.zhinengshe.dao.manager.ManagerMapper;
 import com.zhinengshe.pojo.manager.Manager;
 import com.zhinengshe.pojo.manager.ManagerExample;
 import com.zhinengshe.pojo.manager.ManagerExample.Criteria;
+import com.zhinengshe.pojo.teacher.Teacher;
 import com.zhinengshe.service.baseservice.impl.AbstractService;
 import com.zhinengshe.service.manager.IManagerService;
+import com.zhinengshe.utlis.pagenation.Pagination;
 
 @Service("managerService")
 public class ManagerServiceImpl extends AbstractService<Manager, ManagerExample> implements IManagerService {
@@ -53,64 +55,18 @@ public class ManagerServiceImpl extends AbstractService<Manager, ManagerExample>
 		return null;
 	}
 
-	/**
-	 * 查询所有管理员
-	 */
 	@Override
-	public List<Manager> list(ManagerExample example){
-		List<Manager> list = this.managerMapper.selectByExample(example);
-		if (list != null && list.size() > 0) {
-			return list;
-		}
+	public Pagination list(String name, Byte category, String username, String tel, Integer pageNo) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
-	/**
-	 * 添加管理员
-	 *//*
 	@Override
-	public Boolean add(Manager t) {
-		// TODO 属性校验 -数据格式校验
-		if (t != null) {
-			if (t.getName() != null) {
-				if (t.getUsername() != null) {
-					if (t.getPassword() != null) {
-						int i = this.managerMapper.insertSelective(t);
-						return i > 0;
-					}
-				}
-			}
-		}
-		return false;
+	public Pagination list(Manager manager) {
+		return null;
+		
 	}
+
 	
-	*//**
-	 * 删除管理员
-	 *//*
-	@Override
-	public Boolean del(Integer id) {
-		// TODO 参数校验
-		if (id != null) {
-
-			int i = this.managerMapper.deleteByPrimaryKey(id);
-			return i > 0;
-		}
-		return false;
-	}
-
-	*//**
-	 * 更新管理员
-	 *//*
-	@Override
-	public Boolean update(Manager t) {
-		// TODO 参数校验
-		if (t != null) {
-
-			int i = this.managerMapper.updateByPrimaryKeySelective(t);
-
-			return i > 0;
-		}
-		return false;
-	}*/
 
 }

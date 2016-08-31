@@ -104,9 +104,9 @@ public class LoginController extends BaseController {
 	@RequestMapping(value = "/teacherLogin", method = RequestMethod.POST)
 	public String teacherLogin(@Valid Teacher teacher, BindingResult result, Model model, HttpServletRequest request) {
 
-		if (this.checkParam(model, result)) {
+		/*if (this.checkParam(model, result)) {
 			return "back/login/login-teacher";
-		}
+		}*/
 
 		List<Teacher> list = null;
 		try {

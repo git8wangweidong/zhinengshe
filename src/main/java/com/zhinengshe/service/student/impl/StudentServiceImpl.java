@@ -1,5 +1,6 @@
 package com.zhinengshe.service.student.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -13,6 +14,7 @@ import com.zhinengshe.pojo.student.StudentExample;
 import com.zhinengshe.pojo.student.StudentExample.Criteria;
 import com.zhinengshe.service.baseservice.impl.AbstractService;
 import com.zhinengshe.service.student.IStudentService;
+import com.zhinengshe.utlis.pagenation.Pagination;
 
 /**
  * 学生管理实现
@@ -64,5 +66,13 @@ public class StudentServiceImpl extends AbstractService<Student, StudentExample>
 
 		return null;
 	}
+
+
+	@Override
+	public Pagination list(String name, Byte category, String username, String tel, Integer pageNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

@@ -13,6 +13,7 @@ import com.zhinengshe.pojo.teacher.TeacherExample;
 import com.zhinengshe.pojo.teacher.TeacherExample.Criteria;
 import com.zhinengshe.service.baseservice.impl.AbstractService;
 import com.zhinengshe.service.teacher.ITeacherService;
+import com.zhinengshe.utlis.pagenation.Pagination;
 
 /**
  * 教师管理实现
@@ -34,50 +35,49 @@ public class TeacherServiceImpl extends AbstractService<Teacher, TeacherExample>
 	}
 
 	/**
-	 * 查询教师
+	 * 查询所有教师
 	 */
 	@Override
-	public List<Teacher> get(Teacher t) {
-		// TODO 查询教师
-
-		if (t != null) {
-
-			TeacherExample example = new TeacherExample();
-			example.setOrderByClause(" id  desc ");
-			Criteria criteria = example.createCriteria();
-			String name = t.getName();
-			Byte category = t.getCategory();
-			Integer id = t.getId();
-			
-			if (name != null && name.trim().length() > 0) {
-				criteria.andNameLike("%" + name + "%");
-			}
-
-			if (category != null) {
-				criteria.andCategoryEqualTo(category);
-			}
-
-			if (id != null) {
-				criteria.andIdEqualTo(id);
-			}
-
-			List<Teacher> list = mapper.selectByExample(example);
-
-			if (list != null && list.size() > 0) {
-				return list;
-			}
-
+	public Pagination list(String name, Byte category, String username ,String tel, Integer pageNo) {
+		
+		
+		StringBuffer params = new StringBuffer();
+		
+		Teacher teacher = new Teacher();
+		
+		// 拼接查询条件
+		if (name !=null && name.trim().length()>0) {
+			params.append("name=").append(name);
+			teacher.setName(name);
 		}
-
-		return null;
-	}
-
-	@Override
-	public List<Teacher> list(TeacherExample example) {
+		if (username !=null && username.trim().length()>0) {
+			params.append("&username=").append(username);
+			teacher.setUsername(username);
+			
+		}
+		if (tel !=null && tel.trim().length()>0) {
+			params.append("&tel=").append(tel);
+			teacher.setTel(tel);
+		}
+		if (category !=null && category.toString().trim().length()>0) {
+			params.append("&category=").append(category);
+			teacher.setCategory(category);
+			
+		}
 		
+		teacher.setPageNo(Pagination.cpn(pageNo));  // 设置初始页
 		
-		// TODO Auto-generated method stub
-		return super.list(example);
+		// 带条件查询结果集
+		List<Teacher> list = mapper.selectByPage(teacher);
+		// 查询记录条数
+		int totalCount = mapper.selectTotalCount(teacher);
+		
+		// 初始化pagination 对象
+		Pagination pagination = new Pagination(teacher.getPageNo(), teacher.getPageSize(), totalCount, list);
+		
+		String url = "/teacher/list";
+		pagination.pageView(url, params.toString());
+		return pagination;
 	}
 	
 	

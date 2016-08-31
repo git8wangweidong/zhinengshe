@@ -14,6 +14,7 @@ import com.zhinengshe.pojo.classes.ClassesExample;
 import com.zhinengshe.pojo.classes.ClassesExample.Criteria;
 import com.zhinengshe.service.baseservice.impl.AbstractService;
 import com.zhinengshe.service.classes.IClassesService;
+import com.zhinengshe.utlis.pagenation.Pagination;
 
 @Transactional
 @Service("classesService")
@@ -56,66 +57,12 @@ public class ClassesServiceImpl extends AbstractService<Classes, ClassesExample>
 		return null;
 	}
 
-	/**
-	 * 课程列表
-	 */
+
 	@Override
-	public List<Classes> list(ClassesExample example) {
-		
-		List<Classes> list = classesMapper.selectByExample(example);
-		if (list.size()>0) {
-			return list;
-		}
+	public Pagination list(String name, Byte category, String username, String tel, Integer pageNo) {
+		// TODO Auto-generated method stub
 		return null;
-
 	}
+
 	
-	/*@Override
-	public Boolean add(Classes t) {
-		
-		if (t!=null) {
-			if (t.getCourse()!=null && t.getCourse().trim().length()>0) {
-				if (t.getName()!=null && t.getName().trim().length()>0) {
-					if (t.getState()!=null && t.getState().toString().trim().length()>0) {
-						if (t.getStarttime()!=null) {
-							if (t.getEndtime()!=null) {
-								if (t.getTotalcount()!=null && t.getTotalcount()>=0) {
-									int i = classesMapper.insert(t);
-									return i>0;
-								}
-							}
-						}
-					}
-				}
-			}
-			
-		}
-		
-		return false;
-	}
-
-	*//**
-	 * 删除
-	 *//*
-	@Override
-	public Boolean del(Integer id) {
-		if (id instanceof Integer) {
-			int i = classesMapper.deleteByPrimaryKey(id);
-			return  i>0;
-		}
-		return false;
-	}
-
-	*//**
-	 * 更新
-	 *//*
-	@Override
-	public Boolean update(Classes t) {
-		if (t!=null) {
-			int i = classesMapper.updateByPrimaryKey(t);
-			return i>0;
-		}
-		return false;
-	}
-*/
 }

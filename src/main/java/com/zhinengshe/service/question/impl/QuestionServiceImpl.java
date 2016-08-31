@@ -13,6 +13,7 @@ import com.zhinengshe.pojo.question.QuestionExample;
 import com.zhinengshe.pojo.question.QuestionExample.Criteria;
 import com.zhinengshe.service.baseservice.impl.AbstractService;
 import com.zhinengshe.service.question.IQuestionService;
+import com.zhinengshe.utlis.pagenation.Pagination;
 
 @Service("questionService")
 public class QuestionServiceImpl extends AbstractService<Question, QuestionExample> implements IQuestionService {
@@ -40,6 +41,11 @@ public class QuestionServiceImpl extends AbstractService<Question, QuestionExamp
 		
 		List<Question> list = mapper.selectByExample(example);
 		return list;
+	}
+
+	public Pagination list(String name, Byte category, String username, String tel, Integer pageNo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

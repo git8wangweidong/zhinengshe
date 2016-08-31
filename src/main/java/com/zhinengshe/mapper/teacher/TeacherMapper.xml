@@ -70,6 +70,66 @@
   <sql id="Base_Column_List" >
     id, name, tel, category, username, password
   </sql>
+  
+  <!-- 分页查询 -->
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.zhinengshe.pojo.teacher.Teacher">
+  		select 
+  			id, name, tel, category, username, password 
+  		from 
+  			teacher
+  		<where>
+  				1=1
+  			<if test="name != null">
+  				 and name like "%"#{name}"%"  <!-- 防止sql注入 --> 
+  			</if>
+  			
+  			<if test="tel != null">
+  				 and tel like "%"#{tel}"%"  <!-- 防止sql注入 --> 
+  			</if>
+  			
+  			<if test="category != null">
+  				 and category = ${category}
+  			</if>
+  			
+  			<if test="username != null">
+  				 and username like "%"#{username}"%"  <!-- 防止sql注入 --> 
+  			</if>
+  			<!-- 实现分页 -->
+  			<if test="startRow != null">
+  				limit  #{startRow},#{pageSize}  <!-- limit 0,10 -->
+  			</if>
+  		</where>
+  </select>
+  
+  
+  <!-- 分页查询条数 -->
+  <select id="selectTotalCount" resultType="int" parameterType="com.zhinengshe.pojo.teacher.Teacher">
+  		select 
+  			count(1)
+  		from 
+  			teacher
+  		<where>
+  			<if test="name != null">
+  				 and name like "%"#{name}"%"  <!-- 防止sql注入 --> 
+  			</if>
+  			
+  			<if test="tel != null">
+  				 and tel like "%"#{tel}"%"  <!-- 防止sql注入 --> 
+  			</if>
+  			
+  			<if test="category != null">
+  				 and category = ${category}
+  			</if>
+  			
+  			<if test="username != null">
+  				 and username like "%"#{username}"%"  <!-- 防止sql注入 --> 
+  			</if>
+  		</where>
+  </select>
+  
+  
+  
+  
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhinengshe.pojo.teacher.TeacherExample" >
     select
     <if test="distinct" >
