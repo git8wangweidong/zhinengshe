@@ -1,5 +1,6 @@
 package com.zhinengshe.service.classes.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -12,6 +13,7 @@ import com.zhinengshe.dao.classes.ClassesMapper;
 import com.zhinengshe.pojo.classes.Classes;
 import com.zhinengshe.pojo.classes.ClassesExample;
 import com.zhinengshe.pojo.classes.ClassesExample.Criteria;
+import com.zhinengshe.pojo.student.Student;
 import com.zhinengshe.service.baseservice.impl.AbstractService;
 import com.zhinengshe.service.classes.IClassesService;
 import com.zhinengshe.utlis.pagenation.Pagination;
@@ -22,47 +24,59 @@ public class ClassesServiceImpl extends AbstractService<Classes, ClassesExample>
 
 	
 	@Resource
-	private ClassesMapper classesMapper;
+	private ClassesMapper mapper;
 
 	@Autowired
 	public void setBaseMapper(){
-		super.setBaseMapper(classesMapper);
+		super.setBaseMapper(mapper);
 	}
 
-
-	/**
-	 * 多条件查询
-	 */
+	// TODO  分页展示班级
 	@Override
-	public List<Classes> get(Classes t) {
+	public Pagination list(String name, String course, Integer totalcount, Integer pageNo, Byte state, Date starttime,
+			Date endtime) {
 		
-		ClassesExample example = new ClassesExample();
-		Criteria criteria = example.createCriteria();
-		if (t.getName()!=null && t.getName().trim().length()>0) {
-			criteria.andNameLike("%"+t.getName()+"%");
+		StringBuffer params = new StringBuffer();
+		Classes classes = new Classes();
+		
+		if (name!=null && name.trim().length()>0) {
+			params.append("name=").append(name);
+			classes.setName(name);
 		}
-		if (t.getStarttime()!=null && t.getStarttime().toString().trim().length()>0) {
-			criteria.andStarttimeGreaterThanOrEqualTo(t.getStarttime());
+		if (course!=null && course.trim().length()>0) {
+			params.append("&course=").append(course);
+			classes.setCourse(course);
+			
 		}
-		if (t.getEndtime()!=null && t.getEndtime().toString().trim().length()>0) {
-			criteria.andEndtimeLessThanOrEqualTo(t.getEndtime());
+		if (state!=null && state.toString().trim().length()>0) {
+			params.append("&state=").append(state);
+			classes.setState(state);
 		}
-		if (t.getCourse()!=null && t.getCourse().trim().length()>0) {
-			criteria.andCourseLike("%"+t.getCourse()+"%");
+		if (starttime!=null) {
+			params.append("&starttime=").append(starttime);
+			classes.setStarttime(starttime);
 		}
-		List<Classes> list = classesMapper.selectByExample(example);
-		if (list.size()>0) {
-			return list;
+		if (endtime!=null) {
+			params.append("&endtime=").append(endtime);
+			classes.setEndtime(endtime);
 		}
-		return null;
+		
+		// 初始化当前页
+		classes.setPageNo(Pagination.cpn(pageNo));
+		
+		// 根据条件查询结果集
+		List<Student> list = mapper.selectByPage(classes);
+		int count = mapper.selectTotalCount(classes);
+		
+		Pagination pagination = new Pagination(classes.getPageNo(), classes.getPageSize(), count, list);
+		
+		String url = "/classes/list";
+		pagination.pageView(url, params.toString());
+		
+		return pagination;
+		
 	}
 
 
-	@Override
-	public Pagination list(String name, Byte category, String username, String tel, Integer pageNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	
 }

@@ -8,28 +8,36 @@ import org.springframework.stereotype.Repository;
 import com.zhinengshe.dao.basedao.IBaseMapper;
 import com.zhinengshe.pojo.manager.Manager;
 import com.zhinengshe.pojo.manager.ManagerExample;
+import com.zhinengshe.pojo.student.Student;
 
 @Repository
-public interface ManagerMapper extends IBaseMapper<Manager, ManagerExample>{
-    int countByExample(ManagerExample example);
+public interface ManagerMapper extends IBaseMapper<Manager, ManagerExample> {
 
-    int deleteByExample(ManagerExample example);
+	// 分页结果集查询
+	List<Student> selectByPage(Manager manager);
 
-    int deleteByPrimaryKey(Integer id);
+	// 分页总记录条数查询
+	int selectTotalCount(Manager manager);
 
-    int insert(Manager record);
+	int countByExample(ManagerExample example);
 
-    int insertSelective(Manager record);
+	int deleteByExample(ManagerExample example);
 
-    List<Manager> selectByExample(ManagerExample example);
+	int deleteByPrimaryKey(Integer id);
 
-    Manager selectByPrimaryKey(Integer id);
+	int insert(Manager record);
 
-    int updateByExampleSelective(@Param("record") Manager record, @Param("example") ManagerExample example);
+	int insertSelective(Manager record);
 
-    int updateByExample(@Param("record") Manager record, @Param("example") ManagerExample example);
+	List<Manager> selectByExample(ManagerExample example);
 
-    int updateByPrimaryKeySelective(Manager record);
+	Manager selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKey(Manager record);
+	int updateByExampleSelective(@Param("record") Manager record, @Param("example") ManagerExample example);
+
+	int updateByExample(@Param("record") Manager record, @Param("example") ManagerExample example);
+
+	int updateByPrimaryKeySelective(Manager record);
+
+	int updateByPrimaryKey(Manager record);
 }

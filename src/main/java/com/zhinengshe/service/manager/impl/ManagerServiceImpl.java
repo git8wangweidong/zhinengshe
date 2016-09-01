@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 import com.zhinengshe.dao.manager.ManagerMapper;
 import com.zhinengshe.pojo.manager.Manager;
 import com.zhinengshe.pojo.manager.ManagerExample;
-import com.zhinengshe.pojo.manager.ManagerExample.Criteria;
-import com.zhinengshe.pojo.teacher.Teacher;
+import com.zhinengshe.pojo.student.Student;
 import com.zhinengshe.service.baseservice.impl.AbstractService;
 import com.zhinengshe.service.manager.IManagerService;
 import com.zhinengshe.utlis.pagenation.Pagination;
@@ -20,53 +19,46 @@ import com.zhinengshe.utlis.pagenation.Pagination;
 public class ManagerServiceImpl extends AbstractService<Manager, ManagerExample> implements IManagerService {
 
 	@Resource
-	private ManagerMapper managerMapper;
+	private ManagerMapper mapper;
 
 	@Autowired
 	public void setMapper() {
-		super.setBaseMapper(managerMapper);
+		super.setBaseMapper(mapper);
 	}
 
-	/**
-	 * 查询管理员
-	 */
+	// TODO 管理员分页查询
 	@Override
-	public List<Manager> get(Manager t) {
-		ManagerExample example = new ManagerExample();
-		// TODO 参数校验
-		if (t != null) {
-			Criteria criteria = example.createCriteria();
-			if (t.getId() != null) {
-				criteria.andIdEqualTo(t.getId());
-			}
-			if (t.getName() != null && t.getName().trim().length() > 0) {
-				String name = t.getName();
-				criteria.andNameLike("%" + name + "%");
-			}
-			if (t.getUsername() != null && t.getUsername().trim().length() > 0) {
-				String username = t.getUsername();
-				criteria.andUsernameLike("%" + username + "%");
-			}
-
-			List<Manager> list = this.managerMapper.selectByExample(example);
-			return list;
-
-		}
-		return null;
-	}
-
-	@Override
-	public Pagination list(String name, Byte category, String username, String tel, Integer pageNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Pagination list(Manager manager) {
-		return null;
+	public Pagination list(String name, String username, Integer pageNo) {
 		
+		StringBuffer params = new StringBuffer();
+		
+		Manager manager = new Manager();
+		
+		if (name !=null && name.trim().length()>0) {
+			params.append("name=").append(name);
+			manager.setName(name);
+		}
+
+		if (username !=null && username.trim().length()>0) {
+			params.append("&username=").append(username);
+			manager.setUsername(username);
+		}
+		
+		manager.setPageNo(Pagination.cpn(pageNo));
+		
+		// 查询结果集
+		List<Student> list = mapper.selectByPage(manager);
+		// 查询符合条件的totalcount
+		int totalCount = mapper.selectTotalCount(manager);
+		
+		Pagination pagination = new Pagination(manager.getPageNo(), manager.getPageSize(), totalCount, list);
+		
+		String url = "/manager/list";
+		pagination.pageView(url, params.toString());
+				
+		return pagination;
+	
 	}
 
-	
 
 }

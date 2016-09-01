@@ -43,6 +43,32 @@ public class LoginController extends BaseController {
 
 	private static Logger log = Logger.getLogger(LoginController.class);
 	
+	/**
+	 * 跳转教师登陆
+	 * @return
+	 */
+	@RequestMapping(value = "/teacher")
+	public String teacherLogin(){
+		return "back/login/login-teacher";
+	}
+	
+	/**
+	 * 跳转学生登陆
+	 * @return
+	 */
+	@RequestMapping(value = "/student")
+	public String sudentLogin(){
+		return "front/login/login-student";
+	}
+	
+	/**
+	 * 跳转管理员登陆
+	 * @return
+	 */
+	@RequestMapping(value = "/manager")
+	public String managerLogin(){
+		return "back/login/login-manager";
+	}
 	
 	/**
 	 * 提取检查参数方法

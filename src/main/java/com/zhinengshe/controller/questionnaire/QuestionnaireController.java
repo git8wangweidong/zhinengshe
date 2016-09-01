@@ -11,47 +11,55 @@ import com.zhinengshe.pojo.questionnaire.QuestionList;
 import com.zhinengshe.pojo.questionnaire.Questionnaire;
 import com.zhinengshe.service.naireresult.INaireresultServcie;
 import com.zhinengshe.service.questionnaire.IQuestionnaireService;
+import com.zhinengshe.utlis.pagenation.Pagination;
 
 @Controller
 @RequestMapping("/questionnaire")
 public class QuestionnaireController {
 	
 	@Resource
-	private IQuestionnaireService service;
+	private IQuestionnaireService questionnaireService;
 	
 	@Resource
 	private INaireresultServcie naireresultServcie;
 	
 	
 	/**
-	 * add 添加问卷
+	 * toadd 到添加问卷页面
 	 * @return
 	 */
-	@RequestMapping(value="/add",method = RequestMethod.GET)
-	public String add(){
+	@RequestMapping(value="/toAdd",method = RequestMethod.GET)
+	public String toAdd(){
 		return "back/questionnaire/add-naire";
 		
 	}
 	
 	/**
-	 * toPublish 添加问卷
+	 * add 添加问卷
 	 * @return
 	 */
-	@RequestMapping(value="/toPublish",method = RequestMethod.GET)
-	public String toPublish(){
+	@RequestMapping(value="/add",method = RequestMethod.GET)
+	public String add(Questionnaire t, QuestionList questionList, Model model){
 		
-		// TODO 展示所有的问卷 及班级
+		Boolean b = questionnaireService.addNaire(t, questionList);
+		if (b) {
+			model.addAttribute("add-msg", "添加成功");
+			return this.list(null, null, null, null, model);
+		}
+		model.addAttribute("add-msg", "添加失败");
+		model.addAttribute("questionnaire", t);
+		model.addAttribute("questionList", questionList);
+		return "back/questionnaire/add-naire";
 		
-		return "back/questionnaire/publish-naire";
 		
 	}
 	
 	/**
-	 * state 添加问卷
+	 * showState问卷完成状态展示
 	 * @return
 	 */
-	@RequestMapping(value="/state",method = RequestMethod.GET)
-	public String state(){
+	@RequestMapping(value="/showState",method = RequestMethod.GET)
+	public String showState(){
 		
 		// TODO 展示所有的问卷完成率 及已做答人数
 		
@@ -68,7 +76,7 @@ public class QuestionnaireController {
 	@RequestMapping(value="/show",method = RequestMethod.GET)
 	public String show(Integer id,Model model){
 		
-		Questionnaire naire = service.get(id);
+		Questionnaire naire = questionnaireService.get(id);
 		
 		model.addAttribute("naire",naire);
 		
@@ -90,8 +98,27 @@ public class QuestionnaireController {
 		if (b) {
 			return "success/commit-success"; // 完成问卷页面
 		}
-		
 		return "success/commit-failed"; // 完成问卷失败
+		
+	}
+	
+	/**
+	 * 分页展示问卷列表
+	 * @param name
+	 * @param periods
+	 * @param nairtype
+	 * @param pageNo
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/list",method=RequestMethod.GET)
+	public String list(String name, String periods, Integer nairtype, Integer pageNo, Model model){
+		
+		Pagination pagination = questionnaireService.list(name, periods, nairtype, pageNo);
+		
+		model.addAttribute("pagination",pagination);
+		
+		return "back/questionnaire/list-naire";
 		
 	}
 	

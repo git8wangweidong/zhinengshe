@@ -15,7 +15,7 @@ import com.zhinengshe.service.teacher.ITeacherService;
 @RequestMapping("/test")
 public class Test {
 
-	@Resource
+	/*@Resource
 	private ITeacherService teacherService;
 
 	@RequestMapping("/teacher")
@@ -28,12 +28,12 @@ public class Test {
 		List<Teacher> teacher = teacherService.get(t);
 
 		model.addAttribute("teacher", teacher);
-		/*if (true) {
+		if (true) {
 			throw new BusinessException("【error-info】：", "【BusinessException error】");
-		}*/
+		}
 		
 		return "test";
 
-	}
+	}*/
 
 }

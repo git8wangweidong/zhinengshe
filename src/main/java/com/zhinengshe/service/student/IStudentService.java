@@ -26,6 +26,6 @@ public interface IStudentService extends IBaseService<Student, StudentExample>{
 	 * @param pageNo 当前页码
 	 * @return 分页对象
 	 */
-	Pagination list(String name, String username, String classes, String tel, Byte stustate, Date registTime,
-			Byte qsstate, Integer pageNo);
+	Pagination list(String name, String username, String classes, String tel,Integer pageNo, Byte qsstate,Byte stustate, Date registTime
+			 );
 }

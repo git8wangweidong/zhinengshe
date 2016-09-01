@@ -1,6 +1,7 @@
 package com.zhinengshe.pojo.questiontype;
 
 public class Questiontype {
+	
     private Integer id;
 
     private String name;

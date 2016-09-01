@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.zhinengshe.dao.question.QuestionMapper;
 import com.zhinengshe.pojo.question.Question;
 import com.zhinengshe.pojo.question.QuestionExample;
-import com.zhinengshe.pojo.question.QuestionExample.Criteria;
+import com.zhinengshe.pojo.student.Student;
 import com.zhinengshe.service.baseservice.impl.AbstractService;
 import com.zhinengshe.service.question.IQuestionService;
 import com.zhinengshe.utlis.pagenation.Pagination;
@@ -25,28 +25,39 @@ public class QuestionServiceImpl extends AbstractService<Question, QuestionExamp
 	public void setMapper(){
 		super.setBaseMapper(mapper);
 	}
-
+	
+	// TODO 分页展示问题
 	@Override
-	public List<Question> get(Question t) {
+	public Pagination list(String question, Integer questiontype,Integer pageNo) {
 		
-		QuestionExample example = new QuestionExample();
-		Criteria criteria = example.createCriteria();
+		StringBuffer params = new StringBuffer();
+		Question que = new Question();
 		
-		if (t.getId() !=null && t.getId() instanceof Integer) {
-			criteria.andIdEqualTo(t.getId());
-		}
-		if (t.getQuestiontype() !=null && t.getQuestiontype() instanceof Integer) {
-			criteria.andQuestiontypeEqualTo(t.getQuestiontype());
+		if (question!=null && question.trim().length()>0) {
+			params.append("question=").append(question);
+			que.setQuestion(question);
 		}
 		
-		List<Question> list = mapper.selectByExample(example);
-		return list;
+		if (questiontype!= null) {
+			params.append("&questiontype=").append(questiontype);
+			que.setQuestiontype(questiontype);
+		}
+		
+		que.setPageNo(Pagination.cpn(pageNo));
+		
+		List<Student> list = mapper.selectByPage(que);
+		int totalCount = mapper.selectTotalCount(que);
+		
+		Pagination pagination = new Pagination(que.getPageNo(), que.getPageSize(), totalCount, list);
+		
+		String url = "question/list";
+		pagination.pageView(url, params.toString());
+		
+		return pagination;
+		
 	}
 
-	public Pagination list(String name, Byte category, String username, String tel, Integer pageNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 
 }

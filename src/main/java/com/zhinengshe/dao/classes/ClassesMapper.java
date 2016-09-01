@@ -1,34 +1,43 @@
 package com.zhinengshe.dao.classes;
 
-import com.zhinengshe.dao.basedao.IBaseMapper;
-import com.zhinengshe.pojo.classes.Classes;
-import com.zhinengshe.pojo.classes.ClassesExample;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.zhinengshe.dao.basedao.IBaseMapper;
+import com.zhinengshe.pojo.classes.Classes;
+import com.zhinengshe.pojo.classes.ClassesExample;
+import com.zhinengshe.pojo.student.Student;
+
 @Repository
-public interface ClassesMapper extends IBaseMapper<Classes, ClassesExample>{
-	
-    int countByExample(ClassesExample example);
+public interface ClassesMapper extends IBaseMapper<Classes, ClassesExample> {
 
-    int deleteByExample(ClassesExample example);
+	// 分页结果集查询
+	List<Student> selectByPage(Classes classes);
 
-    int deleteByPrimaryKey(Integer id);
+	// 分页总记录条数查询
+	int selectTotalCount(Classes classes);
 
-    int insert(Classes record);
+	int countByExample(ClassesExample example);
 
-    int insertSelective(Classes record);
+	int deleteByExample(ClassesExample example);
 
-    List<Classes> selectByExample(ClassesExample example);
+	int deleteByPrimaryKey(Integer id);
 
-    Classes selectByPrimaryKey(Integer id);
+	int insert(Classes record);
 
-    int updateByExampleSelective(@Param("record") Classes record, @Param("example") ClassesExample example);
+	int insertSelective(Classes record);
 
-    int updateByExample(@Param("record") Classes record, @Param("example") ClassesExample example);
+	List<Classes> selectByExample(ClassesExample example);
 
-    int updateByPrimaryKeySelective(Classes record);
+	Classes selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKey(Classes record);
+	int updateByExampleSelective(@Param("record") Classes record, @Param("example") ClassesExample example);
+
+	int updateByExample(@Param("record") Classes record, @Param("example") ClassesExample example);
+
+	int updateByPrimaryKeySelective(Classes record);
+
+	int updateByPrimaryKey(Classes record);
 }

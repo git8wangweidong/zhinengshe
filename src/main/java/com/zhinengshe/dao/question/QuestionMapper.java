@@ -7,13 +7,21 @@ import org.apache.ibatis.annotations.Param;
 import com.zhinengshe.dao.basedao.IBaseMapper;
 import com.zhinengshe.pojo.question.Question;
 import com.zhinengshe.pojo.question.QuestionExample;
+import com.zhinengshe.pojo.student.Student;
 
 public interface QuestionMapper extends IBaseMapper<Question, QuestionExample> {
+
+	// 分页结果集查询
+	List<Student> selectByPage(Question question);
+
+	// 分页总记录条数查询
+	int selectTotalCount(Question question);
+
 	int countByExample(QuestionExample example);
 
 	int deleteByExample(QuestionExample example);
 
-	int deleteByPrimaryKey(Integer id);	
+	int deleteByPrimaryKey(Integer id);
 
 	int insert(Question record);
 

@@ -7,7 +7,7 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
-public class Manager implements Serializable{
+public class Manager implements Serializable {
 
 	/**
 	 * 
@@ -24,14 +24,14 @@ public class Manager implements Serializable{
 
 	@Pattern(regexp = "^[0-9_a-zA-Z]{6,20}$", message = "密码必须是6-20个字符之间的")
 	private String password;
-	
-private Integer startRow; // 起始页
-    
-    private Integer pageNo;  // 当前页
-    
-    private Integer pageSize = 5;  // 每页默认条数  
 
-    public Integer getStartRow() {
+	private Integer startRow; // 起始页
+
+	private Integer pageNo; // 当前页
+
+	private Integer pageSize = 5; // 每页默认条数
+
+	public Integer getStartRow() {
 		return startRow;
 	}
 
@@ -44,7 +44,7 @@ private Integer startRow; // 起始页
 	}
 
 	public void setPageNo(Integer pageNo) {
-		this.startRow = (pageNo-1) * pageSize; // 页码发生改变 重新计算起始页
+		this.startRow = (pageNo - 1) * pageSize; // 页码发生改变 重新计算起始页
 		this.pageNo = pageNo;
 	}
 
@@ -53,7 +53,7 @@ private Integer startRow; // 起始页
 	}
 
 	public void setPageSize(Integer pageSize) {
-		this.startRow = (pageNo-1) * pageSize; // 每页数发生改变 重新计算起始页
+		this.startRow = (pageNo - 1) * pageSize; // 每页数发生改变 重新计算起始页
 		this.pageSize = pageSize;
 	}
 

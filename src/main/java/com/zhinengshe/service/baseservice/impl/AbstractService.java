@@ -1,11 +1,9 @@
 package com.zhinengshe.service.baseservice.impl;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import com.zhinengshe.dao.basedao.IBaseMapper;
 import com.zhinengshe.service.baseservice.IBaseService;
-import com.zhinengshe.utlis.pagenation.Pagination;
 
 public abstract class AbstractService<T, K extends Serializable> implements IBaseService<T, K> {
 
@@ -59,14 +57,6 @@ public abstract class AbstractService<T, K extends Serializable> implements IBas
 	@Override
 	public T get(Integer id) {
 		return baseMapper.selectByPrimaryKey(id);
-	}
-	
-	
-	
-	
-	
-	public Pagination list(String name, String username, String classes, String tel, Byte stustate, Byte qsstate, Integer pageNo, Date registTime) {
-		return null;
 	}
 	
 

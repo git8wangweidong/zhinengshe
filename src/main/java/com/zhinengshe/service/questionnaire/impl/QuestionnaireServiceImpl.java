@@ -11,15 +11,14 @@ import org.springframework.stereotype.Service;
 import com.zhinengshe.dao.question.QuestionMapper;
 import com.zhinengshe.dao.questionnaire.QuestionnaireMapper;
 import com.zhinengshe.dao.questiontype.QuestiontypeMapper;
-import com.zhinengshe.pojo.naireresult.Naireresult;
 import com.zhinengshe.pojo.question.Question;
 import com.zhinengshe.pojo.question.QuestionExample;
 import com.zhinengshe.pojo.questionnaire.QuestionList;
 import com.zhinengshe.pojo.questionnaire.Questionnaire;
 import com.zhinengshe.pojo.questionnaire.QuestionnaireExample;
-import com.zhinengshe.pojo.questionnaire.QuestionnaireExample.Criteria;
 import com.zhinengshe.pojo.questiontype.Questiontype;
 import com.zhinengshe.pojo.questiontype.QuestiontypeExample;
+import com.zhinengshe.pojo.student.Student;
 import com.zhinengshe.service.baseservice.impl.AbstractService;
 import com.zhinengshe.service.questionnaire.IQuestionnaireService;
 import com.zhinengshe.utlis.pagenation.Pagination;
@@ -71,30 +70,6 @@ public class QuestionnaireServiceImpl extends AbstractService<Questionnaire, Que
 	}
 
 	/**
-	 * 多条件查询问卷
-	 * @param t
-	 * @return
-	 */
-	@Override
-	public List<Questionnaire> get(Questionnaire t) {
-
-		QuestionnaireExample example = new QuestionnaireExample();
-		Criteria criteria = example.createCriteria();
-		if (t.getId()!=null && t.getId() instanceof Integer) {
-			criteria.andIdEqualTo(t.getId());
-		}
-		if (t.getName() !=null && t.getName().trim().length()>0) {
-			criteria.andNameLike("%"+t.getId()+"%");
-		}
-		
-		List<Questionnaire> list = questionnaireMapper.selectByExample(example);
-		
-		
-		return list;
-
-	}
-	
-	/**
 	 * 展示问卷
 	 */
 	@Override
@@ -132,13 +107,42 @@ public class QuestionnaireServiceImpl extends AbstractService<Questionnaire, Que
 		return naire;
 	}
 
+	// TODO 问卷列表展示
 	@Override
-	public Pagination list(String name, Byte category, String username, String tel, Integer pageNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public Pagination list(String name, String periods, Integer nairtype, Integer pageNo) {
+		
+		StringBuffer params = new StringBuffer();
+		Questionnaire questionnaire = new Questionnaire();
+		
+		if (name != null && name.trim().length()>0) {
+			params.append("name=").append(name);
+			questionnaire.setName(name);
+		}
+		if (periods != null && periods.trim().length()>0) {
+			params.append("name=").append(name);
+			questionnaire.setPeriods(periods);
+		}
+		if (nairtype != null && nairtype.toString().trim().length()>0) {
+			params.append("&nairtype=").append(nairtype);
+			questionnaire.setNairetype(nairtype);
+		}
+		
+		questionnaire.setPageNo(Pagination.cpn(pageNo));
+		
+		// 条件查询结果集
+		List<Student> list = questionnaireMapper.selectByPage(questionnaire);
+		// 条件查询记录条数
+		int totalCount = questionnaireMapper.selectTotalCount(questionnaire);
+		
+		Pagination pagination = new Pagination(questionnaire.getPageNo(), questionnaire.getPageSize(), totalCount, list);
+		
+		String url = "questionnaire/list";
+		pagination.pageView(url, params.toString());
+		
+		return pagination;
+		
 	}
 
-	
 
 	
 

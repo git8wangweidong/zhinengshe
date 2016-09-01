@@ -69,6 +69,51 @@
   <sql id="Base_Column_List" >
     id, name, questionid, nairetype, periods
   </sql>
+  
+   <!-- 分页查询记录 -->
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.zhinengshe.pojo.questionnaire.Questionnaire">
+  		select 
+  			id, name, questionid, nairetype, periods
+  		from 
+  			questionnaire
+  		<where>
+  				1 = 1
+  			<if test="name != null">
+  				 and name like "%"#{name}"%"  <!-- 防止sql注入 --> 
+  			</if>
+  			<if test="periods != null">
+  				 and periods like "%"#{periods}"%"  <!-- 防止sql注入 --> 
+  			</if>
+  			<if test="nairetype != null">
+  				 and nairetype = #{nairetype} 
+  			</if>
+  			<!-- 实现分页 -->
+  			<if test="startRow != null">
+  				limit  #{startRow},#{pageSize}  <!-- limit 0,10 -->
+  			</if>
+  		</where>
+  </select>
+  
+  <!-- 查询分页总记录条数 -->
+  <select id="selectTotalCount" resultType="int" parameterType="com.zhinengshe.pojo.questionnaire.Questionnaire">
+  		select 
+  			count(1)
+  		from 
+  			questionnaire
+  		<where>
+  			<if test="name != null">
+  				 and name like "%"#{name}"%"  <!-- 防止sql注入 --> 
+  			</if>
+  			<if test="periods != null">
+  				 and periods like "%"#{periods}"%"  <!-- 防止sql注入 --> 
+  			</if>
+  			<if test="nairetype != null">
+  				 and nairetype = #{nairetype} 
+  			</if>
+  		</where>
+  </select>
+  
+  
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhinengshe.pojo.questionnaire.QuestionnaireExample" >
     select
     <if test="distinct" >

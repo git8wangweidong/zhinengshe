@@ -11,11 +11,13 @@
 <body>
 
 <h4>欢迎来到智能社只能评分系统</h4>
-<a href="<%=request.getContextPath()%>/teacherLogin">教师登陆</a><br>
 
-<a href="<%=request.getContextPath()%>/studentLogin">学生登陆</a><br>
 
-<a href="<%=request.getContextPath()%>/managerLogin">管理员登陆</a><br>
+<a href="<%=request.getContextPath()%>/login/teacher">教师登陆</a><br>
+
+<a href="<%=request.getContextPath()%>/login/student">学生登陆</a><br>
+
+<a href="<%=request.getContextPath()%>/login/manager">管理员登陆</a><br>
 
 </body>
 </html>

@@ -1,32 +1,41 @@
 package com.zhinengshe.dao.questionnaire;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.zhinengshe.dao.basedao.IBaseMapper;
 import com.zhinengshe.pojo.questionnaire.Questionnaire;
 import com.zhinengshe.pojo.questionnaire.QuestionnaireExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import com.zhinengshe.pojo.student.Student;
 
-public interface QuestionnaireMapper extends IBaseMapper<Questionnaire, QuestionnaireExample>{
-	
-    int countByExample(QuestionnaireExample example);
+public interface QuestionnaireMapper extends IBaseMapper<Questionnaire, QuestionnaireExample> {
 
-    int deleteByExample(QuestionnaireExample example);
+	// 分页结果集查询
+	List<Student> selectByPage(Questionnaire questionnaire);
 
-    int deleteByPrimaryKey(Integer id);
+	// 分页总记录条数查询
+	int selectTotalCount(Questionnaire questionnaire);
 
-    int insert(Questionnaire record);
+	int countByExample(QuestionnaireExample example);
 
-    int insertSelective(Questionnaire record);
+	int deleteByExample(QuestionnaireExample example);
 
-    List<Questionnaire> selectByExample(QuestionnaireExample example);
+	int deleteByPrimaryKey(Integer id);
 
-    Questionnaire selectByPrimaryKey(Integer id);
+	int insert(Questionnaire record);
 
-    int updateByExampleSelective(@Param("record") Questionnaire record, @Param("example") QuestionnaireExample example);
+	int insertSelective(Questionnaire record);
 
-    int updateByExample(@Param("record") Questionnaire record, @Param("example") QuestionnaireExample example);
+	List<Questionnaire> selectByExample(QuestionnaireExample example);
 
-    int updateByPrimaryKeySelective(Questionnaire record);
+	Questionnaire selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKey(Questionnaire record);
+	int updateByExampleSelective(@Param("record") Questionnaire record, @Param("example") QuestionnaireExample example);
+
+	int updateByExample(@Param("record") Questionnaire record, @Param("example") QuestionnaireExample example);
+
+	int updateByPrimaryKeySelective(Questionnaire record);
+
+	int updateByPrimaryKey(Questionnaire record);
 }

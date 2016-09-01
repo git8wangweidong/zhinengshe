@@ -71,6 +71,71 @@
   <sql id="Base_Column_List" >
     id, name, course, state, starttime, endtime, totalcount
   </sql>
+  
+  <!-- 分页查询记录 -->
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.zhinengshe.pojo.classes.Classes">
+  		select 
+  			id, name, course, state, starttime, endtime, totalcount 
+  		from 
+  			classes
+  		<where>
+  				1=1
+  			<if test="name != null">
+  				 and name like "%"#{name}"%"  <!-- 防止sql注入 --> 
+  			</if>
+  			<if test="course != null">
+  				 and course like "%"#{course}"%"  <!-- 防止sql注入 --> 
+  			</if>
+  			<if test="starttime != null">
+  				 and starttime >= #{starttime}
+  			</if>
+  			<if test="endtime != null">
+  				 and endtime <= #{endtime}
+  			</if>
+  			<if test="state != null">
+  				 and state = #{state}
+  			</if>
+  			
+  			<if test="totalcount != null">
+  				 and totalcount = #{totalcount}
+  			</if>
+  			<!-- 实现分页 -->
+  			<if test="startRow != null">
+  				limit  #{startRow},#{pageSize}  <!-- limit 0,10 -->
+  			</if>
+  		</where>
+  </select>
+  
+  <!-- 查询分页总记录条数 -->
+  <select id="selectTotalCount" resultType="int" parameterType="com.zhinengshe.pojo.classes.Classes">
+  		select 
+  			count(1)
+  		from 
+  			classes
+  		<where>
+  			<if test="name != null">
+  				 and name like "%"#{name}"%"  <!-- 防止sql注入 --> 
+  			</if>
+  			<if test="course != null">
+  				 and course like "%"#{course}"%"  <!-- 防止sql注入 --> 
+  			</if>
+  			<if test="starttime != null">
+  				 and starttime >= #{starttime}
+  			</if>
+  			<if test="endtime != null">
+  				 and endtime <= #{endtime}
+  			</if>
+  			<if test="state != null">
+  				 and state = #{state}
+  			</if>
+  			
+  			<if test="totalcount != null">
+  				 and totalcount = #{totalcount}
+  			</if>
+  		</where>
+  </select>
+  
+  
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhinengshe.pojo.classes.ClassesExample" >
     select
     <if test="distinct" >

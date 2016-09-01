@@ -1,7 +1,5 @@
 package com.zhinengshe.controller.manager;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -10,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zhinengshe.pojo.manager.Manager;
-import com.zhinengshe.pojo.manager.ManagerExample;
 import com.zhinengshe.service.manager.IManagerService;
 import com.zhinengshe.utlis.pagenation.Pagination;
 
@@ -41,7 +38,7 @@ public class ManagerController {
 
 		Boolean b = managerService.add(manager);
 		if (b) {
-			return this.list(model);
+			return this.list(null, null, null, model);
 		}
 		model.addAttribute("manager", manager);
 		return "back/user/add-manager";
@@ -59,7 +56,7 @@ public class ManagerController {
 		if (id instanceof Integer) {
 			Boolean b = managerService.del(id);
 			if (b) {
-				return this.list(model);
+				return this.list(null, null, null, model);
 			}
 			model.addAttribute("del_msg", "删除失败，请稍后重试");
 		}
@@ -76,12 +73,9 @@ public class ManagerController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String edit(Integer id, Model model) {
 
-		Manager manager = new Manager();
-		manager.setId(id);
-		List<Manager> list = managerService.get(manager);
-		if (list != null && list.size() > 0) {
-			Manager m = list.get(0);
-			model.addAttribute("manager", m);
+		Manager manager = managerService.get(id);
+		if (manager != null) {
+			model.addAttribute("manager", manager);
 			return "back/user/edit-manager";
 		}
 		model.addAttribute("edit_msg", "获取详细失败，请稍后再试。");
@@ -101,8 +95,10 @@ public class ManagerController {
 		Boolean b = managerService.update(manager);
 		if (b) {
 			model.addAttribute("update_msg", "更新成功");
-			return this.list(model);
+			return this.list(null, null, null,model);
 		}
+		model.addAttribute("name", manager.getName());
+		model.addAttribute("username", manager.getUsername());
 		model.addAttribute("update_msg", "更新失败");
 
 		return "manager-edit";
@@ -115,53 +111,14 @@ public class ManagerController {
 	 * @return
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(Model model) {
+	public String list(String name,String username,Integer pageNo, Model model) {
 
-		Manager manager = new Manager();
-		Pagination pagination =  managerService.list(manager);
+		Pagination pagination =  managerService.list(name, username, pageNo);
 		model.addAttribute("pagination", pagination);
 		return "back/user/add-manager";
 
 	}
 	
-	/**
-	 * 查询所有
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "/listByPage", method = RequestMethod.GET)
-	public String listByPage(String name, String username, Integer pageNo,Model model) {
 
-		Manager manager = new Manager();
-		manager.setName(name);
-		manager.setUsername(username);
-		Pagination pagination = managerService.list(manager);
-		
-		model.addAttribute("username",username);
-		model.addAttribute("name", name);
-		
-		model.addAttribute("pagination", pagination);
-		
-		
-		return "back/user/add-manager";
-
-	}
-
-	/**
-	 * 查询
-	 * @param manager
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "/find", method = RequestMethod.POST)
-	public String find(Manager manager, Model model) {
-
-		List<Manager> managers = managerService.get(manager);
-		if (manager == null || managers.size() > 0) {
-			model.addAttribute("managers", managers);
-		}
-		model.addAttribute("msg", "呃,没有符合条件的数据。。。");
-		return "back/user/add-manager";
-	}
 
 }

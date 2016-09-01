@@ -73,6 +73,79 @@
   <sql id="Base_Column_List" >
     id, name, tel, classes, stustate, qsstate, registtime, username, password
   </sql>
+  
+  <!-- 分页查询记录 -->
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.zhinengshe.pojo.student.Student">
+  		select 
+  			id, name, tel, classes, stustate, qsstate, registtime, username, password 
+  		from 
+  			student
+  		<where>
+  				1=1
+  			<if test="name != null">
+  				 and name like "%"#{name}"%"  <!-- 防止sql注入 --> 
+  			</if>
+  			<if test="tel != null">
+  				 and tel like "%"#{tel}"%"  <!-- 防止sql注入 --> 
+  			</if>
+  			<if test="registtime != null">
+  				 and registtime >= #{registtime}
+  			</if>
+  			
+  			<if test="classes != null">
+  				 and classes = #{classes}
+  			</if>
+  			
+  			<if test="stustate != null">
+  				 and stustate = #{stustate}
+  			</if>
+  			
+  			<if test="qsstate != null">
+  				 and qsstate = #{qsstate}
+  			</if>
+  			
+  			<if test="username != null">
+  				 and username like "%"#{username}"%"  <!-- 防止sql注入 --> 
+  			</if>
+  			<!-- 实现分页 -->
+  			<if test="startRow != null">
+  				limit  #{startRow},#{pageSize}  <!-- limit 0,10 -->
+  			</if>
+  		</where>
+  </select>
+  
+  <!-- 查询分页总记录条数 -->
+  <select id="selectTotalCount" resultType="int" parameterType="com.zhinengshe.pojo.student.Student">
+  		select 
+  			count(1)
+  		from 
+  			student
+  		<where>
+  			<if test="name != null">
+  				 and name like "%"#{name}"%"  <!-- 防止sql注入 --> 
+  			</if>
+  			<if test="tel != null">
+  				 and tel like "%"#{tel}"%"  <!-- 防止sql注入 --> 
+  			</if>
+  			<if test="registtime != null">
+  				 and registtime >= #{registtime}
+  			</if>
+  			<if test="classes != null">
+  				 and classes = #{classes}
+  			</if>
+  			<if test="stustate != null">
+  				 and stustate = #{stustate}
+  			</if>
+  			<if test="qsstate != null">
+  				 and qsstate = #{qsstate}
+  			</if>
+  			<if test="username != null">
+  				 and username like "%"#{username}"%"  <!-- 防止sql注入 --> 
+  			</if>
+  		</where>
+  </select>
+  
+  
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhinengshe.pojo.student.StudentExample" >
     select
     <if test="distinct" >

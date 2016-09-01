@@ -23,6 +23,11 @@
 		}
 	}
 	
+	/* 修改 */
+	function edit(id){
+			window.location.href="/teacher/edit?id="+id;
+	}
+	
 </script>
 
 
@@ -64,23 +69,29 @@
 		        <td>课程</td>
 		        <td>编辑</td>
 	      </tr>
+	      <c:if test="${!empty pagination }">
 	      <c:forEach items="${pagination.list }" var="teacher">
-	      	<input  type="hidden" name="id" value="${teacher.id }"/>
-		      <tr>
-		        <td>${teacher.name }</td>
-		        <td>${teacher.category }</td>
-		        <td>${teacher. username}</td>
-		        <td>${teacher.tel }</td>
-		        <td>
-			        <a href="/teacher/edit?id=${teacher.id }">修改</a>|
-			        <input type="button" onclick="del(${teacher.id });" value="删除">
-		        </td>
-		      </tr>
-	      </c:forEach>
+		      	<input  type="hidden" name="id" value="${teacher.id }"/>
+			      <tr>
+			        <td>${teacher.name }</td>
+			        <td>${teacher.category }</td>
+			        <td>${teacher. username}</td>
+			        <td>${teacher.tel }</td>
+			        <td>
+				        <a href="/teacher/edit?id=${teacher.id }">修改</a>|
+				        <input type="button" onclick="edit(${teacher.id })" value="修改" />|
+				        <input type="button" onclick="del(${teacher.id })" value="删除" />
+			        </td>
+			      </tr>
+		      </c:forEach>
+	      </c:if>
 	     </table>
-	     <c:forEach items="${pagination.pageView }" var="page">
-	     	${page }
-	     </c:forEach>
+	     <!-- 分页页码展示 -->
+		<c:if test="${!empty pagination }">
+			<c:forEach items="${pagination.pageView }" var="page">
+	     		${page }
+	     	</c:forEach>
+		</c:if>
 	<div class="footer"></div>
 </body>
 </html>

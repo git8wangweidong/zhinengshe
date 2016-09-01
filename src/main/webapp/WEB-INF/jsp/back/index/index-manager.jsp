@@ -10,11 +10,13 @@
 
 <h5>我是管理员index</h5> <br><br>
 
-<a href="<%=request.getContextPath()%>/manager/toAdd">添加管理员</a><br><br>
+<a href="<%=request.getContextPath()%>/manager/toAdd">管理员管理</a><br><br>
 
-<a href="<%=request.getContextPath()%>/teacher/toAdd">添加教师</a><br><br>
+<a href="<%=request.getContextPath()%>/teacher/toAdd">教师管理</a><br><br>
 
-<a href="<%=request.getContextPath()%>/student/toAdd">添加学生</a><br><br>
+<a href="<%=request.getContextPath()%>/student/toAdd">学生管理</a><br><br>
+
+<a href="<%=request.getContextPath()%>/classess/toAdd">班级管理</a><br><br>
 
 
 
