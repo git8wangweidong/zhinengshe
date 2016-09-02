@@ -89,7 +89,7 @@
   				 and tel like "%"#{tel}"%"  <!-- 防止sql注入 --> 
   			</if>
   			<if test="registtime != null">
-  				 and registtime >= #{registtime}
+  				 and registtime &gt;= #{registtime}
   			</if>
   			
   			<if test="classes != null">
@@ -128,7 +128,7 @@
   				 and tel like "%"#{tel}"%"  <!-- 防止sql注入 --> 
   			</if>
   			<if test="registtime != null">
-  				 and registtime >= #{registtime}
+  				 and registtime &gt;= #{registtime}
   			</if>
   			<if test="classes != null">
   				 and classes = #{classes}

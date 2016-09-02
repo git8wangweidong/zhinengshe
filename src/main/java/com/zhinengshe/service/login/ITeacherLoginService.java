@@ -3,7 +3,6 @@ package com.zhinengshe.service.login;
 import java.util.List;
 
 import com.zhinengshe.exception.ParameterException;
-import com.zhinengshe.pojo.teacher.Teacher;
 
 /**
  * 登陆控制

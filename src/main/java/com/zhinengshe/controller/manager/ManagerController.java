@@ -1,15 +1,18 @@
 package com.zhinengshe.controller.manager;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zhinengshe.pojo.manager.Manager;
 import com.zhinengshe.service.manager.IManagerService;
 import com.zhinengshe.utlis.pagenation.Pagination;
+import com.zhinengshe.utlis.validate.Hibernate_Validator;
 
 @Controller
 @RequestMapping("/manager")
@@ -34,13 +37,18 @@ public class ManagerController {
 	 * @return
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(Manager manager, Model model) {
+	public String add(@Valid Manager manager, BindingResult result, Model model) {
+
+		if (Hibernate_Validator.checkParam(model, result)) {
+
+			model.addAttribute("manager", manager);
+			return "back/user/add-manager";
+		}
 
 		Boolean b = managerService.add(manager);
 		if (b) {
 			return this.list(null, null, null, model);
 		}
-		model.addAttribute("manager", manager);
 		return "back/user/add-manager";
 	}
 
@@ -90,18 +98,21 @@ public class ManagerController {
 	 * @return
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(Manager manager, Model model) {
+	public String update(@Valid Manager manager, BindingResult result, Model model) {
+		
+		if (Hibernate_Validator.checkParam(model, result)) {
+
+			model.addAttribute("update_msg", "更新失败");
+			model.addAttribute("manager", manager);
+			return "back/user/edit-manager";
+		}
 
 		Boolean b = managerService.update(manager);
 		if (b) {
 			model.addAttribute("update_msg", "更新成功");
-			return this.list(null, null, null,model);
+			return this.list(null, null, null, model);
 		}
-		model.addAttribute("name", manager.getName());
-		model.addAttribute("username", manager.getUsername());
-		model.addAttribute("update_msg", "更新失败");
-
-		return "manager-edit";
+		return "back/user/edit-manager";
 
 	}
 
@@ -111,14 +122,12 @@ public class ManagerController {
 	 * @return
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(String name,String username,Integer pageNo, Model model) {
+	public String list(String name, String username, Integer pageNo, Model model) {
 
-		Pagination pagination =  managerService.list(name, username, pageNo);
+		Pagination pagination = managerService.list(name, username, pageNo);
 		model.addAttribute("pagination", pagination);
 		return "back/user/add-manager";
 
 	}
-	
-
 
 }

@@ -1,5 +1,7 @@
 package com.zhinengshe.controller.questionnaire;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -9,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zhinengshe.pojo.questionnaire.QuestionList;
 import com.zhinengshe.pojo.questionnaire.Questionnaire;
+import com.zhinengshe.pojo.questiontype.Questiontype;
 import com.zhinengshe.service.naireresult.INaireresultServcie;
 import com.zhinengshe.service.questionnaire.IQuestionnaireService;
+import com.zhinengshe.service.questiontype.IQuestionTypeService;
 import com.zhinengshe.utlis.pagenation.Pagination;
 
 @Controller
@@ -23,13 +27,20 @@ public class QuestionnaireController {
 	@Resource
 	private INaireresultServcie naireresultServcie;
 	
+	@Resource
+	private IQuestionTypeService questionTypeService;
+	
 	
 	/**
 	 * toadd 到添加问卷页面
 	 * @return
 	 */
 	@RequestMapping(value="/toAdd",method = RequestMethod.GET)
-	public String toAdd(){
+	public String toAdd(Model model){
+		
+		List<Questiontype> list = questionTypeService.list();
+		model.addAttribute("questiontypes", list);
+		
 		return "back/questionnaire/add-naire";
 		
 	}

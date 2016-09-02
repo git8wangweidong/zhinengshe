@@ -14,7 +14,6 @@ import com.zhinengshe.dao.questionnaire.QuestionnaireMapper;
 import com.zhinengshe.pojo.naireresult.AnswerDistribution;
 import com.zhinengshe.pojo.naireresult.IdListAndPeriods;
 import com.zhinengshe.pojo.naireresult.Naireresult;
-import com.zhinengshe.pojo.naireresult.NaireresultExample;
 import com.zhinengshe.pojo.question.Question;
 import com.zhinengshe.pojo.questionnaire.QuestionList;
 import com.zhinengshe.pojo.questionnaire.Questionnaire;

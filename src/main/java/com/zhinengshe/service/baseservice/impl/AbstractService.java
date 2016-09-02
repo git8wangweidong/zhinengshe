@@ -15,7 +15,7 @@ public abstract class AbstractService<T, K extends Serializable> implements IBas
 	}
 
 	/**
-	 * 添加问题
+	 * 添加
 	 * @param t	
 	 * @return
 	 */
@@ -54,6 +54,9 @@ public abstract class AbstractService<T, K extends Serializable> implements IBas
 		return i>0;
 	}
 
+	/**
+	 * 根据Id查询
+	 */
 	@Override
 	public T get(Integer id) {
 		return baseMapper.selectByPrimaryKey(id);

@@ -3,15 +3,18 @@ package com.zhinengshe.controller.student;
 import java.util.Date;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zhinengshe.pojo.student.Student;
 import com.zhinengshe.service.student.IStudentService;
 import com.zhinengshe.utlis.pagenation.Pagination;
+import com.zhinengshe.utlis.validate.Hibernate_Validator;
 
 @Controller
 @RequestMapping("/student")
@@ -36,14 +39,20 @@ public class StudentController {
 	 * @return
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(Student student, Model model) {
+	public String add(@Valid Student student, BindingResult result, Model model) {
+		
+		if (Hibernate_Validator.checkParam(model, result)) {
+
+			model.addAttribute("add_msg", "添加失败");
+			model.addAttribute("student", student);
+			return "back/user/add-student";
+		}
 
 		student.setRegisttime(new Date());
 		Boolean b = studentService.add(student);
 		if (b) {
 			return this.list(null, null, null, null, null, null, null, null, model);
 		}
-		model.addAttribute("student", student);
 		return "back/user/add-student";
 	}
 
@@ -91,7 +100,16 @@ public class StudentController {
 	 * @return
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(Student student, Model model) {
+	public String update(@Valid Student student, BindingResult result, Model model) {
+		
+		if (Hibernate_Validator.checkParam(model, result)) {
+
+			model.addAttribute("update_msg", "更新失败");
+			model.addAttribute("student", student);
+			return "back/user/edit-student";
+		}
+		
+		
 		student.setRegisttime(new Date());
 		Boolean b = studentService.update(student);
 		if (b) {

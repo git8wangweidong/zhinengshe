@@ -57,9 +57,9 @@ public class TeacherLoginImpl implements ITeacherLoginService {
 					return list;
 				}
 			}
-			throw new ParameterException("密码格式错误");
+			throw new ParameterException("密码错误");
 		}
-		throw new ParameterException("用户名格式错误");
+		throw new ParameterException("用户名错误");
 	}
 
 }

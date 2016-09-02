@@ -1,30 +1,43 @@
 package com.zhinengshe.dao.questiontype;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+import com.zhinengshe.dao.basedao.IBaseMapper;
 import com.zhinengshe.pojo.questiontype.Questiontype;
 import com.zhinengshe.pojo.questiontype.QuestiontypeExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import com.zhinengshe.pojo.student.Student;
 
-public interface QuestiontypeMapper {
-    int countByExample(QuestiontypeExample example);
+@Repository
+public interface QuestiontypeMapper extends IBaseMapper<Questiontype, QuestiontypeExample> {
 
-    int deleteByExample(QuestiontypeExample example);
+	// 分页结果集查询
+	List<Student> selectByPage(Questiontype questiontype);
 
-    int deleteByPrimaryKey(Integer id);
+	// 分页总记录条数查询
+	int selectTotalCount(Questiontype questiontype);
 
-    int insert(Questiontype record);
+	int countByExample(QuestiontypeExample example);
 
-    int insertSelective(Questiontype record);
+	int deleteByExample(QuestiontypeExample example);
 
-    List<Questiontype> selectByExample(QuestiontypeExample example);
+	int deleteByPrimaryKey(Integer id);
 
-    Questiontype selectByPrimaryKey(Integer id);
+	int insert(Questiontype record);
 
-    int updateByExampleSelective(@Param("record") Questiontype record, @Param("example") QuestiontypeExample example);
+	int insertSelective(Questiontype record);
 
-    int updateByExample(@Param("record") Questiontype record, @Param("example") QuestiontypeExample example);
+	List<Questiontype> selectByExample(QuestiontypeExample example);
 
-    int updateByPrimaryKeySelective(Questiontype record);
+	Questiontype selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKey(Questiontype record);
+	int updateByExampleSelective(@Param("record") Questiontype record, @Param("example") QuestiontypeExample example);
+
+	int updateByExample(@Param("record") Questiontype record, @Param("example") QuestiontypeExample example);
+
+	int updateByPrimaryKeySelective(Questiontype record);
+
+	int updateByPrimaryKey(Questiontype record);
 }

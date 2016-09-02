@@ -56,9 +56,9 @@ public class ManagerLoginImpl implements IManagerLoginService {
 					return list;
 				}
 			}
-			throw new ParameterException("密码格式不正确");
+			throw new ParameterException("密码不正确");
 		}
-		throw new ParameterException("账号格式不正确");
+		throw new ParameterException("账号不正确");
 	}
 
 }

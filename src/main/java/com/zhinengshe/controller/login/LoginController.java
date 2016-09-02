@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -70,23 +69,6 @@ public class LoginController extends BaseController {
 		return "back/login/login-manager";
 	}
 	
-	/**
-	 * 提取检查参数方法
-	 * @param model
-	 * @param result
-	 * @return
-	 */
-	private boolean checkParam(Model model,BindingResult result){
-		
-		if (result.hasErrors()) {
-			List<FieldError> errors = result.getFieldErrors();
-			for (FieldError fieldError : errors) {
-				model.addAttribute("ERR_" + fieldError.getField(), fieldError.getDefaultMessage());
-			}
-			return true;
-		}
-		return false;
-	}
 
 	/**
 	 * 管理员登陆
@@ -99,9 +81,6 @@ public class LoginController extends BaseController {
 	public String managerLogin(@Valid Manager manager, BindingResult result, Model model, HttpServletRequest request) {
 
 		
-		if (this.checkParam(model, result)) {
-			return "back/login/login-manager";
-		}
 		
 		List<Manager> list = null;
 		try {
@@ -130,9 +109,6 @@ public class LoginController extends BaseController {
 	@RequestMapping(value = "/teacherLogin", method = RequestMethod.POST)
 	public String teacherLogin(@Valid Teacher teacher, BindingResult result, Model model, HttpServletRequest request) {
 
-		/*if (this.checkParam(model, result)) {
-			return "back/login/login-teacher";
-		}*/
 
 		List<Teacher> list = null;
 		try {
@@ -163,9 +139,6 @@ public class LoginController extends BaseController {
 	@RequestMapping(value = "/studentLogin", method = RequestMethod.POST)
 	public String studentLogin(@Valid Student student, BindingResult result, Model model, HttpServletRequest request) {
 
-		if (this.checkParam(model, result)) {
-			return "front/login/login-student";
-		}
 
 		List<Student> list = null;
 		try {

@@ -1,15 +1,18 @@
 package com.zhinengshe.controller.teacher;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zhinengshe.pojo.teacher.Teacher;
 import com.zhinengshe.service.teacher.ITeacherService;
 import com.zhinengshe.utlis.pagenation.Pagination;
+import com.zhinengshe.utlis.validate.Hibernate_Validator;
 
 @Controller
 @RequestMapping("/teacher")
@@ -17,7 +20,6 @@ public class TeacherController {
 
 	@Resource
 	private ITeacherService teacherService;
-	
 	
 	/**
 	 * toAddTeacher
@@ -35,13 +37,19 @@ public class TeacherController {
 	 * @return
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(Teacher teacher, Model model) {
+	public String add(@Valid Teacher teacher, BindingResult result, Model model) {
 
+		if (Hibernate_Validator.checkParam(model, result)) {
+
+			model.addAttribute("add_msg", "添加失败");
+			model.addAttribute("teacher", teacher);
+			return "back/user/add-teacher";
+		}
+		
 		Boolean b = teacherService.add(teacher);
 		if (b) {
 			return this.list(null, null, null, null, null, model);
 		}
-		model.addAttribute("teacher", teacher);
 		return "back/success/add-falied";
 	}
 
@@ -93,8 +101,15 @@ public class TeacherController {
 	 * @return
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(Teacher teacher, Model model) {
+	public String update(@Valid Teacher teacher, BindingResult result, Model model) {
 
+		if (Hibernate_Validator.checkParam(model, result)) {
+
+			model.addAttribute("update_msg", "添加失败");
+			model.addAttribute("teacher", teacher);
+			return "back/user/add-teacher";
+		}
+		
 		Boolean b = teacherService.update(teacher);
 		if (b) {
 			model.addAttribute("update_msg", "更新成功");

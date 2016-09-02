@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zhinengshe.pojo.manager.Manager;
+import com.zhinengshe.pojo.question.Question;
 import com.zhinengshe.service.question.IQuestionService;
 import com.zhinengshe.utlis.pagenation.Pagination;
 
@@ -29,24 +29,24 @@ public class QuestionController {
 	 */
 	@RequestMapping(value = "/toAdd")
 	public String toAdd() {
-		return "back/user/add-manager";
+		return "back/user/add-question";
 	}
 
 	/**
 	 * 添加
-	 * @param manager
+	 * @param question
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(Manager manager, Model model) {
+	public String add(Question question, Model model) {
 
-		Boolean b = questionService.add(manager);
+		Boolean b = questionService.add(question);
 		if (b) {
 			return this.list(null, null, null, model);
 		}
-		model.addAttribute("manager", manager);
-		return "back/user/add-manager";
+		model.addAttribute("question", question);
+		return "back/user/add-question";
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class QuestionController {
 			}
 			model.addAttribute("del_msg", "删除失败，请稍后重试");
 		}
-		return "back/user/add-manager";
+		return "back/user/add-question";
 
 	}
 
@@ -78,35 +78,34 @@ public class QuestionController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String edit(Integer id, Model model) {
 
-		Manager manager = questionService.get(id);
-		if (manager != null) {
-			model.addAttribute("manager", manager);
-			return "back/user/edit-manager";
+		Question question = questionService.get(id);
+		if (question != null) {
+			model.addAttribute("question", question);
+			return "back/user/edit-question";
 		}
 		model.addAttribute("edit_msg", "获取详细失败，请稍后再试。");
-		return "back/user/edit-manager";
+		return "back/user/edit-question";
 
 	}
 
 	/**
 	 * 修改-更新
-	 * @param manager
+	 * @param question
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(Manager manager, Model model) {
+	public String update(Question question, Model model) {
 
-		Boolean b = questionService.update(manager);
+		Boolean b = questionService.update(question);
 		if (b) {
 			model.addAttribute("update_msg", "更新成功");
 			return this.list(null, null, null,model);
 		}
-		model.addAttribute("name", manager.getName());
-		model.addAttribute("username", manager.getUsername());
+		model.addAttribute("question", question);
 		model.addAttribute("update_msg", "更新失败");
 
-		return "manager-edit";
+		return "question-edit";
 
 	}
 
@@ -116,11 +115,11 @@ public class QuestionController {
 	 * @return
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(String name,String username,Integer pageNo, Model model) {
+	public String list(String question,Integer questiontype,Integer pageNo, Model model) {
 
-		Pagination pagination =  questionService.list(name, username, pageNo);
+		Pagination pagination =  questionService.list(question, questiontype, pageNo);
 		model.addAttribute("pagination", pagination);
-		return "back/user/add-manager";
+		return "back/user/add-question";
 
 	}
 

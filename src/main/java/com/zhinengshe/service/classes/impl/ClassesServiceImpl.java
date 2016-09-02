@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.zhinengshe.dao.classes.ClassesMapper;
 import com.zhinengshe.pojo.classes.Classes;
 import com.zhinengshe.pojo.classes.ClassesExample;
-import com.zhinengshe.pojo.classes.ClassesExample.Criteria;
 import com.zhinengshe.pojo.student.Student;
 import com.zhinengshe.service.baseservice.impl.AbstractService;
 import com.zhinengshe.service.classes.IClassesService;

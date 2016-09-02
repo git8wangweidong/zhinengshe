@@ -56,10 +56,9 @@ public class StudentLoginImpl implements IStudentLoginService {
 						return list;
 					}
 				}
-				throw new ParameterException("密码格式错误");
+				throw new ParameterException("密码错误");
 			}
-			throw new ParameterException("账号格式错误");
-		
+			throw new ParameterException("账号错误");
 	}
 
 }

@@ -66,6 +66,40 @@
   <sql id="Base_Column_List" >
     id, name
   </sql>
+  
+  <!-- 分页查询记录 -->
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.zhinengshe.pojo.questiontype.Questiontype">
+  		select 
+  			id, name
+  		from 
+  			questiontype
+  		<where>
+  				1=1
+  			<if test="name != null">
+  				 and name like "%"#{name}"%"  <!-- 防止sql注入 --> 
+  			</if>
+  			<!-- 实现分页 -->
+  			<if test="startRow != null">
+  				limit  #{startRow},#{pageSize}  <!-- limit 0,10 -->
+  			</if>
+  		</where>
+  </select>
+  
+  <!-- 查询分页总记录条数 -->
+  <select id="selectTotalCount" resultType="int" parameterType="com.zhinengshe.pojo.questiontype.Questiontype">
+  		select 
+  			count(1)
+  		from 
+  			questiontype
+  		<where>
+  			<if test="questiontype != null">
+  				 and name like "%"#{name}"%"  <!-- 防止sql注入 --> 
+  			</if>
+  		</where>
+  </select>
+  
+  
+  
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhinengshe.pojo.questiontype.QuestiontypeExample" >
     select
     <if test="distinct" >
