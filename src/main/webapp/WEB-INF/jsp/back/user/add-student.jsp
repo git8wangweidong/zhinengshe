@@ -15,7 +15,7 @@
 	/* 查询  */
 	function find() {
 		document.student.method="get";
-		document.student.action="/student/find";
+		document.student.action="/student/list";
 		document.student.submit();
 	}
 	/* 删除确认  */
@@ -91,14 +91,13 @@
 				</c:forEach>
 			</c:if>
 		</table>
-		
-	</div>
 	<!-- 分页页码展示 -->
 		<c:if test="${!empty pagination }">
 			<c:forEach items="${pagination.pageView }" var="page">
 	     		${page }
 	     	</c:forEach>
 		</c:if>
+	</div>
 	<div class="footer"></div>
 </body>
 </html>

@@ -12,7 +12,25 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring-mybatis.xml</param-value>
 	</context-param>
-
+	
+	<!-- GET请求编码过滤器 -->
+	<!-- 
+	<filter>
+		<filter-name>myEncodingFilter</filter-name>
+		<filter-class>com.zhinengshe.utlis.filter.MyEncodingFilter</filter-class>
+		<async-supported>true</async-supported>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter> 
+	
+	
+	<filter-mapping>
+		<filter-name>myEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	-->
 
 	<!-- 编码过滤器 -->
 	<filter>
@@ -28,8 +46,7 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-
-
+	
 	<!-- Spring监听器 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

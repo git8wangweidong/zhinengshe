@@ -14,7 +14,7 @@
 	/* 查询  */
 	function find() {
 		document.manager.method="get";
-		document.manager.action="/manager/find";
+		document.manager.action="/manager/list";
 		document.manager.submit();
 	}
 	/* 删除确认  */
@@ -75,9 +75,8 @@
 					</tr>
 				</c:forEach>
 			</c:if>
+			<!-- 分页页码展示 -->
 		</table>
-
-		<!-- 分页页码展示 -->
 		<c:if test="${!empty pagination }">
 			<c:forEach items="${pagination.pageView }" var="page">
 		     	${page }

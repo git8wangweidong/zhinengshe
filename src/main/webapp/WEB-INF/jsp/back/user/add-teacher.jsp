@@ -78,7 +78,6 @@
 			        <td>${teacher. username}</td>
 			        <td>${teacher.tel }</td>
 			        <td>
-				        <a href="/teacher/edit?id=${teacher.id }">修改</a>|
 				        <input type="button" onclick="edit(${teacher.id })" value="修改" />|
 				        <input type="button" onclick="del(${teacher.id })" value="删除" />
 			        </td>

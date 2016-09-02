@@ -145,7 +145,7 @@ div.login .footer{color:#8cb9ce;font-size:1px;margin-top:-55px;}
 	width:896px;
 	height:100%;
 	margin:30px auto;
-	background: #efefef;
+	border:1px solid #efefef;
 }
  .content-nav{
  	width:814px;
@@ -154,7 +154,7 @@ div.login .footer{color:#8cb9ce;font-size:1px;margin-top:-55px;}
  	margin:30px auto;
  }
  .project{
- 	float: left;
+ 	/*float: left;*/
  	width:100%;
  	margin-top: 20px;
  }
@@ -191,8 +191,14 @@ div.login .footer{color:#8cb9ce;font-size:1px;margin-top:-55px;}
 .content-nav .select-button{
 	margin-top: 40px;
 }
+.select-button .clist table{
+	width:350px;
+	height: 17px;
+	border:1px solid #fff;
+	margin-bottom: 5px;
+}
 .select-button .clist table td{
-width:20px;
+
 }
 .content-nav .title{
 		font-size:16px;
@@ -218,13 +224,28 @@ width:20px;
 .row-content{
 	width:1196px;
 	height:660px;
-	border:1px solid #056b9b;
+	/*border:1px solid #056b9b;*/
 	margin:0 auto;
 }
-.left-content{
-	width:122px;
+.row-content .left-content{
+	width:192px;
 	height:660px;
-	border:1px solid red;
+	margin-left: 20px;
+	/*border:1px solid red;*/
+}
+.left-content p a{
+	width:122px;
+	height:36px;
+	display: block;
+	line-height: 30px;
+	font-size: 12px;
+	border:none;
+	/*padding:2px 0;*/
+}
+.left-content #left-group{
+	width: 200px;
+	height: 300px;
+	background: blue;
 }
 .left-content .left-list{
 	margin:0;
