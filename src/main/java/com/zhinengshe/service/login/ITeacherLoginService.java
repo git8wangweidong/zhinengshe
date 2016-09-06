@@ -1,8 +1,6 @@
 package com.zhinengshe.service.login;
 
-import java.util.List;
-
-import com.zhinengshe.exception.ParameterException;
+import com.zhinengshe.pojo.teacher.Teacher;
 
 /**
  * 登陆控制
@@ -17,6 +15,6 @@ public interface ITeacherLoginService {
 	 * @param password
 	 * @return
 	 */
-	public <T> List<T> login(String username, String password)throws ParameterException, Exception;
+	public <T> Teacher login(String username, String password)throws Exception;
 
 }

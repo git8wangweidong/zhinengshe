@@ -33,8 +33,9 @@ public class StudentServiceImpl extends AbstractService<Student, StudentExample>
 	
 	// TODO 学生分页具体实现
 	@Override
-	public Pagination list(String name, String username, String classes, String tel,
-										Integer pageNo, Byte qsstate,Byte stustate, Date registtime)
+	public Pagination list(String name, String username,
+									String classes, String tel, Integer pageNo,
+										Byte qsstate,Byte stustate, Date registtime)throws Exception
 	{
 		
 		// 创建接收url参数

@@ -32,8 +32,9 @@ public class ClassesServiceImpl extends AbstractService<Classes, ClassesExample>
 
 	// TODO  分页展示班级
 	@Override
-	public Pagination list(String name, String course, Integer totalcount, Integer pageNo, Byte state, Date starttime,
-			Date endtime) {
+	public Pagination list(String name, String course, Integer totalcount, Integer pageNo, 
+									Byte state, Date starttime, Date endtime)throws Exception 
+	{
 		
 		StringBuffer params = new StringBuffer();
 		Classes classes = new Classes();
@@ -75,7 +76,6 @@ public class ClassesServiceImpl extends AbstractService<Classes, ClassesExample>
 		return pagination;
 		
 	}
-
 
 
 }

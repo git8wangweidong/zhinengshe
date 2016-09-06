@@ -1,20 +1,34 @@
 package com.zhinengshe.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.apache.log4j.Logger;
 
-import com.zhinengshe.pojo.teacher.Teacher;
-import com.zhinengshe.service.teacher.ITeacherService;
+import com.zhinengshe.service.login.IManagerLoginService;
 
-@Controller
-@RequestMapping("/test")
 public class Test {
 
+	private static Logger log = Logger.getLogger(Test.class);
+	
+	public static void main(String[] args) {
+		
+		log.info("咋发生 法萨芬是否");
+		log.error("发沙发沙发萨芬");
+	}
+	
+	
+	@Resource
+	private IManagerLoginService loginService;
+	@org.junit.Test
+	public void testLog(){
+		try {
+			loginService.login("admin", "admin");
+		} catch (Exception e) {
+			log.info(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
 	/*@Resource
 	private ITeacherService teacherService;
 

@@ -3,8 +3,6 @@ package com.zhinengshe.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.json.JsonObject;
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,18 +12,17 @@ import com.zhinengshe.pojo.naireresult.Naireresult;
 import com.zhinengshe.pojo.question.Question;
 import com.zhinengshe.pojo.questionnaire.QuestionList;
 import com.zhinengshe.pojo.questionnaire.Questionnaire;
-import com.zhinengshe.service.naireresult.INaireresultServcie;
-import com.zhinengshe.service.question.IQuestionService;
+import com.zhinengshe.service.naireresult.INaireresultService;
 import com.zhinengshe.test.basetest.BaseTest;
 
 public class NaireresultTest extends BaseTest {
 
 	
 	@Autowired
-	private INaireresultServcie naireresultServcie;
+	private INaireresultService naireresultServcie;
 	
 	@Test
-	public void testCommit(){
+	public void testCommit() throws Exception{
 		
 		Question q = new Question();
 		q.setId(1);
@@ -59,7 +56,7 @@ public class NaireresultTest extends BaseTest {
 	}
 	
 	@Test
-	public void testSql(){
+	public void testSql() throws Exception{
 		List<AnswerDistribution> list = naireresultServcie.testSql(1,1);
 		
 		for (AnswerDistribution result : list) {
@@ -68,7 +65,7 @@ public class NaireresultTest extends BaseTest {
 	}
 	
 	@Test
-	public void testShowNaire(){
+	public void testShowNaire() throws Exception{
 		List<Naireresult> list = naireresultServcie.showNaire(1, 1);
 		
 		for (Naireresult naireresult : list) {

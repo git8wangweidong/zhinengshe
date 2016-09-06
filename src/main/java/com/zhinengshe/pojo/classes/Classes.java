@@ -3,24 +3,30 @@ package com.zhinengshe.pojo.classes;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Classes implements Serializable{
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -3212479802597416883L;
-
+	
 	private Integer id;
-
+	
+	@NotBlank(message="班级名称不能为空")
 	private String name;
-
+	
+	@NotBlank(message="课程不能为空")
 	private String course;
-
+	
+	@NotBlank(message="班级状态不能为空")
 	private Byte state;
 
+	@NotBlank(message="开始时间不能为空")
 	private Date starttime;
 
+	@NotBlank(message="结束不能为空")
 	private Date endtime;
 
+	@NotBlank(message="班级总人数不能为空")
 	private Integer totalcount;
 
 	private Integer startRow; // 起始页

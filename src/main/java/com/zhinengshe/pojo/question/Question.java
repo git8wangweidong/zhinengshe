@@ -2,18 +2,21 @@ package com.zhinengshe.pojo.question;
 
 import java.io.Serializable;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Question implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -3791527761693949L;
 
 	private Integer id;
-
+	
+	@NotBlank(message="问题名称不能为空")
 	private String question;
 
+	@NotBlank(message="答案不能为空")
 	private String answer;
 
+	@NotBlank(message="问题类型不能为空")
 	private Integer questiontype;
 
 	private Integer startRow; // 起始页

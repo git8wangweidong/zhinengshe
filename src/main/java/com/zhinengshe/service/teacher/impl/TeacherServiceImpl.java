@@ -35,7 +35,7 @@ public class TeacherServiceImpl extends AbstractService<Teacher, TeacherExample>
 
 	// TODO 教师分页具体实现
 	@Override
-	public Pagination list(String name, Byte category, String username ,String tel, Integer pageNo) {
+	public Pagination list(String name, Byte category, String username ,String tel, Integer pageNo)throws Exception{
 		
 		
 		StringBuffer params = new StringBuffer();

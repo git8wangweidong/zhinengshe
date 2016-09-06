@@ -1,12 +1,9 @@
 package com.zhinengshe.controller.login;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zhinengshe.controller.BaseController;
-import com.zhinengshe.exception.ParameterException;
 import com.zhinengshe.pojo.manager.Manager;
 import com.zhinengshe.pojo.student.Student;
 import com.zhinengshe.pojo.teacher.Teacher;
@@ -29,7 +25,7 @@ import com.zhinengshe.service.login.ITeacherLoginService;
  */
 @Controller
 @RequestMapping("/login")
-public class LoginController extends BaseController {
+public class LoginController extends BaseController{
 
 	@Resource
 	private IManagerLoginService managerLoginService;
@@ -40,8 +36,6 @@ public class LoginController extends BaseController {
 	@Resource
 	private IStudentLoginService studentLoginService;
 
-	private static Logger log = Logger.getLogger(LoginController.class);
-	
 	/**
 	 * 跳转教师登陆
 	 * @return
@@ -82,20 +76,17 @@ public class LoginController extends BaseController {
 
 		
 		
-		List<Manager> list = null;
+		Manager man = null;
 		try {
-			list = managerLoginService.login(manager.getUsername(), manager.getPassword());
-		} catch (ParameterException e) {
-			log.error(e.getMessage(), e);
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+			man = managerLoginService.login(manager.getUsername(), manager.getPassword());
+		}catch (Exception e) {
+			log.error(e.getMessage());
 		}
-		if (list != null && list.size() > 0) {
-			Manager man = list.get(0);
+		if (man != null) {
 			request.getSession().setAttribute("manager", man);
-			model.addAttribute("manager", man);
 			return "back/index/index-manager";
 		}
+		model.addAttribute("login_msg", "账户名或密码错误");
 		return "back/login/login-manager";
 	}
 
@@ -110,22 +101,18 @@ public class LoginController extends BaseController {
 	public String teacherLogin(@Valid Teacher teacher, BindingResult result, Model model, HttpServletRequest request) {
 
 
-		List<Teacher> list = null;
+		Teacher tea = null;
 		try {
-			list = teacherLoginService.login(teacher.getUsername(),teacher.getPassword());
-		} catch (ParameterException e) {
-			log.error(e.getMessage(), e);
-		} catch (Exception e) {
+			tea = teacherLoginService.login(teacher.getUsername(),teacher.getPassword());
+		}catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
 
-		if (list.size() > 0) {
-			Teacher tea = list.get(0);
-			model.addAttribute("teacher", tea);
-
+		if (tea!=null) {
+			request.getSession().setAttribute("teacher", tea);
 			return "back/index/index-teacher";
 		}
-		model.addAttribute("error_msg", "用户名或密码不能为空。。。");
+		model.addAttribute("login_msg", "账户名或密码错误");
 		return "back/login/login-teacher";
 	}
 
@@ -140,20 +127,17 @@ public class LoginController extends BaseController {
 	public String studentLogin(@Valid Student student, BindingResult result, Model model, HttpServletRequest request) {
 
 
-		List<Student> list = null;
+		Student stu = null;
 		try {
-			list = studentLoginService.login(student.getUsername(), student.getPassword());
-		} catch (ParameterException e) {
-			log.error(e.getMessage(), e);
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+			stu = studentLoginService.login(student.getUsername(), student.getPassword());
+		}catch (Exception e) {
+			log.error(e.getMessage(),e);
 		}
-		if (list.size() > 0) {
-			Student stu = list.get(0);
+		if (stu!=null) {
 			request.getSession().setAttribute("student", stu);
-			model.addAttribute("student", stu);
 			return "front/question-naire/index-student";
 		}
+		model.addAttribute("login_msg", "账户名或密码错误");
 		return "front/login/login-student";
 	}
 }

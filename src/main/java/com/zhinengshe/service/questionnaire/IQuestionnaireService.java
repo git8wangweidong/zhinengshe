@@ -14,7 +14,7 @@ public interface IQuestionnaireService extends IBaseService<Questionnaire, Quest
 	 * @param 问题集合
 	 * @return boolean 是否成功
 	 */
-	 Boolean addNaire(Questionnaire t, QuestionList questionList);
+	 Boolean addNaire(Questionnaire t, QuestionList questionList)throws Exception;
 	 
 	 /**
 	  * 分页展示问卷列表
@@ -23,6 +23,6 @@ public interface IQuestionnaireService extends IBaseService<Questionnaire, Quest
 	  * @param periods
 	  * @return 分页结果
 	  */
-	 Pagination list(String name, String periods, Integer nairtype, Integer pageNo);
+	 Pagination list(String name, String periods, Integer nairtype, Integer pageNo)throws Exception;
 
 }

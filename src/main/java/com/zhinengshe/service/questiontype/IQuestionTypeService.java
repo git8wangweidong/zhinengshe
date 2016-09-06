@@ -15,11 +15,11 @@ public interface IQuestionTypeService extends IBaseService<Questiontype, Questio
 	 * @param pageNo 当前页码
 	 * @return
 	 */
-	Pagination list(String name, Integer pageNo);
+	Pagination list(String name, Integer pageNo)throws Exception;
 	
 	/**
 	 * 展示问题类型 
 	 * @return
 	 */
-	List<Questiontype> list();
+	List<Questiontype> list()throws Exception;
 }

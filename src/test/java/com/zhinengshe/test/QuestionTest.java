@@ -14,7 +14,7 @@ public class QuestionTest extends BaseTest {
 	private IQuestionService questionService;
 	
 	@Test
-	public void testAdd(){
+	public void testAdd() throws Exception{
 		
 		Question q = new Question();
 		
@@ -29,7 +29,7 @@ public class QuestionTest extends BaseTest {
 	}
 	
 	@Test
-	public void testDel(){
+	public void testDel() throws Exception{
 		Boolean flag = questionService.del(20);
 		System.out.println(flag);
 	}

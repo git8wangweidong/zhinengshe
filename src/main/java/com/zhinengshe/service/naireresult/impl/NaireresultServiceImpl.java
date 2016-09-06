@@ -17,11 +17,11 @@ import com.zhinengshe.pojo.naireresult.Naireresult;
 import com.zhinengshe.pojo.question.Question;
 import com.zhinengshe.pojo.questionnaire.QuestionList;
 import com.zhinengshe.pojo.questionnaire.Questionnaire;
-import com.zhinengshe.service.naireresult.INaireresultServcie;
+import com.zhinengshe.service.naireresult.INaireresultService;
 
 
 @Service("naireresultServcie")
-public class NaireresultServiceImpl implements INaireresultServcie {
+public class NaireresultServiceImpl implements INaireresultService {
 
 	@Resource
 	private NaireresultMapper naireresultMapper;
@@ -36,7 +36,7 @@ public class NaireresultServiceImpl implements INaireresultServcie {
 	 * 提交问卷 问卷id 问题id 问题答案
 	 */
 	@Override
-	public Boolean commitNaire(QuestionList questions, Questionnaire questionnaire) {
+	public Boolean commitNaire(QuestionList questions, Questionnaire questionnaire)throws Exception{
 		
 		 // 获取问题集合  将问题/回答 插入问卷结果表
 		List<Question> list = questions.getQuestions();
@@ -60,7 +60,7 @@ public class NaireresultServiceImpl implements INaireresultServcie {
 	 * 问卷结果展示
 	 */
 	@Override
-	public List<Naireresult> showNaire(Integer naireId,Integer periods) {
+	public List<Naireresult> showNaire(Integer naireId,Integer periods)throws Exception{
 		
 		// 查询当前问卷的所有问题id
 		Questionnaire naire = naireMapper.selectByPrimaryKey(naireId);
@@ -71,7 +71,7 @@ public class NaireresultServiceImpl implements INaireresultServcie {
 		IdListAndPeriods periods4Single = new IdListAndPeriods();
 		IdListAndPeriods periods4Text = new IdListAndPeriods();
 		
-		// 接收打分题目的姐
+		// 接收打分题目的集合
 		List<Integer> ids = new ArrayList<>();
 		// 声明接收 单行填空的集合
 		List<Integer> inputIds = new ArrayList<>();
@@ -136,7 +136,7 @@ public class NaireresultServiceImpl implements INaireresultServcie {
 	 * @param naireId
 	 * @return
 	 */
-	public List<AnswerDistribution> testSql(Integer naireId,Integer periods){
+	public List<AnswerDistribution> testSql(Integer naireId,Integer periods)throws Exception{
 		
 		IdListAndPeriods idListAndPeriods = new IdListAndPeriods();
 		

@@ -28,7 +28,7 @@ public class QuestionServiceImpl extends AbstractService<Question, QuestionExamp
 	
 	// TODO 分页展示问题
 	@Override
-	public Pagination list(String question, Integer questiontype,Integer pageNo) {
+	public Pagination list(String question, Integer questiontype,Integer pageNo)throws Exception{
 		
 		StringBuffer params = new StringBuffer();
 		Question que = new Question();

@@ -29,7 +29,7 @@ public class QuestionTypeServiceImpl extends AbstractService<Questiontype, Quest
 	
 	// TODO 分页展示问题类型
 	@Override
-	public Pagination list(String name, Integer pageNo) {
+	public Pagination list(String name, Integer pageNo)throws Exception{
 		
 		StringBuffer params = new StringBuffer();
 		
@@ -59,7 +59,7 @@ public class QuestionTypeServiceImpl extends AbstractService<Questiontype, Quest
 	
 	
 	@Override
-	public List<Questiontype> list() {
+	public List<Questiontype> list()throws Exception{
 		List<Questiontype> list = mapper.selectByExample(null);
 		
 		return list;

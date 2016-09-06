@@ -7,5 +7,5 @@ import com.zhinengshe.utlis.pagenation.Pagination;
 
 public interface IQuestionService extends IBaseService<Question, QuestionExample>{
 
-	Pagination list(String question, Integer questiontype, Integer pageNo);
+	Pagination list(String question, Integer questiontype, Integer pageNo)throws Exception;
 }

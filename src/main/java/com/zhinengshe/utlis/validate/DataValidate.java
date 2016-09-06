@@ -7,7 +7,6 @@ public class DataValidate {
 
 	/**
 	* 验证邮箱
-	* 
 	* @param 待验证的字符串
 	* @return 如果是符合的字符串,返回 <b>true </b>,否则为 <b>false </b>
 	*/
@@ -18,7 +17,6 @@ public class DataValidate {
 
 	/**
 	* 验证IP地址
-	* 
 	* @param 待验证的字符串
 	* @return 如果是符合格式的字符串,返回 <b>true </b>,否则为 <b>false </b>
 	*/
@@ -30,7 +28,6 @@ public class DataValidate {
 
 	/**
 	* 验证网址Url
-	* 
 	* @param 待验证的字符串
 	* @return 如果是符合格式的字符串,返回 <b>true </b>,否则为 <b>false </b>
 	*/
@@ -41,7 +38,6 @@ public class DataValidate {
 
 	/**
 	* 验证电话号码
-	* 
 	* @param 待验证的字符串
 	* @return 如果是符合格式的字符串,返回 <b>true </b>,否则为 <b>false </b>
 	*/
@@ -52,7 +48,6 @@ public class DataValidate {
 
 	/**
 	* 验证输入密码条件(字符与数据同时出现)
-	* 
 	* @param 待验证的字符串
 	* @return 如果是符合格式的字符串,返回 <b>true </b>,否则为 <b>false </b>
 	*/
@@ -63,7 +58,6 @@ public class DataValidate {
 
 	/**
 	* 验证输入密码长度 (6-18位)
-	* 
 	* @param 待验证的字符串
 	* @return 如果是符合格式的字符串,返回 <b>true </b>,否则为 <b>false </b>
 	*/
@@ -74,7 +68,6 @@ public class DataValidate {
 
 	/**
 	* 验证输入邮政编号
-	* 
 	* @param 待验证的字符串
 	* @return 如果是符合格式的字符串,返回 <b>true </b>,否则为 <b>false </b>
 	*/
@@ -85,7 +78,6 @@ public class DataValidate {
 
 	/**
 	* 验证输入手机号码
-	* 
 	* @param 待验证的字符串
 	* @return 如果是符合格式的字符串,返回 <b>true </b>,否则为 <b>false </b>
 	*/
@@ -96,7 +88,6 @@ public class DataValidate {
 
 	/**
 	* 验证输入身份证号
-	* 
 	* @param 待验证的字符串
 	* @return 如果是符合格式的字符串,返回 <b>true </b>,否则为 <b>false </b>
 	*/
@@ -107,7 +98,6 @@ public class DataValidate {
 
 	/**
 	* 验证输入两位小数
-	* 
 	* @param 待验证的字符串
 	* @return 如果是符合格式的字符串,返回 <b>true </b>,否则为 <b>false </b>
 	*/
@@ -118,7 +108,6 @@ public class DataValidate {
 
 	/**
 	* 验证输入一年的12个月
-	* 
 	* @param 待验证的字符串
 	* @return 如果是符合格式的字符串,返回 <b>true </b>,否则为 <b>false </b>
 	*/
@@ -129,7 +118,6 @@ public class DataValidate {
 
 	/**
 	* 验证输入一个月的31天
-	* 
 	* @param 待验证的字符串
 	* @return 如果是符合格式的字符串,返回 <b>true </b>,否则为 <b>false </b>
 	*/
@@ -140,7 +128,6 @@ public class DataValidate {
 
 	/**
 	* 验证日期时间
-	* 
 	* @param 待验证的字符串
 	* @return 如果是符合网址格式的字符串,返回 <b>true </b>,否则为 <b>false </b>
 	*/
@@ -159,7 +146,6 @@ public class DataValidate {
 
 	/**
 	* 验证数字输入
-	* 
 	* @param 待验证的字符串
 	* @return 如果是符合格式的字符串,返回 <b>true </b>,否则为 <b>false </b>
 	*/
@@ -170,7 +156,6 @@ public class DataValidate {
 
 	/**
 	* 验证非零的正整数
-	* 
 	* @param 待验证的字符串
 	* @return 如果是符合格式的字符串,返回 <b>true </b>,否则为 <b>false </b>
 	*/
@@ -181,7 +166,6 @@ public class DataValidate {
 
 	/**
 	* 验证大写字母
-	* 
 	* @param 待验证的字符串
 	* @return 如果是符合格式的字符串,返回 <b>true </b>,否则为 <b>false </b>
 	*/
@@ -192,7 +176,6 @@ public class DataValidate {
 
 	/**
 	* 验证小写字母
-	* 
 	* @param 待验证的字符串
 	* @return 如果是符合格式的字符串,返回 <b>true </b>,否则为 <b>false </b>
 	*/
@@ -203,7 +186,6 @@ public class DataValidate {
 
 	/**
 	* 验证输入字母
-	* 
 	* @param 待验证的字符串
 	* @return 如果是符合格式的字符串,返回 <b>true </b>,否则为 <b>false </b>
 	*/
@@ -214,7 +196,6 @@ public class DataValidate {
 
 	/**
 	* 验证输入汉字
-	* 
 	* @param 待验证的字符串
 	* @return 如果是符合格式的字符串,返回 <b>true </b>,否则为 <b>false </b>
 	*/
@@ -225,7 +206,6 @@ public class DataValidate {
 
 	/**
 	* 验证输入字符串
-	* 
 	* @param 待验证的字符串
 	* @return 如果是符合格式的字符串,返回 <b>true </b>,否则为 <b>false </b>
 	*/

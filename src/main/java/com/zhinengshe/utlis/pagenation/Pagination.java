@@ -8,6 +8,8 @@ import java.util.List;
  */
 public class Pagination extends SimplePage{
 
+	private static final long serialVersionUID = 3343267199960321265L;
+
 	public Pagination() {
 	}
 
@@ -73,16 +75,14 @@ public class Pagination extends SimplePage{
 
 	/**
 	 * 设置分页内容
-	 * 
 	 * @param list
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public void setList(List list) {
 		this.list = list;
 	}
 	/**
 	 * 获得分页样式
-	 * 
 	 * @return
 	 */
 	public List<String> getPageView() {
@@ -90,7 +90,6 @@ public class Pagination extends SimplePage{
 	}
 	/**
 	 * 设置分页样式
-	 * 
 	 * @param list
 	 */
 	public void setPageView(List<String> pageView) {

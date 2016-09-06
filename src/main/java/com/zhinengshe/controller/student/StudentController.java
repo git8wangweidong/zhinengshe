@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.zhinengshe.controller.BaseController;
 import com.zhinengshe.pojo.student.Student;
 import com.zhinengshe.service.student.IStudentService;
 import com.zhinengshe.utlis.pagenation.Pagination;
@@ -18,7 +19,7 @@ import com.zhinengshe.utlis.validate.Hibernate_Validator;
 
 @Controller
 @RequestMapping("/student")
-public class StudentController {
+public class StudentController extends BaseController{
 
 	@Resource
 	private IStudentService studentService;
@@ -49,7 +50,12 @@ public class StudentController {
 		}
 
 		student.setRegisttime(new Date());
-		Boolean b = studentService.add(student);
+		Boolean b = null;
+		try {
+			b = studentService.add(student);
+		} catch (Exception e) {
+			log.error(e.getMessage(),e);
+		}
 		if (b) {
 			return this.list(null, null, null, null, null, null, null, null, model);
 		}
@@ -65,7 +71,12 @@ public class StudentController {
 	@RequestMapping(value = "/del", method = RequestMethod.GET)
 	public String del(Integer id, Model model) {
 
-		Boolean b = studentService.del(id);
+		Boolean b = null;
+		try {
+			b = studentService.del(id);
+		} catch (Exception e) {
+			log.error(e.getMessage(),e);
+		}
 		if (b) {
 			return this.list(null, null, null, null, null, null, null, null, model);
 		}
@@ -83,7 +94,12 @@ public class StudentController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String edit(Integer id, Model model) {
 
-		Student student = studentService.get(id);
+		Student student = null;
+		try {
+			student = studentService.get(id);
+		} catch (Exception e) {
+			log.error(e.getMessage(),e);
+		}
 		if (student != null) {
 			model.addAttribute("student", student);
 			return "back/user/edit-student";
@@ -111,7 +127,12 @@ public class StudentController {
 		
 		
 		student.setRegisttime(new Date());
-		Boolean b = studentService.update(student);
+		Boolean b = null;
+		try {
+			b = studentService.update(student);
+		} catch (Exception e) {
+			log.error(e.getMessage(),e);
+		}
 		if (b) {
 			model.addAttribute("update_msg", "更新成功");
 			return this.list(null, null, null, null, null, null, null, null, model);
@@ -132,7 +153,12 @@ public class StudentController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(String name, String username, String classes, String tel, Integer pageNo, Byte qsstate, Byte stustate, Date registtime, Model model) {
 
-		Pagination pagination = studentService.list(name, username, classes, tel, pageNo, qsstate, stustate, registtime);
+		Pagination pagination = null;
+		try {
+			pagination = studentService.list(name, username, classes, tel, pageNo, qsstate, stustate, registtime);
+		} catch (Exception e) {
+			log.error(e.getMessage(),e);
+		}
 		
 		// 查询条件回显
 		model.addAttribute("name", name);

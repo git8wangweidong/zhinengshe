@@ -28,7 +28,7 @@ public class ManagerServiceImpl extends AbstractService<Manager, ManagerExample>
 
 	// TODO 管理员分页查询
 	@Override
-	public Pagination list(String name, String username, Integer pageNo) {
+	public Pagination list(String name, String username, Integer pageNo)throws Exception {
 		
 		StringBuffer params = new StringBuffer();
 		

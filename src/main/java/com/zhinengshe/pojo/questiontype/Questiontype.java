@@ -2,6 +2,8 @@ package com.zhinengshe.pojo.questiontype;
 
 import java.io.Serializable;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Questiontype implements Serializable{
 	
     /**
@@ -11,6 +13,7 @@ public class Questiontype implements Serializable{
 
 	private Integer id;
 
+	@NotBlank(message="问卷类型名称不能为空")
     private String name;
 
     public Integer getId() {

@@ -9,13 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.zhinengshe.controller.BaseController;
 import com.zhinengshe.pojo.classes.Classes;
 import com.zhinengshe.service.classes.IClassesService;
 import com.zhinengshe.utlis.pagenation.Pagination;
 
 @Controller
 @RequestMapping("/classes")
-public class ClassesController {
+public class ClassesController extends BaseController{
 
 	@Resource
 	private IClassesService classesService;
@@ -38,7 +39,12 @@ public class ClassesController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(Classes classes, Model model) {
 
-		Boolean b = classesService.add(classes);
+		Boolean b = null;
+		try {
+			b = classesService.add(classes);
+		} catch (Exception e) {
+			log.error(e.getMessage(),e);
+		}
 		if (b) {
 			return this.list(null, null, null, null, null, null, null, model);
 		}
@@ -55,7 +61,12 @@ public class ClassesController {
 	@RequestMapping(value = "/del", method = RequestMethod.GET)
 	public String del(Integer id, Model model) {
 
-		Boolean b = classesService.del(id);
+		Boolean b = null;
+		try {
+			b = classesService.del(id);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
 		if (b) {
 			return this.list(null, null, null, null, null, null, null, model);
 		}
@@ -73,7 +84,12 @@ public class ClassesController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String edit(Integer id, Model model) {
 
-		Classes classes = classesService.get(id);
+		Classes classes = null;
+		try {
+			classes = classesService.get(id);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
 		if (classes != null) {
 			model.addAttribute("classes", classes);
 			return "back/classes/edit-classes";
@@ -91,7 +107,12 @@ public class ClassesController {
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update(Classes classes, Model model) {
-		Boolean b = classesService.update(classes);
+		Boolean b = null;
+		try {
+			b = classesService.update(classes);
+		} catch (Exception e) {
+			log.error(e.getMessage(),e);
+		}
 		if (b) {
 			model.addAttribute("update_msg", "更新成功");
 			return this.list(null, null, null, null, null, null, null, model);
@@ -112,7 +133,12 @@ public class ClassesController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(String name, String course, Integer totalcount, Integer pageNo, Byte state, Date starttime, Date endtime, Model model) {
 
-		Pagination pagination = classesService.list(name, course, totalcount, pageNo, state, starttime, endtime);
+		Pagination pagination = null;
+		try {
+			pagination = classesService.list(name, course, totalcount, pageNo, state, starttime, endtime);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
 		
 		// 查询条件回显
 		model.addAttribute("name", name);

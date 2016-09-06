@@ -7,22 +7,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.zhinengshe.controller.BaseController;
 import com.zhinengshe.pojo.question.Question;
 import com.zhinengshe.service.question.IQuestionService;
 import com.zhinengshe.utlis.pagenation.Pagination;
 
 /**
  * 问题控制
- * @author Administrator
- * 存在大量bug 未修改
+ * 
+ * @author Administrator 存在大量bug 未修改
  */
 @Controller
 @RequestMapping("/question")
-public class QuestionController {
+public class QuestionController extends BaseController {
 	
 	@Resource
 	private IQuestionService questionService;
-	
+
 	/**
 	 * toAdd
 	 * @return
@@ -41,7 +42,12 @@ public class QuestionController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(Question question, Model model) {
 
-		Boolean b = questionService.add(question);
+		Boolean b = null;
+		try {
+			b = questionService.add(question);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
 		if (b) {
 			return this.list(null, null, null, model);
 		}
@@ -58,13 +64,16 @@ public class QuestionController {
 	@RequestMapping(value = "/del", method = RequestMethod.GET)
 	public String del(Integer id, Model model) {
 
-		if (id instanceof Integer) {
-			Boolean b = questionService.del(id);
-			if (b) {
-				return this.list(null, null, null, model);
-			}
-			model.addAttribute("del_msg", "删除失败，请稍后重试");
+		Boolean b = null;
+		try {
+			b = questionService.del(id);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
 		}
+		if (b) {
+			return this.list(null, null, null, model);
+		}
+		model.addAttribute("del_msg", "删除失败，请稍后重试");
 		return "back/user/add-question";
 
 	}
@@ -78,7 +87,12 @@ public class QuestionController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String edit(Integer id, Model model) {
 
-		Question question = questionService.get(id);
+		Question question = null;
+		try {
+			question = questionService.get(id);
+		} catch (Exception e) {
+			log.error(e.getMessage(),e);
+		}
 		if (question != null) {
 			model.addAttribute("question", question);
 			return "back/user/edit-question";
@@ -97,10 +111,15 @@ public class QuestionController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update(Question question, Model model) {
 
-		Boolean b = questionService.update(question);
+		Boolean b = null;
+		try {
+			b = questionService.update(question);
+		} catch (Exception e) {
+			log.error(e.getMessage(),e);
+		}
 		if (b) {
 			model.addAttribute("update_msg", "更新成功");
-			return this.list(null, null, null,model);
+			return this.list(null, null, null, model);
 		}
 		model.addAttribute("question", question);
 		model.addAttribute("update_msg", "更新失败");
@@ -115,9 +134,14 @@ public class QuestionController {
 	 * @return
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(String question,Integer questiontype,Integer pageNo, Model model) {
+	public String list(String question, Integer questiontype, Integer pageNo, Model model) {
 
-		Pagination pagination =  questionService.list(question, questiontype, pageNo);
+		Pagination pagination = null;
+		try {
+			pagination = questionService.list(question, questiontype, pageNo);
+		} catch (Exception e) {
+			log.error(e.getMessage(),e);
+		}
 		model.addAttribute("pagination", pagination);
 		return "back/user/add-question";
 

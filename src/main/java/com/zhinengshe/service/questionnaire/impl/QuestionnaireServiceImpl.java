@@ -47,7 +47,7 @@ public class QuestionnaireServiceImpl extends AbstractService<Questionnaire, Que
 	 * @return boolean 是否成功
 	 */
 	@Override
-	public Boolean addNaire(Questionnaire t, QuestionList questionList) {
+	public Boolean addNaire(Questionnaire t, QuestionList questionList)throws Exception{
 
 		List<Question> list = questionList.getQuestions();
 		
@@ -73,7 +73,7 @@ public class QuestionnaireServiceImpl extends AbstractService<Questionnaire, Que
 	 * 展示问卷
 	 */
 	@Override
-	public Questionnaire get(Integer id) {
+	public Questionnaire get(Integer id)throws Exception{
 
 		// 查询问卷
 		Questionnaire naire = questionnaireMapper.selectByPrimaryKey(id);
@@ -109,7 +109,7 @@ public class QuestionnaireServiceImpl extends AbstractService<Questionnaire, Que
 
 	// TODO 问卷列表展示
 	@Override
-	public Pagination list(String name, String periods, Integer nairtype, Integer pageNo) {
+	public Pagination list(String name, String periods, Integer nairtype, Integer pageNo)throws Exception{
 		
 		StringBuffer params = new StringBuffer();
 		Questionnaire questionnaire = new Questionnaire();

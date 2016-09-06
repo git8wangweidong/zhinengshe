@@ -9,9 +9,6 @@ import org.hibernate.validator.constraints.NotBlank;
 
 public class Manager implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1753088071219716134L;
 
 	private Integer id;

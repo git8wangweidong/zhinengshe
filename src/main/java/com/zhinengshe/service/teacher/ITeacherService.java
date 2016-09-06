@@ -22,5 +22,5 @@ public interface ITeacherService extends IBaseService<Teacher, TeacherExample>{
 	 * @param pageNo 当前页码
 	 * @return 分页对象
 	 */
-	Pagination list(String name, Byte category, String username ,String tel, Integer pageNo);
+	Pagination list(String name, Byte category, String username ,String tel, Integer pageNo)throws Exception;
 }

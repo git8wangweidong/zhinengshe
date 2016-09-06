@@ -3,23 +3,27 @@ package com.zhinengshe.pojo.questionnaire;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.zhinengshe.pojo.question.Question;
 import com.zhinengshe.pojo.questiontype.Questiontype;
 
 public class Questionnaire implements Serializable {
-	/**
-	 * 
-	 */
+	 
 	private static final long serialVersionUID = -4990817197414713103L;
 
 	private Integer id;
-
+	
+	@NotBlank(message="问卷名称不能为空")
 	private String name;
-
+	
+	@NotBlank(message="问卷期数不能为空")
 	private String periods;
-
+	
+	@NotBlank(message="问卷类型不能为空")
 	private Integer nairetype;
 
+	@NotBlank(message="问题不能为空")
 	private String questionid;
 
 	private Integer studentId;

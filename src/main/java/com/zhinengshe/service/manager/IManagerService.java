@@ -19,6 +19,6 @@ public interface IManagerService extends IBaseService<Manager, ManagerExample>{
 	 * @param pageNo 当前页
 	 * @return
 	 */
-	Pagination list(String name, String username, Integer pageNo);
+	Pagination list(String name, String username, Integer pageNo)throws Exception;
 	
 }

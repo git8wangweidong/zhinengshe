@@ -22,6 +22,7 @@ public interface IClassesService extends IBaseService<Classes, ClassesExample> {
 	 * @return
 	 */
 	
-	Pagination list(String name, String course,Integer totalcount,Integer pageNo, Byte state, Date starttime, Date endtime);
+	Pagination list(String name, String course,Integer totalcount,Integer pageNo,
+								Byte state, Date starttime, Date endtime)throws Exception;
 
 }

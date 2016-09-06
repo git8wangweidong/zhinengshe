@@ -9,27 +9,27 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.zhinengshe.controller.BaseController;
 import com.zhinengshe.pojo.questionnaire.QuestionList;
 import com.zhinengshe.pojo.questionnaire.Questionnaire;
 import com.zhinengshe.pojo.questiontype.Questiontype;
-import com.zhinengshe.service.naireresult.INaireresultServcie;
+import com.zhinengshe.service.naireresult.INaireresultService;
 import com.zhinengshe.service.questionnaire.IQuestionnaireService;
 import com.zhinengshe.service.questiontype.IQuestionTypeService;
 import com.zhinengshe.utlis.pagenation.Pagination;
 
 @Controller
 @RequestMapping("/questionnaire")
-public class QuestionnaireController {
+public class QuestionnaireController extends BaseController{
 	
 	@Resource
 	private IQuestionnaireService questionnaireService;
 	
 	@Resource
-	private INaireresultServcie naireresultServcie;
+	private INaireresultService naireresultServcie;
 	
 	@Resource
 	private IQuestionTypeService questionTypeService;
-	
 	
 	/**
 	 * toadd 到添加问卷页面
@@ -38,7 +38,12 @@ public class QuestionnaireController {
 	@RequestMapping(value="/toAdd",method = RequestMethod.GET)
 	public String toAdd(Model model){
 		
-		List<Questiontype> list = questionTypeService.list();
+		List<Questiontype> list = null;
+		try {
+			list = questionTypeService.list();
+		} catch (Exception e) {
+			log.error(e.getMessage(),e);
+		}
 		model.addAttribute("questiontypes", list);
 		
 		return "back/questionnaire/add-naire";
@@ -52,7 +57,12 @@ public class QuestionnaireController {
 	@RequestMapping(value="/add",method = RequestMethod.GET)
 	public String add(Questionnaire t, QuestionList questionList, Model model){
 		
-		Boolean b = questionnaireService.addNaire(t, questionList);
+		Boolean b = null;
+		try {
+			b = questionnaireService.addNaire(t, questionList);
+		} catch (Exception e) {
+			log.error(e.getMessage(),e);
+		}
 		if (b) {
 			model.addAttribute("add-msg", "添加成功");
 			return this.list(null, null, null, null, model);
@@ -87,7 +97,12 @@ public class QuestionnaireController {
 	@RequestMapping(value="/show",method = RequestMethod.GET)
 	public String show(Integer id,Model model){
 		
-		Questionnaire naire = questionnaireService.get(id);
+		Questionnaire naire = null;
+		try {
+			naire = questionnaireService.get(id);
+		} catch (Exception e) {
+			log.error(e.getMessage(),e);
+		}
 		
 		model.addAttribute("naire",naire);
 		
@@ -105,7 +120,12 @@ public class QuestionnaireController {
 	@RequestMapping(value="/commit",method = RequestMethod.POST)
 	public String commit(QuestionList questionList, Questionnaire questionnaire, Model model){
 		
-		Boolean b = naireresultServcie.commitNaire(questionList, questionnaire);
+		Boolean b = null;
+		try {
+			b = naireresultServcie.commitNaire(questionList, questionnaire);
+		} catch (Exception e) {
+			log.error(e.getMessage(),e);
+		}
 		if (b) {
 			return "success/commit-success"; // 完成问卷页面
 		}
@@ -125,7 +145,12 @@ public class QuestionnaireController {
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	public String list(String name, String periods, Integer nairtype, Integer pageNo, Model model){
 		
-		Pagination pagination = questionnaireService.list(name, periods, nairtype, pageNo);
+		Pagination pagination = null;
+		try {
+			pagination = questionnaireService.list(name, periods, nairtype, pageNo);
+		} catch (Exception e) {
+			log.error(e.getMessage(),e);
+		}
 		
 		model.addAttribute("pagination",pagination);
 		

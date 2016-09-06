@@ -1,8 +1,15 @@
 package com.zhinengshe.controller;
 
-import org.springframework.stereotype.Controller;
+import org.apache.log4j.Logger;
 
-@Controller
-public class BaseController {
+/**
+ * 声明logger文件
+ * @author Administrator
+ *
+ */
+public abstract class BaseController{
 
+	protected  Logger log = Logger.getLogger(this.getClass().getName());
+
+	
 }

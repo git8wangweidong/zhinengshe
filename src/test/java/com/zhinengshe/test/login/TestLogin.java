@@ -1,7 +1,5 @@
 package com.zhinengshe.test.login;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -23,19 +21,18 @@ import com.zhinengshe.test.basetest.BaseTest;
  */
 public class TestLogin extends BaseTest {
 	
+	@Autowired
+	private IStudentLoginService studentLoginService;
+
 	/**
 	 * 测试学生登陆
 	 */
-	@Autowired
-	private IStudentLoginService studentLoginService;
-	
-	/*@Test
-	public void testLogin() {
+	@Test
+	public void testLogin() throws Exception {
+		Student student = studentLoginService.login("1234", "123");
+		System.out.println(JSON.toJSONString(student));
 		
-		List<Student> list = studentLoginService.login("1234", "123");
-		System.out.println(JSON.toJSONString(list.get(0)));
-		
-	}*/
+	}
 	
 	/**
 	 * 测试教师登陆
@@ -46,8 +43,8 @@ public class TestLogin extends BaseTest {
 	@Test
 	public void testTeacherLogin() throws Exception{
 		
-		List<Teacher> list = teacherLoginService.login("libaibai", "baibaili");
-		System.out.println(JSON.toJSONString(list.get(0)));
+		Teacher teacher = teacherLoginService.login("libaibai", "baibaili");
+		System.out.println(JSON.toJSONString(teacher));
 		
 	}
 	
@@ -60,8 +57,8 @@ public class TestLogin extends BaseTest {
 	@Test
 	public void testManagerLogin() throws Exception{
 		
-		List<Manager> list = managerLoginService.login("123", "123");
-		System.out.println(JSON.toJSONString(list.get(0)));
+		Manager manager = managerLoginService.login("123", "123");
+		System.out.println(JSON.toJSONString(manager));
 		
 	}
 

@@ -19,7 +19,7 @@ public class NaireTest extends BaseTest {
 	private IQuestionnaireService questionnaireService;
 	
 	@Test
-	public void testAdd(){
+	public void testAdd() throws Exception{
 		
 		Questionnaire naire = new Questionnaire();
 		naire.setName("问卷一号");
