@@ -1,6 +1,4 @@
-package com.zhinengshe.controller.classes;
-
-import java.util.Date;
+package com.zhinengshe.controller.nairetype;
 
 import javax.annotation.Resource;
 
@@ -10,46 +8,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zhinengshe.controller.BaseController;
-import com.zhinengshe.pojo.classes.Classes;
-import com.zhinengshe.service.classes.IClassesService;
+import com.zhinengshe.pojo.nairetype.Nairetype;
+import com.zhinengshe.service.nairetype.INaireTypeService;
 import com.zhinengshe.utlis.pagenation.Pagination;
 
 @Controller
-@RequestMapping("/classes")
-public class ClassesController extends BaseController{
-
-	@Resource
-	private IClassesService classesService;
+@RequestMapping("/ynaireType")
+public class NaireTypeController extends BaseController {
 	
+	@Resource
+	private INaireTypeService naireTypeService;
+
 	/**
 	 * toAdd
 	 * @return
 	 */
 	@RequestMapping(value = "/toAdd")
 	public String toAdd() {
-		return "back/classes/add-classes";
+		return "back/nairetype/add-nairetype";
 	}
 
 	/**
 	 * 添加
-	 * @param classes
+	 * @param questiontype
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(Classes classes, Model model) {
+	public String add(Nairetype nairetype, Model model) {
 
 		Boolean b = null;
 		try {
-			b = classesService.add(classes);
+			b = naireTypeService.add(nairetype);
 		} catch (Exception e) {
-			log.error(e.getMessage(),e);
+			log.error(e.getMessage(), e);
 		}
 		if (b) {
-			return this.list(null, null, null, null, null, null, null, model);
+			return this.list(null, null, model);
 		}
-		model.addAttribute("classes", classes);
-		return "back/classes/add-classes";
+		model.addAttribute("nairetype", nairetype);
+		return "back/nairetype/add-questiontype";
 	}
 
 	/**
@@ -63,15 +61,15 @@ public class ClassesController extends BaseController{
 
 		Boolean b = null;
 		try {
-			b = classesService.del(id);
+			b = naireTypeService.del(id);
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+			log.error(e.getMessage(),e);
 		}
 		if (b) {
-			return this.list(null, null, null, null, null, null, null, model);
+			return this.list(null, null, model);
 		}
 		model.addAttribute("del_msg", "删除失败，请稍后重试");
-		return "back/classes/add-classes";
+		return "back/nairetype/add-questiontype";
 
 	}
 
@@ -84,73 +82,64 @@ public class ClassesController extends BaseController{
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String edit(Integer id, Model model) {
 
-		Classes classes = null;
+		Nairetype questiontype = null;
 		try {
-			classes = classesService.get(id);
+			questiontype = naireTypeService.get(id);
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+			log.error(e.getMessage(),e);
 		}
-		if (classes != null) {
-			model.addAttribute("classes", classes);
-			return "back/classes/edit-classes";
+		if (questiontype != null) {
+			model.addAttribute("questiontype", questiontype);
+			return "back/nairetype/edit-questiontype";
 		}
 		model.addAttribute("edit_msg", "获取详细失败，请稍后再试。");
-		return "back/classes/add-classes";
+		return "back/nairetype/edit-nairetype";
 
 	}
 
 	/**
 	 * 修改-更新
-	 * @param classes
+	 * @param questiontype
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(Classes classes, Model model) {
+	public String update(Nairetype nairetype, Model model) {
+
 		Boolean b = null;
 		try {
-			b = classesService.update(classes);
+			b = naireTypeService.update(nairetype);
 		} catch (Exception e) {
 			log.error(e.getMessage(),e);
 		}
 		if (b) {
 			model.addAttribute("update_msg", "更新成功");
-			return this.list(null, null, null, null, null, null, null, model);
+			return this.list(null, null, model);
 		}
+		model.addAttribute("nairetype", nairetype);
 		model.addAttribute("update_msg", "更新失败");
 
-		return "back/classes/edit-classes";
+		return "back/nairetype/nairetype-edit";
 
 	}
 
-
 	/**
-	 * 分页查询
-	 * @param name
-	 * @param course
-	 * @param totalcount
-	 * @param pageNo
-	 * @param state
-	 * @param starttime
-	 * @param endtime
+	 * 查询所有
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(String name, String course, Integer totalcount, Integer pageNo, Byte state, Date starttime, Date endtime, Model model) {
+	public String list(String name, Integer pageNo, Model model) {
 
 		Pagination pagination = null;
 		try {
-			pagination = classesService.list(name, course, totalcount, pageNo, state, starttime, endtime);
+			pagination = naireTypeService.list(name, pageNo);
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+			log.error(e.getMessage(),e);
 		}
-		
-		// 查询条件回显
-		model.addAttribute("name", name);
-		
 		model.addAttribute("pagination", pagination);
-		return "back/classes/add-classes";
+		return "back/nairetype/add-nairetype";
+
 	}
-	
+
 }

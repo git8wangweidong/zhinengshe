@@ -72,10 +72,8 @@ public class LoginController extends BaseController{
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/managerLogin", method = RequestMethod.POST)
-	public String managerLogin(@Valid Manager manager, BindingResult result, Model model, HttpServletRequest request) {
+	public String managerLogin(Manager manager, Model model, HttpServletRequest request) {
 
-		
-		
 		Manager man = null;
 		try {
 			man = managerLoginService.login(manager.getUsername(), manager.getPassword());
@@ -92,13 +90,13 @@ public class LoginController extends BaseController{
 
 	/**
 	 * 教师登陆
-	 * @param manager
+	 * @param teacher
 	 * @param model
 	 * @return
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/teacherLogin", method = RequestMethod.POST)
-	public String teacherLogin(@Valid Teacher teacher, BindingResult result, Model model, HttpServletRequest request) {
+	public String teacherLogin(Teacher teacher, Model model, HttpServletRequest request) {
 
 
 		Teacher tea = null;
@@ -118,13 +116,13 @@ public class LoginController extends BaseController{
 
 	/**
 	 * 学生登陆
-	 * @param manager
+	 * @param student
 	 * @param model
 	 * @return
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/studentLogin", method = RequestMethod.POST)
-	public String studentLogin(@Valid Student student, BindingResult result, Model model, HttpServletRequest request) {
+	public String studentLogin(Student student, Model model, HttpServletRequest request) {
 
 
 		Student stu = null;
