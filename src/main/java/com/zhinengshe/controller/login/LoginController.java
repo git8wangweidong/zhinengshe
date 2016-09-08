@@ -2,11 +2,13 @@ package com.zhinengshe.controller.login;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -73,8 +75,20 @@ public class LoginController extends BaseController{
 	 */
 	@RequestMapping(value = "/managerLogin", method = RequestMethod.POST)
 	public String managerLogin(Manager manager, Model model, HttpServletRequest request) {
-
-		Manager man = null;
+		
+		Subject subject = SecurityUtils.getSubject();
+		UsernamePasswordToken token = new UsernamePasswordToken(manager.getUsername(),manager.getPassword());
+		
+		try {
+			subject.login(token);
+			return "back/index/index-manager";
+		} catch (AuthenticationException e1) {
+		}
+		model.addAttribute("login_msg", "账户名或密码错误");
+		return "back/login/login-manager";
+		
+		
+		/*Manager man = null;
 		try {
 			man = managerLoginService.login(manager.getUsername(), manager.getPassword());
 		}catch (Exception e) {
@@ -86,6 +100,7 @@ public class LoginController extends BaseController{
 		}
 		model.addAttribute("login_msg", "账户名或密码错误");
 		return "back/login/login-manager";
+		*/
 	}
 
 	/**

@@ -7,30 +7,33 @@
 	<display-name>Archetype Created Web Application</display-name>
 
 
-	<!-- 加载 Spring和mybatis的配置文件 -->
+	<!-- 加载 Spring/mybatis/shiro的配置文件 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring-mybatis.xml</param-value>
 	</context-param>
-	
+
+	<!-- shiro过滤器定义 -->
+    <filter>
+        <filter-name>shiroFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <!-- 该值缺省为false,表示生命周期由SpringApplicationContext管理,设置为true则表示由ServletContainer管理 -->
+            <param-name>targetFilterLifecycle</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>shiroFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 	<!-- GET请求编码过滤器 -->
-	<!-- 
-	<filter>
-		<filter-name>myEncodingFilter</filter-name>
-		<filter-class>com.zhinengshe.utlis.filter.MyEncodingFilter</filter-class>
-		<async-supported>true</async-supported>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-	</filter> 
-	
-	
-	<filter-mapping>
-		<filter-name>myEncodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	-->
+	<!-- <filter> <filter-name>myEncodingFilter</filter-name> <filter-class>com.zhinengshe.utlis.filter.MyEncodingFilter</filter-class> 
+		<async-supported>true</async-supported> <init-param> <param-name>encoding</param-name> 
+		<param-value>UTF-8</param-value> </init-param> </filter> <filter-mapping> 
+		<filter-name>myEncodingFilter</filter-name> <url-pattern>/*</url-pattern> 
+		</filter-mapping> -->
 
 	<!-- 编码过滤器 -->
 	<filter>
@@ -46,7 +49,7 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
+
 	<!-- Spring监听器 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -55,7 +58,6 @@
 	<listener>
 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
 	</listener>
-
 
 	<!-- Spring MVC servlet -->
 	<servlet>
@@ -75,6 +77,7 @@
 	</servlet-mapping>
 
 
+
 	<welcome-file-list>
 		<welcome-file>/index.jsp</welcome-file>
 	</welcome-file-list>
@@ -84,12 +87,10 @@
 		<error-code>404</error-code>
 		<location>/WEB-INF/jsp/error/404.jsp</location>
 	</error-page>
-	
+
 	<!-- 配置默认错误页面 -->
-	<!-- <error-page>
-		<exception-type>java.lang.Exception</exception-type>
-		<location>/WEB-INF/jsp/error/500.jsp</location>
-	</error-page> -->
+	<!-- <error-page> <exception-type>java.lang.Exception</exception-type> <location>/WEB-INF/jsp/error/500.jsp</location> 
+		</error-page> -->
 
 
 </web-app> 
