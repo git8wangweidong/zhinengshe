@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MenuMapper extends IBaseMapper<Menu, MenuExample>{
 	
-	List<Menu> selectMenuList();
+	List<Menu> selectMenuList(Integer menuId);
 	
     int countByExample(MenuExample example);
 

@@ -23,13 +23,10 @@ public class MenuServiceImpl extends AbstractService<Menu, MenuExample> implemen
   private void setBaseMapper(){
 	  super.setBaseMapper(mapper);
   }
-
 	@Override
-	public List<Menu> listMenus() {
+	public List<Menu> listMenus(Integer menuId) {
 		
-		List<Menu> list = mapper.selectMenuList();
-		
-		
+		List<Menu> list = mapper.selectMenuList(menuId);
 		
 		return list;
 	}

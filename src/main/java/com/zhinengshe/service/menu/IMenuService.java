@@ -8,5 +8,5 @@ import com.zhinengshe.service.baseservice.IBaseService;
 
 public interface IMenuService extends IBaseService<Menu, MenuExample> {
 
-	List<Menu> listMenus();
+	List<Menu> listMenus(Integer menuId);
 }

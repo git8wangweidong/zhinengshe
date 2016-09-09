@@ -8,8 +8,18 @@
 		<result column="url" property="url" jdbcType="VARCHAR" />
 		<result column="pid" property="pid" jdbcType="INTEGER" />
 		<!-- 查询下级菜单 -->
-		<collection property="menus" column="pid" select="getChildrenMenus" />
+		<collection property="menus" column="menuid" select="getChildrenMenus" ofType="com.zhinengshe.pojo.menu.Menu"/>
 	</resultMap>
+	
+	<!-- 查询所有菜单 -->
+	<select id="selectMenuList" resultMap="BaseResultMap" parameterType="int">
+        select * from menu where menuid =#{menuId}
+    </select>
+	<!-- 自关联查询 -->
+	<select id="getChildrenMenus" parameterType="int" resultMap="BaseResultMap">    
+        select * from menu where pid = #{menuId} 
+    </select>
+	
 	<sql id="Example_Where_Clause">
 		<where>
 			<foreach collection="oredCriteria" item="criteria" separator="or">
@@ -76,19 +86,6 @@
 	<sql id="Base_Column_List">
 		menuid, menuname, icon, url, pid
 	</sql>
-	<!-- 查询所有菜单 -->
-	<select id="selectMenuList" resultMap="BaseResultMap" >  
-        select * from menu where menuid = 0 
-    </select>
-	<!-- 自关联查询 -->
-	<select id="getChildrenMenus" parameterType="int" resultMap="BaseResultMap">    
-        select * from menu where pid = #{menuid} 
-    </select>
-    <!-- getMenuById -->
-	<select id="getModulesById" parameterType="int" resultMap="BaseResultMap">    
-        select * from menu where pid = #{menuid}    
-    </select> 
-	
 	<select id="selectByExample" resultMap="BaseResultMap"
 		parameterType="com.zhinengshe.pojo.menu.MenuExample">
 		select
