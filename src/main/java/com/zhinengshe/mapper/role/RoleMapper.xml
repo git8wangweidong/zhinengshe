@@ -1,10 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zhinengshe.dao.role.RoleMapper" >
+  
   <resultMap id="BaseResultMap" type="com.zhinengshe.pojo.role.Role" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <resultMap id="MenuResultMap" type="com.zhinengshe.pojo.role.Role" extends="BaseResultMap">
+    <collection property="menus" ofType="com.zhinengshe.pojo.menu.Menu">
+    	<id column="menuid" property="menuid"/>
+    	<result column="menuname" property="menuname"/>
+    	<result column="icon" property="icon"/>
+    	<result column="url" property="url"/>
+    	<result column="pid" property="pid"/>
+    </collection>
+  </resultMap>
+  
+  <!-- 根据role表中的id查询角色和菜单信息 -->
+	<select id="selectRoleMenu" parameterType="int"
+		resultMap="MenuResultMap">
+		select 
+			r.id,r.name,
+			m.menuid as menuid,
+			m.menuname as menuname,
+			m.icon as icon,
+			m.url as url,
+			m.pid as pid
+		from
+			role r 
+		left join 
+			role_menu rm 
+		on 
+			r.id=rm.role_id
+		left join 
+			menu m on rm.menu_id=m.menuid 
+		where 
+			r.id = #{id}
+	</select>
+  
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

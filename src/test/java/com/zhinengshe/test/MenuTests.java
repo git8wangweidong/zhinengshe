@@ -33,7 +33,7 @@ public class MenuTests extends BaseTest{
 	}
 	@Test
 	public void readMenus(){
-		List<Tree> list = roleService.readRoleMenus();
+		List<Tree> list = roleService.readRoleMenus(1);
 		
 		System.out.println(list.size());
 		for (Tree tree : list) {

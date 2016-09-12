@@ -62,4 +62,48 @@ public class Menu {
     public void setPid(Integer pid) {
         this.pid = pid;
     }
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Menu other = (Menu) obj;
+		if (icon == null) {
+			if (other.icon != null)
+				return false;
+		} else if (!icon.equals(other.icon))
+			return false;
+		if (menuid == null) {
+			if (other.menuid != null)
+				return false;
+		} else if (!menuid.equals(other.menuid))
+			return false;
+		if (menuname == null) {
+			if (other.menuname != null)
+				return false;
+		} else if (!menuname.equals(other.menuname))
+			return false;
+		if (menus == null) {
+			if (other.menus != null)
+				return false;
+		} else if (!menus.equals(other.menus))
+			return false;
+		if (pid == null) {
+			if (other.pid != null)
+				return false;
+		} else if (!pid.equals(other.pid))
+			return false;
+		if (url == null) {
+			if (other.url != null)
+				return false;
+		} else if (!url.equals(other.url))
+			return false;
+		return true;
+	}
+    
+    
 }

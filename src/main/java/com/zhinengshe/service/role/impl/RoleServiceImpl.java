@@ -31,16 +31,21 @@ public class RoleServiceImpl extends AbstractService<Role, RoleExample> implemen
 		super.setBaseMapper(roleMapper);
 	}
 	
-	
+	/**
+	 * 读取菜单树
+	 */
 	@Override
-	public List<Tree> readRoleMenus() {
+	public List<Tree> readRoleMenus(Integer roleId){
 		
 		// 构建tree集合数据
 		List<Tree> trees = new ArrayList<>();
+		
+		// 获取角色用户有的权限
+		List<Menu> menus = roleMapper.selectRoleMenu(roleId).getMenus();
+		
 		// 获取所有数据
-		List<Menu> menus= menuMapper.selectMenuList(0);
-		Menu menu0 = menus.get(0);
-		for (Menu menu1 : menu0.getMenus()){
+		List<Menu> menu0= menuMapper.selectMenuList(0);
+		for (Menu menu1 : menu0.get(0).getMenus()){
 			// 构建一级树菜单
 			Tree tree1 = new Tree();
 			tree1.setId(menu1.getMenuid());
@@ -51,10 +56,31 @@ public class RoleServiceImpl extends AbstractService<Role, RoleExample> implemen
 				tree2.setId(menu2.getMenuid());
 				tree2.setText(menu2.getMenuname());
 				tree1.getChildren().add(tree2); // 将二级菜单挂到一级菜单下
+				for (Menu menu : menus) {
+					if (menu.getMenuid().equals(menu2.getMenuid())) {
+						tree2.setChecked(true);  // 判断相等 勾选
+					}
+				}
 			}
 			trees.add(tree1);
 		}
 		return trees;
 	}
 
+	
+	@Override
+	public boolean updateRoleMenus(Integer id, String checkedStr) {
+		
+		Role role = roleMapper.selectByPrimaryKey(id);
+		role.setMenus(new ArrayList<Menu>()); // 角色权限置空
+		
+		// 获取菜单ids
+		String[] menuIds = checkedStr.split(",");
+		for (String menuId : menuIds) {
+			Menu menu = menuMapper.selectByPrimaryKey(Integer.parseInt(menuId));
+			role.getMenus().add(menu); 
+		}
+		return false;
+	}
+	
 }

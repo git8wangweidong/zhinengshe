@@ -13,5 +13,14 @@ public interface IRoleService extends IBaseService<Role, RoleExample> {
 	 * 读取角色菜单
 	 * @return
 	 */
-	List<Tree> readRoleMenus();
+	List<Tree> readRoleMenus(Integer roleId);
+	
+	/**
+	 * 更新角色菜单
+	 * @param id
+	 * @param checkedStr
+	 * @return
+	 */
+	boolean updateRoleMenus(Integer id,String checkedStr);
+	
 }

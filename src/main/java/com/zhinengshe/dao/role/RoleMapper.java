@@ -9,6 +9,14 @@ import com.zhinengshe.pojo.role.Role;
 import com.zhinengshe.pojo.role.RoleExample;
 
 public interface RoleMapper extends IBaseMapper<Role, RoleExample>{
+	
+	/**
+	 * 通过id读取 role menu 列表
+	 * @param roleId
+	 * @return
+	 */
+	Role selectRoleMenu(Integer roleId);
+	
     int countByExample(RoleExample example);
 
     int deleteByExample(RoleExample example);
