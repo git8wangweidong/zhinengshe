@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhinengshe.dao.emp.EmpMapper" >
+  <resultMap id="BaseResultMap" type="com.zhinengshe.pojo.emp.Emp" >
+    <id column="eid" property="eid" jdbcType="INTEGER" />
+    <result column="ename" property="ename" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="classes" property="classes" jdbcType="VARCHAR" />
+    <result column="stustate" property="stustate" jdbcType="TINYINT" />
+    <result column="qsstate" property="qsstate" jdbcType="TINYINT" />
+    <result column="registtime" property="registtime" jdbcType="TIMESTAMP" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="identity" property="identity" jdbcType="TINYINT" />
+  </resultMap>
+  
+  <resultMap id="EmpRoleResultMap" type="com.zhinengshe.pojo.emp.Emp" extends="BaseResultMap">
+  	<collection property="roles" ofType="com.zhinengshe.pojo.role.Role">
+  		<id column="id" property="id"/>
+  		<result column="name" property="name"/>
+  	</collection>
+  </resultMap>  
+  	<!-- 根据用户id多对多查询用户角色 -->
+  	<select id="selectEmpRoles" parameterType="int" resultMap="EmpRoleResultMap">
+  		select 
+			e.eid, e.ename,
+			e.tel, e.classes,
+			e.stustate, e.qsstate,
+			e.registtime, e.username,
+			e.password, e.identity,
+			r.id as id,
+			r.name as name
+		from 
+			emp e 
+		left join 
+			emp_role er 
+		on
+			e.eid=er.emp_eid 
+		left join 
+			role r on er.role_id=r.id 
+		where 
+			e.eid = #{id}
+  	</select>
+  
+  
+  
+  
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    eid, ename, tel, classes, stustate, qsstate, registtime, username, password, identity
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhinengshe.pojo.emp.EmpExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from emp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from emp
+    where eid = #{eid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from emp
+    where eid = #{eid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhinengshe.pojo.emp.EmpExample" >
+    delete from emp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhinengshe.pojo.emp.Emp" >
+    insert into emp (eid, ename, tel, 
+      classes, stustate, qsstate, 
+      registtime, username, password, 
+      identity)
+    values (#{eid,jdbcType=INTEGER}, #{ename,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{classes,jdbcType=VARCHAR}, #{stustate,jdbcType=TINYINT}, #{qsstate,jdbcType=TINYINT}, 
+      #{registtime,jdbcType=TIMESTAMP}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{identity,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhinengshe.pojo.emp.Emp" >
+    insert into emp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="ename != null" >
+        ename,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="classes != null" >
+        classes,
+      </if>
+      <if test="stustate != null" >
+        stustate,
+      </if>
+      <if test="qsstate != null" >
+        qsstate,
+      </if>
+      <if test="registtime != null" >
+        registtime,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="identity != null" >
+        identity,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="eid != null" >
+        #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="ename != null" >
+        #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="classes != null" >
+        #{classes,jdbcType=VARCHAR},
+      </if>
+      <if test="stustate != null" >
+        #{stustate,jdbcType=TINYINT},
+      </if>
+      <if test="qsstate != null" >
+        #{qsstate,jdbcType=TINYINT},
+      </if>
+      <if test="registtime != null" >
+        #{registtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null" >
+        #{identity,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhinengshe.pojo.emp.EmpExample" resultType="java.lang.Integer" >
+    select count(*) from emp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update emp
+    <set >
+      <if test="record.eid != null" >
+        eid = #{record.eid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ename != null" >
+        ename = #{record.ename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classes != null" >
+        classes = #{record.classes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stustate != null" >
+        stustate = #{record.stustate,jdbcType=TINYINT},
+      </if>
+      <if test="record.qsstate != null" >
+        qsstate = #{record.qsstate,jdbcType=TINYINT},
+      </if>
+      <if test="record.registtime != null" >
+        registtime = #{record.registtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.identity != null" >
+        identity = #{record.identity,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update emp
+    set eid = #{record.eid,jdbcType=INTEGER},
+      ename = #{record.ename,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      classes = #{record.classes,jdbcType=VARCHAR},
+      stustate = #{record.stustate,jdbcType=TINYINT},
+      qsstate = #{record.qsstate,jdbcType=TINYINT},
+      registtime = #{record.registtime,jdbcType=TIMESTAMP},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      identity = #{record.identity,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhinengshe.pojo.emp.Emp" >
+    update emp
+    <set >
+      <if test="ename != null" >
+        ename = #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="classes != null" >
+        classes = #{classes,jdbcType=VARCHAR},
+      </if>
+      <if test="stustate != null" >
+        stustate = #{stustate,jdbcType=TINYINT},
+      </if>
+      <if test="qsstate != null" >
+        qsstate = #{qsstate,jdbcType=TINYINT},
+      </if>
+      <if test="registtime != null" >
+        registtime = #{registtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null" >
+        identity = #{identity,jdbcType=TINYINT},
+      </if>
+    </set>
+    where eid = #{eid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhinengshe.pojo.emp.Emp" >
+    update emp
+    set ename = #{ename,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      classes = #{classes,jdbcType=VARCHAR},
+      stustate = #{stustate,jdbcType=TINYINT},
+      qsstate = #{qsstate,jdbcType=TINYINT},
+      registtime = #{registtime,jdbcType=TIMESTAMP},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      identity = #{identity,jdbcType=TINYINT}
+    where eid = #{eid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,15 +1,15 @@
 var id;//用户ID
 var clickRow=function(rowIndex,rowData){
-	
-	id=rowData.id;//角色ID赋值
+	id=rowData.eid;//角色ID赋值
 	$('#tree').tree({
-		url:'/emp/roleMenus2?id='+id,
+		url:'/emp/empRoles?id='+id,
 		animate:true,
 		checkbox:true
 	});	
 }
 
 function save(){
+	alert(id)
 	//得到选中的节点集合
 	var nodes= $('#tree').tree('getChecked');	
 	var checkedStr="";
@@ -21,7 +21,7 @@ function save(){
 	}	
 	//提交更新
 	$.ajax({
-		url:'/emp/updateRoleMenus',
+		url:'/emp/updateEmpRole',
 		data:{"id":id,"checkedStr":checkedStr},
 		dataType:'json',
 		type:'post',

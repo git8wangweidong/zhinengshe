@@ -106,7 +106,7 @@ public class QuestionnaireController extends BaseController{
 		
 		model.addAttribute("naire",naire);
 		
-		return "index/index-student";
+		return "front/question-naire/index-student";
 		
 	}
 	

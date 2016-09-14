@@ -8,18 +8,47 @@
 		<result column="url" property="url" jdbcType="VARCHAR" />
 		<result column="pid" property="pid" jdbcType="INTEGER" />
 		<!-- 查询下级菜单 -->
-		<collection property="menus" column="menuid" select="getChildrenMenus" ofType="com.zhinengshe.pojo.menu.Menu"/>
+		<collection property="menus" column="menuid" select="getChildrenMenus"
+			ofType="com.zhinengshe.pojo.menu.Menu" />
 	</resultMap>
-	
+
+	<!-- 查询当前用户的菜单列表 -->
+	<select id="getEmpMenusByEmpId" parameterType="int" resultMap="BaseResultMap">
+		SELECT
+			m.*
+		from
+			emp e
+		left JOIN
+			emp_role er
+		on
+			e.eid =er.emp_eid
+		LEFT JOIN
+			role r
+		on
+			r.id = er.role_id
+		LEFT JOIN
+			role_menu rm
+		on
+			rm.role_id = r.id
+		LEFT JOIN
+			menu m
+		on
+			m.menuid = rm.menu_id
+		WHERE
+			e.eid =#{empId}
+	</select>
+
+
 	<!-- 查询所有菜单 -->
-	<select id="selectMenuList" resultMap="BaseResultMap" parameterType="int">
-        select * from menu where menuid =#{menuId}
-    </select>
+	<select id="selectMenuList" resultMap="BaseResultMap"
+		parameterType="int">
+		select * from menu where menuid =#{menuId}
+	</select>
 	<!-- 自关联查询 -->
-	<select id="getChildrenMenus" parameterType="int" resultMap="BaseResultMap">    
-        select * from menu where pid = #{menuId} 
-    </select>
-	
+	<select id="getChildrenMenus" parameterType="int" resultMap="BaseResultMap">
+		select * from menu where pid = #{menuId}
+	</select>
+
 	<sql id="Example_Where_Clause">
 		<where>
 			<foreach collection="oredCriteria" item="criteria" separator="or">
@@ -34,7 +63,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -66,7 +96,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -108,9 +139,11 @@
 		</if>
 	</delete>
 	<insert id="insert" parameterType="com.zhinengshe.pojo.menu.Menu">
-		insert into menu (menuid, menuname, icon,
+		insert into menu (menuid,
+		menuname, icon,
 		url, pid)
-		values (#{menuid,jdbcType=INTEGER}, #{menuname,jdbcType=VARCHAR},
+		values (#{menuid,jdbcType=INTEGER},
+		#{menuname,jdbcType=VARCHAR},
 		#{icon,jdbcType=VARCHAR},
 		#{url,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER})
 	</insert>
@@ -184,8 +217,10 @@
 	<update id="updateByExample" parameterType="map">
 		update menu
 		set menuid = #{record.menuid,jdbcType=INTEGER},
-		menuname = #{record.menuname,jdbcType=VARCHAR},
-		icon = #{record.icon,jdbcType=VARCHAR},
+		menuname =
+		#{record.menuname,jdbcType=VARCHAR},
+		icon =
+		#{record.icon,jdbcType=VARCHAR},
 		url = #{record.url,jdbcType=VARCHAR},
 		pid = #{record.pid,jdbcType=INTEGER}
 		<if test="_parameter != null">

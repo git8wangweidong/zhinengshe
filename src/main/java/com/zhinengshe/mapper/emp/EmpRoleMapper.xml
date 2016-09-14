@@ -1,44 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zhinengshe.dao.role.RoleMapper" >
-  
-  <resultMap id="BaseResultMap" type="com.zhinengshe.pojo.role.Role" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
+<mapper namespace="com.zhinengshe.dao.emp.EmpRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.zhinengshe.pojo.emp.EmpRole" >
+    <result column="emp_eid" property="empEid" jdbcType="INTEGER" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
   </resultMap>
-  
-  <resultMap id="MenuResultMap" type="com.zhinengshe.pojo.role.Role" extends="BaseResultMap">
-    <collection property="menus" ofType="com.zhinengshe.pojo.menu.Menu">
-    	<id column="menuid" property="menuid"/>
-    	<result column="menuname" property="menuname"/>
-    	<result column="icon" property="icon"/>
-    	<result column="url" property="url"/>
-    	<result column="pid" property="pid"/>
-    </collection>
-  </resultMap>
-  
-  <!-- 根据role表中的id查询角色和菜单信息 -->
-	<select id="selectRoleMenu" parameterType="int"
-		resultMap="MenuResultMap">
-		select 
-			r.id,r.name,
-			m.menuid as menuid,
-			m.menuname as menuname,
-			m.icon as icon,
-			m.url as url,
-			m.pid as pid
-		from
-			role r 
-		left join 
-			role_menu rm 
-		on 
-			r.id=rm.role_id
-		left join 
-			menu m on rm.menu_id=m.menuid 
-		where 
-			r.id = #{id}
-	</select>
-  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -98,15 +64,27 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name
+    emp_eid, role_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhinengshe.pojo.role.RoleExample" >
+  
+  <!-- 插入list数据 -->
+	<insert id="insertList" useGeneratedKeys="true" parameterType="java.util.List">
+		insert into
+			 emp_role (<include refid="Base_Column_List" />)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.empEid},#{item.roleId})
+		</foreach>
+	</insert>
+  
+  
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhinengshe.pojo.emp.EmpRoleExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from role
+    from emp_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -114,59 +92,49 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from role
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from role
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.zhinengshe.pojo.role.RoleExample" >
-    delete from role
+  <delete id="deleteByExample" parameterType="com.zhinengshe.pojo.emp.EmpRoleExample" >
+    delete from emp_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.zhinengshe.pojo.role.Role" >
-    insert into role (id, name)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.zhinengshe.pojo.emp.EmpRole" >
+    insert into emp_role (emp_eid, role_id)
+    values (#{empEid,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.zhinengshe.pojo.role.Role" >
-    insert into role
+  <insert id="insertSelective" parameterType="com.zhinengshe.pojo.emp.EmpRole" >
+    insert into emp_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
+      <if test="empEid != null" >
+        emp_eid,
       </if>
-      <if test="name != null" >
-        name,
+      <if test="roleId != null" >
+        role_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+      <if test="empEid != null" >
+        #{empEid,jdbcType=INTEGER},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+      <if test="roleId != null" >
+        #{roleId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.zhinengshe.pojo.role.RoleExample" resultType="java.lang.Integer" >
-    select count(*) from role
+  <select id="countByExample" parameterType="com.zhinengshe.pojo.emp.EmpRoleExample" resultType="java.lang.Integer" >
+    select count(*) from emp_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update role
+    update emp_role
     <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
+      <if test="record.empEid != null" >
+        emp_eid = #{record.empEid,jdbcType=INTEGER},
       </if>
-      <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.roleId != null" >
+        role_id = #{record.roleId,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -174,25 +142,11 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update role
-    set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR}
+    update emp_role
+    set emp_eid = #{record.empEid,jdbcType=INTEGER},
+      role_id = #{record.roleId,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zhinengshe.pojo.role.Role" >
-    update role
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.zhinengshe.pojo.role.Role" >
-    update role
-    set name = #{name,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

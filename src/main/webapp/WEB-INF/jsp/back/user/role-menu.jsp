@@ -14,7 +14,7 @@
 </head>
 <body class="easyui-layout">
  <div data-options="region:'west',title:'请选择角色',split:true" style="width:210px;">
-	<table class="easyui-datagrid" data-options="url:'/user/roleList',singleSelect:true,onClickRow:clickRow" >
+	<table class="easyui-datagrid" data-options="url:'/emp/roleList',singleSelect:true,onClickRow:clickRow" >
 		<thead>
 			<tr>
 				<th data-options="field:'id',width:100">角色编号</th>

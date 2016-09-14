@@ -7,7 +7,7 @@ import com.zhinengshe.pojo.role.RoleExample;
 import com.zhinengshe.pojo.tree.Tree;
 import com.zhinengshe.service.baseservice.IBaseService;
 
-public interface IRoleService extends IBaseService<Role, RoleExample> {
+public interface IRoleMenuService extends IBaseService<Role, RoleExample> {
 
 	/**
 	 * 读取角色菜单

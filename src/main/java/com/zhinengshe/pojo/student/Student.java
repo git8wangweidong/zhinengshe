@@ -41,7 +41,7 @@ public class Student implements Serializable{
     @Pattern(regexp = "^[0-9_a-zA-Z]{6,20}$", message = "密码必须是6-20个字符之间的")
     private String password;
 
-private Integer startRow; // 起始页
+    private Integer startRow; // 起始页
     
     private Integer pageNo;  // 当前页
     

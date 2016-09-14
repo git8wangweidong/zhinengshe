@@ -10,6 +10,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MenuMapper extends IBaseMapper<Menu, MenuExample>{
 	
+	/**
+	 * 通过员工id查询权限列表
+	 * @param empId
+	 * @return
+	 */
+	List<Menu> getEmpMenusByEmpId(Integer empId);
+	
 	List<Menu> selectMenuList(Integer menuId);
 	
     int countByExample(MenuExample example);
