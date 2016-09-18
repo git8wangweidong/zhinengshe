@@ -97,7 +97,6 @@ public class EmpRoleServiceImpl extends AbstractService<Emp, EmpExample> impleme
 
 	/**
 	 * 复制菜单
-	 * 
 	 * @param menu
 	 * @return
 	 */
@@ -112,6 +111,9 @@ public class EmpRoleServiceImpl extends AbstractService<Emp, EmpExample> impleme
 		return m;
 	}
 
+	/**
+	 * 读取菜单id
+	 */
 	public Menu readEmpMenus(Integer empId) {
 
 		List<Menu> menus = menuMapper.getEmpMenusByEmpId(empId);
@@ -122,16 +124,26 @@ public class EmpRoleServiceImpl extends AbstractService<Emp, EmpExample> impleme
 			Menu m1 = copyMenu(menu1); // 克隆一级菜单
 			for (Menu menu2 : menu1.getMenus()) { // 循环二级菜单
 				Menu m2 = copyMenu(menu2);  // 克隆二级菜单
-				for (Menu menu4 : menus) {  // 将二级菜单挂到一级菜单下
-					if (menu4.getMenuid().equals(menu2.getMenuid())) {
+				for (Menu menu3 : menus) {  // 将二级菜单挂到一级菜单下
+					if (menu3.getMenuid().equals(menu2.getMenuid())) {
 						m1.getMenus().add(m2);
+					}
+					for (Menu menu4 : menu2.getMenus()) {
+						Menu m3 = copyMenu(menu4);  // 循环三级菜单
+						for (Menu menu5 : menus) {
+							if (menu5.getMenuid().equals(menu4.getMenuid())) {
+								m2.getMenus().add(m3);
+							}
+						}
+					}
+					if (m2.getMenus().size()>0) { // 判断二级菜单下是否有三级菜单
+						m1.getMenus().add(m2);  // 将二级菜单挂到一级菜单下
 					}
 				}
 			}
 			if (m1.getMenus().size() > 0) {// 判断一级菜单下是否有二级菜单
 				m0.getMenus().add(m1);// 将一级菜单挂到根菜单下
 			}
-
 		}
 		return m0;
 	}

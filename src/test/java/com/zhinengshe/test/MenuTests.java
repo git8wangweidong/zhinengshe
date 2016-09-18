@@ -87,7 +87,7 @@ public class MenuTests extends BaseTest {
 	public void readEmpMenus() {
 
 		Menu menu = empService.readEmpMenus(1);
-		System.out.println(JSON.toJSONString(menu));
+		System.out.println(JSON.toJSONString(menu, SerializerFeature.DisableCircularReferenceDetect));
 
 	}
 
